@@ -1,4 +1,4 @@
-[source: 2]<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
@@ -858,11 +858,12 @@
       const customerPhone = countryCode + ' ' + phone;
       const customerBusiness = document.getElementById('inputBusiness') ? document.getElementById('inputBusiness').value : '';
       const selectedProgram = document.getElementById('selectedProgramInput') ? document.getElementById('selectedProgramInput').value : '';
+      const customerChallenge = document.getElementById('inputChallenge') ? document.getElementById('inputChallenge').value : '';
 
       fetch('/.netlify/functions/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ customerName, customerEmail, customerPhone, customerBusiness, selectedProgram })
+        body: JSON.stringify({ customerName, customerEmail, customerPhone, customerBusiness, selectedProgram, customerChallenge })
       })
       .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
