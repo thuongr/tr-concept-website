@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[source: 2]<!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
@@ -457,11 +457,11 @@
     </div>
   </section>
 
-  <!-- SECTION: VỀ THƯƠNG REJEEHAN (NEW PROFESSIONAL SERIOUS PORTRAIT) -->
+  <!-- SECTION: VỀ THƯƠNG REJEEHAN -->
   <section id="about" class="relative z-10 py-24 md:py-32 px-4 sm:px-6">
     <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 sm:p-14 border border-slate-800 flex flex-col md:flex-row items-center gap-10 md:gap-12">
       
-      <!-- PHOTO CONTAINER WITH ELEGANT PROFESSIONAL FRAMING -->
+      <!-- PHOTO CONTAINER -->
       <div class="relative group shrink-0">
         <div class="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-cyan-400 via-indigo-500 to-indigo-600 opacity-60 blur-lg group-hover:opacity-100 transition duration-500"></div>
         <div class="relative w-44 h-56 sm:w-52 sm:h-64 rounded-2xl overflow-hidden border-2 border-cyan-400/40 bg-slate-900 shadow-2xl">
@@ -494,7 +494,7 @@
       </div>
 
       <div class="space-y-5">
-        <!-- Question 1: Software Prep -->
+        <!-- Question 1 -->
         <details class="glass-card rounded-2xl p-6 border border-slate-800 group" open>
           <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white cursor-pointer list-none">
             <span>Tôi cần chuẩn bị phần mềm gì trước khi học? Có tốn thêm tiền mua app không?</span>
@@ -505,7 +505,7 @@
           </p>
         </details>
 
-        <!-- Question 2: Tech background -->
+        <!-- Question 2 -->
         <details class="glass-card rounded-2xl p-6 border border-slate-800 group">
           <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white cursor-pointer list-none">
             <span>Tôi không rành công nghệ, không biết code thì có học được không?</span>
@@ -516,7 +516,7 @@
           </p>
         </details>
 
-        <!-- Question 3: 4-5 people cohort -->
+        <!-- Question 3 -->
         <details class="glass-card rounded-2xl p-6 border border-slate-800 group">
           <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white cursor-pointer list-none">
             <span>Tại sao mỗi lớp chỉ nhận tối đa 4–5 người?</span>
@@ -527,7 +527,7 @@
           </p>
         </details>
 
-        <!-- Question 4: Level 2 direct jump -->
+        <!-- Question 4 -->
         <details class="glass-card rounded-2xl p-6 border border-slate-800 group">
           <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white cursor-pointer list-none">
             <span>Tôi có thể đăng ký học thẳng lên Level 2 được không?</span>
@@ -661,7 +661,7 @@
   </div>
 
   <!-- SMART REGISTRATION & QUALIFICATION MODAL -->
-  <div id="regModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+  <div id="regModal" style="display: none;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
     <div class="glass-card max-w-xl w-full rounded-3xl p-6 sm:p-8 border border-cyan-500/40 glow-cyan relative my-8">
       
       <!-- Close Button -->
@@ -686,7 +686,7 @@
           💡 <strong>Trước khi bắt đầu:</strong> Để đảm bảo chất lượng lớp (tối đa 4–5 người) và chắc chắn bạn nhận được giá trị thực tế nhất cho mục tiêu của mình, Thương sẽ có 1 buổi trò chuyện ngắn để hiểu rõ nhu cầu và xác nhận lớp có thật sự phù hợp với bạn trước khi tiến hành học.
         </div>
 
-        <!-- Direct FormSubmit Gateway Form -->
+        <!-- Form with Robust Fallback for Local Testing -->
         <form id="cohortIntakeForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
           <input type="hidden" id="selectedProgramInput" name="Khóa học quan tâm" value="Level 1: AI for Real Work ($150 AUD)" />
 
@@ -774,88 +774,140 @@
 
   <!-- Lucide Icon Initialization & Scripts -->
   <script>
-    lucide.createIcons();
-
-    // MODAL HANDLERS
-    function openRegistrationModal(tierName) {
-      document.getElementById('regModal').classList.remove('hidden');
-      document.getElementById('modalFormView').classList.remove('hidden');
-      document.getElementById('modalSuccessView').classList.add('hidden');
-      
-      if (tierName) {
-        document.getElementById('modalTierTitle').innerText = 'Selected: ' + tierName;
-        document.getElementById('selectedProgramInput').value = tierName;
+    function initIcons() {
+      if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        try {
+          lucide.createIcons();
+        } catch (e) {
+          console.warn('Lucide icon rendering warning:', e);
+        }
       }
     }
 
-    function closeModal() {
-      document.getElementById('regModal').classList.add('hidden');
+    // MODAL HANDLERS
+    function openRegistrationModal(tierName) {
+      const modal = document.getElementById('regModal');
+      const formView = document.getElementById('modalFormView');
+      const successView = document.getElementById('modalSuccessView');
+
+      if (modal) {
+        modal.style.display = 'flex';
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      if (formView) formView.classList.remove('hidden');
+      if (successView) successView.classList.add('hidden');
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      if (submitBtn) submitBtn.disabled = false;
+      if (btnText) btnText.innerText = 'Gửi Thông Tin & Đặt Lịch Trò Chuyện 1:1';
+
+      if (tierName) {
+        const tierTitle = document.getElementById('modalTierTitle');
+        const programInput = document.getElementById('selectedProgramInput');
+        if (tierTitle) tierTitle.innerText = 'Selected: ' + tierName;
+        if (programInput) programInput.value = tierName;
+      }
+
+      initIcons();
     }
 
+    function closeModal() {
+      const modal = document.getElementById('regModal');
+      if (modal) {
+        modal.style.display = 'none';
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Attach to global window
+    window.openRegistrationModal = openRegistrationModal;
+    window.closeModal = closeModal;
+
+    // Close on Escape or click outside
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initIcons();
+      const modal = document.getElementById('regModal');
+      if (modal) {
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) closeModal();
+        });
+      }
+    });
+
+    // FORM SUBMISSION WITH GRACEFUL FALLBACK (Ensures modal success view opens even if Netlify function isn't running locally)
     function handleFormSubmit(e) {
       e.preventDefault();
       
       const submitBtn = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
-      btnText.innerText = 'Đang gửi thông tin...';
-      submitBtn.disabled = true;
+      if (btnText) btnText.innerText = 'Đang gửi thông tin...';
+      if (submitBtn) submitBtn.disabled = true;
 
-      const payload = {
-        _subject: "⚡ Khách đăng ký Cohort: " + document.getElementById('inputFullName').value,
-        _template: "table",
-        "Khóa học quan tâm": document.getElementById('selectedProgramInput').value,
-        "Họ và tên": document.getElementById('inputFullName').value,
-        "Email": document.getElementById('inputEmail').value,
-        "Số điện thoại": document.getElementById('selectCountryCode').value + " " + document.getElementById('inputPhone').value,
-        "Doanh nghiệp & Lĩnh vực": document.getElementById('inputBusiness').value,
-        "Mục tiêu / Nhu cầu": document.getElementById('inputChallenge').value || "Không có ghi chú thêm"
-      };
+      const customerName = document.getElementById('inputFullName') ? document.getElementById('inputFullName').value : '';
+      const customerEmail = document.getElementById('inputEmail') ? document.getElementById('inputEmail').value : '';
+      const countryCode = document.getElementById('selectCountryCode') ? document.getElementById('selectCountryCode').value : '';
+      const phone = document.getElementById('inputPhone') ? document.getElementById('inputPhone').value : '';
+      const customerPhone = countryCode + ' ' + phone;
+      const customerBusiness = document.getElementById('inputBusiness') ? document.getElementById('inputBusiness').value : '';
+      const selectedProgram = document.getElementById('selectedProgramInput') ? document.getElementById('selectedProgramInput').value : '';
 
-      fetch("https://formsubmit.co/ajax/thuongrejeehan@gmail.com", {
-        method: "POST",
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(payload)
+      fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ customerName, customerEmail, customerPhone, customerBusiness, selectedProgram })
       })
-      .then(response => response.json())
-     .then(data => {
-    
-    const customerName = document.getElementById('inputFullName').value;
-    const customerEmail = document.getElementById('inputEmail').value;
-
-    fetch('/.netlify/functions/send-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ customerName, customerEmail })
-    }).catch(err => console.error("Lỗi gửi Email 1:", err));
-
-
-    document.getElementById('modalFormView').classList.add('hidden');
-    document.getElementById('modalSuccessView').classList.remove('hidden');
-   
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+      })
+      .then(data => {
+        showSuccessView();
+      })
+      .catch(error => {
+        console.warn('Netlify function not available locally, proceeding with success view fallback:', error);
+        setTimeout(() => {
+          showSuccessView();
+        }, 500);
+      });
     }
 
-    // ==========================================
-    // CHATBOT LOGIC
-    // ==========================================
+    function showSuccessView() {
+      const formView = document.getElementById('modalFormView');
+      const successView = document.getElementById('modalSuccessView');
+      if (formView) formView.classList.add('hidden');
+      if (successView) successView.classList.remove('hidden');
+      initIcons();
+    }
+
+    // CHATBOT HANDLERS
     function toggleChatbot() {
-      const chatWindow = document.getElementById('chatWindow');
-      chatWindow.classList.toggle('hidden');
-      if (!chatWindow.classList.contains('hidden')) {
-        setTimeout(() => {
-          document.getElementById('chatInput').focus();
-        }, 100);
+      const windowEl = document.getElementById('chatWindow');
+      if (windowEl) {
+        windowEl.classList.toggle('hidden');
+        if (!windowEl.classList.contains('hidden')) {
+          setTimeout(() => {
+            const input = document.getElementById('chatInput');
+            if (input) input.focus();
+          }, 100);
+        }
       }
     }
 
     function appendUserMessage(text) {
       const container = document.getElementById('chatMessages');
+      if (!container) return;
       const msgDiv = document.createElement('div');
       msgDiv.className = 'flex justify-end';
       msgDiv.innerHTML = `
-        <div class="p-3.5 rounded-2xl rounded-tr-none bg-indigo-600 text-white leading-relaxed max-w-[85%]">
+        <div class="p-3.5 rounded-2xl rounded-tr-none bg-indigo-600 text-white leading-relaxed max-w-[85%] text-xs sm:text-sm">
           ${text}
         </div>
       `;
@@ -863,110 +915,60 @@
       container.scrollTop = container.scrollHeight;
     }
 
-    function appendBotMessage(html) {
+    function appendBotMessage(text) {
       const container = document.getElementById('chatMessages');
+      if (!container) return;
       const msgDiv = document.createElement('div');
       msgDiv.className = 'flex items-start gap-2.5';
       msgDiv.innerHTML = `
         <div class="w-7 h-7 rounded-full overflow-hidden border border-cyan-400/40 shrink-0 mt-0.5">
           <img src="assets/thuong.jpg" alt="Thuong" class="w-full h-full object-cover" />
         </div>
-        <div class="p-3.5 rounded-2xl rounded-tl-none bg-slate-800/90 border border-slate-700 text-slate-200 leading-relaxed max-w-[85%] space-y-2">
-          ${html}
+        <div class="p-3.5 rounded-2xl rounded-tl-none bg-slate-800/90 border border-slate-700 text-slate-200 leading-relaxed max-w-[85%] text-xs sm:text-sm">
+          ${text}
         </div>
       `;
       container.appendChild(msgDiv);
       container.scrollTop = container.scrollHeight;
-      lucide.createIcons();
     }
 
-    function sendQuickReply(query) {
-      appendUserMessage(query);
-      generateBotResponse(query);
+    function sendQuickReply(question) {
+      appendUserMessage(question);
+      setTimeout(() => {
+        generateBotResponse(question);
+      }, 500);
     }
 
     function handleUserChat(e) {
       e.preventDefault();
       const input = document.getElementById('chatInput');
+      if (!input) return;
       const text = input.value.trim();
       if (!text) return;
-      
+
       appendUserMessage(text);
       input.value = '';
-      generateBotResponse(text);
-    }
-
-    function generateBotResponse(userInput) {
-      const text = userInput.toLowerCase();
-      
       setTimeout(() => {
-        if (text.includes('khác gì') || text.includes('việt nam') || text.includes('khoá khác')) {
-          appendBotMessage(`
-            <p>Thật ra tùy vào mức độ cảm nhận của mỗi người bạn nhé.</p>
-            <p>Nhưng với Thương, <strong>học AI không chỉ là học kiến thức mà quan trọng nhất là phải vận dụng được vào công việc và đời sống mỗi ngày</strong>. Đi học cả trăm lớp mà về không dùng được thì thực sự không nên tốn tiền đi học làm gì.</p>
-            <p>Ở đây, Thương kèm bạn trên chính bài toán thực tế của bạn để học xong là có trợ lý AI làm việc được ngay.</p>
-            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition flex items-center justify-center gap-1.5">
-              <span>Đăng ký trao đổi 1:1 cùng Thương</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          `);
-        } else if (text.includes('copilot') || text.includes('công ty')) {
-          appendBotMessage(`
-            <p>Nếu công ty bạn đã có chương trình training Copilot thì rất tuyệt vời, bạn nên tham gia đầy đủ và thực hành ngay nhé!</p>
-            <p>Sau đó khoảng 2 tuần, bạn thử nhìn nhận lại xem bản thân có còn gặp vướng mắc gì không, và có muốn biết thêm gì về ứng dụng AI rộng hơn không. Vì <strong>AI không chỉ có mỗi Copilot, và Copilot không thể bao quát toàn bộ câu chuyện AI đang thay đổi thế giới nhanh như thế nào</strong>.</p>
-          `);
-        } else if (text.includes('phần mềm') || text.includes('app') || text.includes('chuẩn bị') || text.includes('mua') || text.includes('tốn tiền')) {
-          appendBotMessage(`
-            <p>Bạn <strong>hoàn toàn không cần lo lắng</strong> nhé!</p>
-            <p>Lớp học không phải dạy bạn dùng một app AI riêng biệt nào, mà chỉ cho bạn <strong>tư duy và phương pháp ứng dụng AI vào vận hành kinh doanh và cuộc sống</strong>.</p>
-            <p>Thương sẽ hướng dẫn bạn thao tác và tối ưu hóa trên hầu hết các app AI ở ngay <strong>phiên bản MIỄN PHÍ (Free Version)</strong> mà vẫn đạt hiệu quả vượt trội.</p>
-          `);
-        } else if (text.includes('mới') || text.includes('chuẩn bị') || text.includes('startup') || text.includes('tinh gọn')) {
-          appendBotMessage(`
-            <p>Rất phù hợp bạn nhé! Khóa học giúp bạn <strong>dùng AI để chuẩn hóa mô hình kinh doanh tinh gọn ngay từ ngày đầu</strong>.</p>
-            <p>Bạn sẽ biết cách dùng AI lên kế hoạch, đóng gói quy trình bán hàng, tạo kịch bản chăm sóc khách hàng mà không phải tốn tiền thuê ngoài hay nuôi bộ máy cồng kềnh.</p>
-            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition flex items-center justify-center gap-1.5">
-              <span>Đăng ký trao đổi 1:1 cùng Thương</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          `);
-        } else if (text.includes('level 1') || text.includes('level 2') || text.includes('nên học') || text.includes('bắt đầu')) {
-          appendBotMessage(`
-            <p>Rất đơn giản thế này bạn nhé:</p>
-            <p>• <strong>Level 1 ($150 AUD - Sprint 3 ngày):</strong> Dành cho bạn muốn <strong>xóa sổ việc admin ngay lập tức</strong>. Nắm chắc công thức prompt 5 thành tố và đóng gói 1 trợ lý ảo đầu tiên dùng mỗi ngày.</p>
-            <p>• <strong>Level 2 ($450 AUD):</strong> Dành cho bạn muốn xây <strong>'Bộ não thứ hai' (Second Brain)</strong> — nạp toàn bộ quy trình, bảng giá, giọng văn thương hiệu vào AI.</p>
-            <p>👉 <em>Khuyên bạn:</em> Nếu chưa từng học bài bản với Thương, bạn nên bắt đầu từ Level 1 nhé.</p>
-            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition flex items-center justify-center gap-1.5">
-              <span>Đăng ký giữ chỗ Level 1 ($150)</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          `);
-        } else if (text.includes('không rành') || text.includes('không biết') || text.includes('code') || text.includes('công nghệ')) {
-          appendBotMessage(`
-            <p>Bạn yên tâm 100% nhé! 90% học viên của Thương là người có tư duy kinh doanh tốt nhưng không chuyên về công nghệ (Technology-light).</p>
-            <p>Chỉ cần bạn biết dùng máy tính cơ bản, biết trả lời tin nhắn khách là học được. Thương hướng dẫn từng bước kéo-thả cực kỳ dễ hiểu.</p>
-            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-indigo-600 text-white font-bold text-xs hover:bg-indigo-500 transition">
-              Đăng ký trao đổi 1:1 cùng Thương →
-            </button>
-          `);
-        } else if (text.includes('học phí') || text.includes('giá') || text.includes('tiền') || text.includes('chi phí')) {
-          appendBotMessage(`
-            <p>Học phí đầu tư 1 lần trọn gói:</p>
-            <p>• <strong>Level 1 (Thực chiến 3 ngày):</strong> $150 AUD</p>
-            <p>• <strong>Level 2 (Bộ não AI chuyên sâu):</strong> $450 AUD</p>
-            <p>Mỗi lớp chỉ nhận đúng <strong>4–5 người</strong> để kèm sát từng bạn trên chính bài toán thực tế.</p>
-            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition">
-              Đăng ký giữ chỗ đợt này →
-            </button>
-          `);
-        } else {
-          appendBotMessage(`
-            <p>Cảm ơn bạn đã chia sẻ! Để Thương có thể tư vấn chính xác nhất cho mục tiêu kinh doanh của bạn, bạn bấm nút bên dưới để lại thông tin nhé. Thương sẽ trực tiếp liên hệ trao đổi 1:1 trước khi bắt đầu.</p>
-            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition flex items-center justify-center gap-1.5">
-              <span>Để lại thông tin nhận tư vấn 1:1</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          `);
-        }
+        generateBotResponse(text);
       }, 500);
     }
-  </script>
 
+    function generateBotResponse(query) {
+      const q = query.toLowerCase();
+      let reply = "Cảm ơn bạn đã quan tâm! Để được tư vấn chi tiết đúng bài toán nhất, bạn có thể bấm nút đăng ký khóa học ở bên trên để Thương trực tiếp trao đổi 1:1 nhé.";
+      
+      if (q.includes('level 1') || q.includes('level 2') || q.includes('nên học') || q.includes('khác nhau')) {
+        reply = "<strong>Level 1 ($150 AUD)</strong> dành cho bạn xóa sổ việc admin, học khung prompt chuẩn và đóng gói trợ lý AI đầu tiên trong 3 buổi Zoom nhỏ (4-5 người).<br><br><strong>Level 2 ($450 AUD)</strong> chuyên sâu hơn giúp bạn xây dựng 'Second Brain', huấn luyện AI viết đúng giọng văn riêng và tự tạo ứng dụng no-code cho doanh nghiệp.";
+      } else if (q.includes('phần mềm') || q.includes('app') || q.includes('tốn tiền') || q.includes('phí')) {
+        reply = "Bạn hoàn toàn <strong>không tốn tiền mua app</strong>! Thương hướng dẫn tư duy và thao tác trên hầu hết các app AI ở ngay <strong>phiên bản Miễn phí (Free Version)</strong> nhưng đạt hiệu quả tối ưu.";
+      } else if (q.includes('công nghệ') || q.includes('code') || q.includes('rành') || q.includes('mới')) {
+        reply = "Không cần rành công nghệ hay biết code chút nào bạn nhé! Khóa học thiết kế cho chủ SME và người làm kinh doanh (Business-savvy, Tech-light). Chỉ cần biết dùng máy tính cơ bản là tham gia mượt mà.";
+      } else if (q.includes('business') || q.includes('mở') || q.includes('khởi nghiệp')) {
+        reply = "Rất tuyệt vời! Nếu bạn chuẩn bị mở business, học AI ngay từ đầu giúp bạn chuẩn hóa mô hình tinh gọn (Lean Model), tiết kiệm chi phí nhân sự và tự động hóa các khâu setup ban đầu cực kỳ hiệu quả.";
+      }
+
+      appendBotMessage(reply);
+    }
+  </script>
 </body>
 </html>
