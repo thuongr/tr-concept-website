@@ -1,0 +1,11 @@
+{
+  "name": "my-website",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2",
+    "resend": "^6.26.0"
+  }
+}

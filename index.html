@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thuong Rejeehan | Leverage AI & Digital Transformation For High-Level Business</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg: '#0B0F19',
+              card: '#161E2E',
+              cardLight: '#1E293B',
+              border: '#27354A',
+              cyan: '#38BDF8',
+              indigo: '#6366F1',
+              accent: '#818CF8'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'gradient-pulse': 'gradientShift 8s ease infinite alternate',
+          },
+          keyframes: {
+            gradientShift: {
+              '0%': { transform: 'scale(1) translate(0px, 0px)' },
+              '50%': { transform: 'scale(1.1) translate(30px, -20px)' },
+              '100%': { transform: 'scale(1) translate(-20px, 20px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background-color: #0B0F19;
+      color: #E2E8F0;
+      font-family: 'Inter', sans-serif;
+    }
+    .heading-font {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .glass-card {
+      background: rgba(22, 30, 46, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.25);
+    }
+    .glow-indigo {
+      box-shadow: 0 0 35px -5px rgba(99, 102, 241, 0.35);
+    }
+    .chat-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .chat-scroll::-webkit-scrollbar-track {
+      background: #0B0F19;
+    }
+    .chat-scroll::-webkit-scrollbar-thumb {
+      background: #27354A;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-brand-bg text-slate-200 antialiased relative overflow-x-hidden selection:bg-brand-indigo selection:text-white">
+
+  <!-- BACKGROUND AMBIENT GLOW -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-gradient-to-tr from-cyan-600/20 to-indigo-600/20 rounded-full blur-[140px] animate-gradient-pulse"></div>
+    <div class="absolute top-1/3 -right-40 w-[650px] h-[650px] bg-gradient-to-bl from-indigo-700/20 to-purple-600/15 rounded-full blur-[160px] animate-gradient-pulse" style="animation-delay: 3s;"></div>
+    <div class="absolute bottom-10 left-1/4 w-[500px] h-[500px] bg-cyan-900/15 rounded-full blur-[130px]"></div>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-full overflow-hidden border border-cyan-400/50 shadow-md shadow-cyan-500/20">
+          <img src="assets/thuong.jpg" alt="Thuong Rejeehan" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="heading-font font-bold text-base tracking-tight text-white group-hover:text-cyan-400 transition-colors">THUONG REJEEHAN</span>
+          <span class="text-[11px] text-slate-400 font-medium tracking-wider uppercase">AI & Digital Transformation</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#target-audience" class="hover:text-cyan-400 transition-colors">Dành Cho Ai?</a>
+        <a href="#what-you-get" class="hover:text-cyan-400 transition-colors">Giá Trị Nhận Được</a>
+        <a href="#curriculum" class="hover:text-cyan-400 transition-colors">Lộ Trình & Học Phí</a>
+        <a href="#about" class="hover:text-cyan-400 transition-colors">Về Thương</a>
+        <a href="#faq" class="hover:text-cyan-400 transition-colors">FAQ</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="inline-flex items-center px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white shadow-md shadow-indigo-500/20 transition transform active:scale-95">
+          Đăng Ký Khóa Học
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative z-10 pt-20 pb-28 md:pt-28 md:pb-36 px-4 sm:px-6 max-w-5xl mx-auto text-center">
+    
+    <!-- Top Pill Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/90 border border-cyan-500/30 text-cyan-400 text-xs sm:text-sm font-medium mb-8 backdrop-blur-md shadow-inner">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+      Professional Learning Pathway for Australian SMEs & Future Founders
+    </div>
+
+    <!-- Main H1 -->
+    <h1 class="heading-font text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.25] mb-8">
+      Don't Just Learn AI.<br/>
+      <span class="bg-gradient-to-r from-cyan-400 via-indigo-300 to-indigo-500 bg-clip-text text-transparent">
+        Leverage AI to Work at a Higher Level
+      </span> & Build Lean Systems.
+    </h1>
+
+    <!-- Sub-headline -->
+    <p class="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-12 font-normal">
+      Chương trình huấn luyện thực chiến <strong class="text-cyan-400">3 ngày qua Zoom (nhóm 4–5 người)</strong> dành cho chủ SME, người muốn nâng cao năng lực làm việc chiến lược (High-Level Working), và người chuẩn bị mở business mới muốn dùng AI để chuẩn hóa mô hình vận hành tinh gọn ngay từ đầu.
+    </p>
+
+    <!-- Dual CTA Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-5 max-w-xl mx-auto mb-16">
+      <!-- Option A: Level 1 -->
+      <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 shadow-xl shadow-indigo-600/30 border border-indigo-400/40 transition transform active:scale-95 group">
+        <span>Đăng ký Level 1: AI for Real Work ($150 AUD)</span>
+        <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i>
+      </button>
+
+      <!-- Option B: Level 2 -->
+      <button onclick="openRegistrationModal('Level 2: AI Business Builder ($450 AUD)')" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-sm font-bold text-cyan-300 bg-slate-800/90 hover:bg-slate-800 hover:text-white border border-cyan-500/40 shadow-lg shadow-cyan-500/10 transition transform active:scale-95 group">
+        <span>Level 2: AI Business Builder ($450 AUD)</span>
+        <i data-lucide="shield-check" class="w-4 h-4 ml-2 text-cyan-400 group-hover:scale-110 transition-transform"></i>
+      </button>
+    </div>
+
+    <!-- 3 Core Highlight Tags -->
+    <div class="pt-8 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs font-medium text-slate-400">
+      <div class="flex items-center justify-center gap-2.5">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+        <span>Xây năng lực làm việc chiến lược & ra quyết định</span>
+      </div>
+      <div class="flex items-center justify-center gap-2.5">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+        <span>Thao tác hoàn toàn trên các app AI bản Miễn Phí</span>
+      </div>
+      <div class="flex items-center justify-center gap-2.5">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+        <span>Cohort nhỏ 4–5 người mổ xẻ bài toán thực tế</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: TARGET AUDIENCE & 3 CHARACTERISTICS -->
+  <section id="target-audience" class="relative z-10 py-24 md:py-32 px-4 sm:px-6 bg-slate-950/60 border-t border-slate-800/60">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <div class="text-xs uppercase tracking-widest text-cyan-400 font-bold mb-3">Chân Dung Học Viên</div>
+        <h2 class="heading-font text-2xl sm:text-4xl font-bold text-white mb-4">
+          Khóa Học Này Được Thiết Kế Dành Riêng Cho Bạn Nếu...
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+          Bạn không cần là chuyên gia công nghệ, nhưng bạn có <strong class="text-slate-200">tư duy muốn làm việc và phát triển doanh nghiệp tốt hơn</strong>.
+        </p>
+      </div>
+
+      <!-- 3 Core Target Groups -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-14">
+        
+        <!-- Group 1: Chủ SME đang vận hành -->
+        <div class="glass-card p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-cyan-500/40 transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-5">
+              <i data-lucide="building-2" class="w-6 h-6"></i>
+            </div>
+            <h3 class="heading-font font-bold text-lg text-white mb-3">1. Chủ Doanh Nghiệp SME (1–20 nhân sự)</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+              Bạn hiểu rõ business của mình, nhưng mọi thứ vẫn <em>"nằm trong đầu bạn"</em>. Team liên tục hỏi bạn cùng một việc, các công việc admin, email, kiểm tra giấy tờ ngốn hết thời gian quản lý.
+            </p>
+          </div>
+          <div class="text-xs font-semibold text-cyan-300 bg-slate-900/90 p-3 rounded-xl border border-slate-800">
+            🎯 <strong>Giải pháp:</strong> Chuẩn hóa kiến thức & đóng gói trợ lý ảo để giải phóng bản thân.
+          </div>
+        </div>
+
+        <!-- Group 2: Nâng tầm kỹ năng làm việc High-Level -->
+        <div class="glass-card p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-indigo-500/40 transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-5">
+              <i data-lucide="trending-up" class="w-6 h-6"></i>
+            </div>
+            <h3 class="heading-font font-bold text-lg text-white mb-3">2. Người Muốn Nâng Tầm "High-Level Working"</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+              Quản lý, chuyên gia, freelancer hoặc solo-operator muốn <em>leverage AI để nâng cấp kỹ năng tư duy chiến lược</em>, phân tích thông tin nhanh, và xử lý khối lượng công việc gấp 3 lần với chất lượng vượt trội.
+            </p>
+          </div>
+          <div class="text-xs font-semibold text-indigo-300 bg-slate-900/90 p-3 rounded-xl border border-slate-800">
+            🎯 <strong>Giải pháp:</strong> Xây bộ não số (Second Brain) & nâng cao năng suất cá nhân.
+          </div>
+        </div>
+
+        <!-- Group 3: Chuẩn bị khởi nghiệp / Mở business mới -->
+        <div class="glass-card p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-emerald-500/40 transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-5">
+              <i data-lucide="rocket" class="w-6 h-6"></i>
+            </div>
+            <h3 class="heading-font font-bold text-lg text-white mb-3">3. Người Chuẩn Bị Mở Business Mới</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+              Đang lên kế hoạch kinh doanh nhưng chưa biết bắt đầu từ đâu. Muốn ứng dụng AI ngay từ ngày đầu tiên để <em>chuẩn hóa mô hình tinh gọn (Lean Model)</em>, tiết kiệm tối đa chi phí nhân sự và thuê ngoài.
+            </p>
+          </div>
+          <div class="text-xs font-semibold text-emerald-300 bg-slate-900/90 p-3 rounded-xl border border-slate-800">
+            🎯 <strong>Giải pháp:</strong> Dùng AI xây dựng kế hoạch, kịch bản bán hàng và công cụ vận hành.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 3 Characteristics Bar -->
+      <div class="p-6 sm:p-8 rounded-3xl border border-slate-800 bg-slate-900/60 flex flex-col md:flex-row items-center justify-between gap-6 text-xs sm:text-sm">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold shrink-0">1</div>
+          <span class="text-slate-300"><strong>Business Owner Mindset:</strong> Muốn công việc & business tốt hơn, không chỉ học công nghệ.</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold shrink-0">2</div>
+          <span class="text-slate-300"><strong>Cảm thấy áp lực thời gian:</strong> Admin, email, giao tiếp đang ngốn quá nhiều thời gian.</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0">3</div>
+          <span class="text-slate-300"><strong>Business-savvy, Tech-light:</strong> Đã biết AI nhưng cần biến nó thành hệ thống thực tế.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION: "CỤ THỂ BẠN MANG CÁI GÌ VỀ NHÀ?" (WHAT YOU GET) -->
+  <section id="what-you-get" class="relative z-10 py-24 md:py-32 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <div class="text-xs uppercase tracking-widest text-indigo-400 font-bold mb-3">Giá Trị Thực Tế</div>
+        <h2 class="heading-font text-2xl sm:text-4xl font-bold text-white mb-4">
+          Lộ Trình Đào Tạo Thực Chiến: Học Là Làm Được
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+          Xây năng lực leverage AI → Build systems → Improve workflows → Transform business.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <div class="glass-card p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-cyan-500/40 transition">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-5">
+            <i data-lucide="cpu" class="w-6 h-6"></i>
+          </div>
+          <h3 class="heading-font font-bold text-lg text-white mb-2">1. Tư Duy Ứng Dụng AI Trên Mọi Nền Tảng (Free Version)</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+            Không phụ thuộc vào 1 app riêng biệt hay tốn tiền mua phần mềm đắt đỏ. Thương hướng dẫn bạn phương pháp tư duy để ứng dụng trên hầu hết các công cụ AI phổ biến ở ngay phiên bản miễn phí.
+          </p>
+          <span class="text-[11px] font-semibold text-cyan-400 bg-cyan-950/50 px-3 py-1.5 rounded-lg border border-cyan-800/40">✓ Không phát sinh chi phí phần mềm</span>
+        </div>
+
+        <div class="glass-card p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-indigo-500/40 transition">
+          <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-5">
+            <i data-lucide="layers" class="w-6 h-6"></i>
+          </div>
+          <h3 class="heading-font font-bold text-lg text-white mb-2">2. Khung Prompt 5 Thành Tố Chuẩn Doanh Nghiệp</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+            Bỏ thói quen prompt vu vơ. Nắm chắc cấu trúc câu lệnh và bối cảnh (Context Architecture) để AI hiểu sâu sắc về doanh nghiệp và làm việc chính xác 95% ngay từ lần đầu tiên.
+          </p>
+          <span class="text-[11px] font-semibold text-indigo-400 bg-indigo-950/50 px-3 py-1.5 rounded-lg border border-indigo-800/40">✓ Chuẩn hóa văn phong & dữ liệu</span>
+        </div>
+
+        <div class="glass-card p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-emerald-500/40 transition">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-5">
+            <i data-lucide="bot" class="w-6 h-6"></i>
+          </div>
+          <h3 class="heading-font font-bold text-lg text-white mb-2">3. Tự Tay Đóng Gói Trợ Lý AI Chuyên Trách</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+            Tạo trợ lý ảo riêng được nạp sẵn bảng giá, quy trình làm việc và phong cách thương hiệu của bạn để tự động trả lời khách hàng, soạn báo giá (quote) chuẩn tiếng Anh Úc và xử lý giấy tờ.
+          </p>
+          <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-950/50 px-3 py-1.5 rounded-lg border border-emerald-800/40">✓ Mang về sử dụng hàng ngày</span>
+        </div>
+
+        <div class="glass-card p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-amber-500/40 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-5">
+            <i data-lucide="clock-3" class="w-6 h-6"></i>
+          </div>
+          <h3 class="heading-font font-bold text-lg text-white mb-2">4. Tiết Kiệm 5–10 Giờ Admin & Tập Trung High-Level</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+            Giải phóng bạn khỏi những việc lặp đi lặp lại để dành năng lượng cho chiến lược phát triển, mở rộng mối quan hệ và tăng trưởng doanh thu.
+          </p>
+          <span class="text-[11px] font-semibold text-amber-400 bg-amber-950/50 px-3 py-1.5 rounded-lg border border-amber-800/40">✓ Tối ưu hóa mô hình tinh gọn</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: BẢNG KHÓA HỌC & HỌC PHÍ (LEVEL 1 VS LEVEL 2) -->
+  <section id="curriculum" class="relative z-10 py-24 md:py-32 px-4 sm:px-6 bg-slate-950/60 border-t border-slate-800/80">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <div class="text-xs uppercase tracking-widest text-cyan-400 font-bold mb-3">Lộ Trình Đào Tạo</div>
+        <h2 class="heading-font text-2xl sm:text-4xl font-bold text-white mb-4">
+          Hai Cấp Độ Huấn Luyện Thực Chiến
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+          Mỗi cohort giới hạn <strong>tối đa 4–5 người</strong> để Thương trực tiếp mổ xẻ bài toán của bạn.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+        
+        <!-- LEVEL 1 CARD -->
+        <div class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-800 hover:border-slate-700 flex flex-col justify-between transition-all duration-300 relative">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 uppercase tracking-wider">
+                Khóa Thực Chiến Căn Bản
+              </span>
+              <span class="text-xs text-slate-400 font-medium">Nhóm 4–5 người</span>
+            </div>
+
+            <h3 class="heading-font text-2xl sm:text-3xl font-bold text-white mb-1">LEVEL 1: AI for Real Work</h3>
+            <p class="text-xs sm:text-sm text-slate-400 mb-8">Xóa sổ việc admin & tự đóng gói trợ lý AI đầu tiên.</p>
+
+            <div class="flex items-baseline gap-2 mb-8">
+              <span class="heading-font text-4xl sm:text-5xl font-extrabold text-white">$150</span>
+              <span class="text-sm font-semibold text-slate-400">AUD / đóng 1 lần</span>
+            </div>
+
+            <div class="space-y-4 mb-10 text-sm">
+              <div class="font-semibold text-indigo-300 text-xs uppercase tracking-wider">Chi tiết khóa học:</div>
+              <ul class="space-y-3.5 text-xs sm:text-sm text-slate-300">
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
+                  <span><strong>3 Buổi Zoom Thực Chiến Trực Tiếp:</strong> Mổ xẻ công việc của từng học viên.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
+                  <span><strong>Làm Chủ Khung Prompt 5 Thành Tố:</strong> Xây dựng tư duy câu lệnh chuẩn xác.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
+                  <span><strong>Thực Hành Trên App AI Bản Miễn Phí:</strong> Không tốn tiền mua phần mềm.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
+                  <span><strong>Chữa Bài & Hỗ Trợ 1:1:</strong> Nhận feedback trực tiếp từ Thương trong 24h.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="w-full inline-flex items-center justify-center py-4 px-6 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-500 shadow-lg shadow-indigo-600/25 transition transform active:scale-95">
+              Đăng Ký Level 1 ($150 AUD)
+            </button>
+            <p class="text-center text-[11px] text-slate-500 mt-3">Dành cho người mới hoặc muốn hệ thống hóa lại từ đầu</p>
+          </div>
+        </div>
+
+        <!-- LEVEL 2 CARD (PREMIUM / GATED) -->
+        <div class="glass-card rounded-3xl p-8 sm:p-10 border-2 border-cyan-500/40 glow-cyan flex flex-col justify-between transition-all duration-300 relative bg-gradient-to-b from-brand-card to-slate-900">
+          <div class="absolute -top-3.5 right-8 px-4 py-1 rounded-full text-[11px] font-bold bg-gradient-to-r from-cyan-400 to-indigo-500 text-slate-950 uppercase tracking-wide">
+            Chuyên Sâu Doanh Nghiệp
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 uppercase tracking-wider">
+                Hệ Thống Toàn Diện
+              </span>
+              <span class="text-xs text-amber-400 font-semibold flex items-center gap-1.5">
+                <i data-lucide="lock" class="w-3.5 h-3.5"></i> Cần trao đổi trước
+              </span>
+            </div>
+
+            <h3 class="heading-font text-2xl sm:text-3xl font-bold text-white mb-1">LEVEL 2: AI Business Builder</h3>
+            <p class="text-xs sm:text-sm text-slate-400 mb-8">Xây Bộ não thứ hai & Huấn luyện AI theo phong cách thương hiệu.</p>
+
+            <div class="flex items-baseline gap-2 mb-8">
+              <span class="heading-font text-4xl sm:text-5xl font-extrabold text-cyan-400">$450</span>
+              <span class="text-sm font-semibold text-slate-400">AUD / đóng 1 lần</span>
+            </div>
+
+            <div class="space-y-4 mb-10 text-sm">
+              <div class="font-semibold text-cyan-300 text-xs uppercase tracking-wider">Năng lực đạt được:</div>
+              <ul class="space-y-3.5 text-xs sm:text-sm text-slate-300">
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check-check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                  <span><strong>Xây Dựng AI Second Brain:</strong> Nạp toàn bộ dữ liệu, SOP, bảng giá vào AI.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check-check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                  <span><strong>AI That Sounds Like You:</strong> Huấn luyện AI viết đúng 99% giọng văn của sếp.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check-check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                  <span><strong>Tự Tạo Ứng Dụng No-Code:</strong> Dựng trang web & công cụ nội bộ tự động.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check-check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                  <span><strong>1:1 System Calibration:</strong> Được Thương trực tiếp hiệu chỉnh hệ thống dữ liệu.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <button onclick="openRegistrationModal('Level 2: AI Business Builder ($450 AUD)')" class="w-full inline-flex items-center justify-center py-4 px-6 rounded-xl text-sm font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-cyan-300 hover:from-cyan-300 hover:to-cyan-200 shadow-lg shadow-cyan-400/25 transition transform active:scale-95">
+              Đăng Ký / Trao Đổi Vào Level 2
+            </button>
+            <p class="text-center text-[11px] text-slate-400 mt-3">Dành cho học viên đã qua Level 1 hoặc qua phỏng vấn 15 phút</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- HIGHER PATHWAY TEASER (LEVEL 5 & 6) -->
+      <div class="mt-14 p-8 rounded-3xl border border-slate-800 bg-slate-900/50 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="text-xs uppercase tracking-wider text-indigo-400 font-bold">Cần giải pháp lớn hơn?</span>
+          <h4 class="heading-font text-base sm:text-lg font-bold text-white mt-1">Level 5 (Tự động hóa quy trình) & Level 6 (Tư vấn chuyển đổi số toàn diện 1:1)</h4>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">Dành cho doanh nghiệp 10–50+ nhân sự muốn kết nối tự động Zapier/Make.com và tái cấu trúc vận hành.</p>
+        </div>
+        <button onclick="openRegistrationModal('Level 5-6: Tư vấn Chuyển đổi số 1:1')" class="px-6 py-3 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition">
+          Liên Hệ Tư Vấn Riêng →
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION: VỀ THƯƠNG REJEEHAN (NEW PROFESSIONAL SERIOUS PORTRAIT) -->
+  <section id="about" class="relative z-10 py-24 md:py-32 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 sm:p-14 border border-slate-800 flex flex-col md:flex-row items-center gap-10 md:gap-12">
+      
+      <!-- PHOTO CONTAINER WITH ELEGANT PROFESSIONAL FRAMING -->
+      <div class="relative group shrink-0">
+        <div class="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-cyan-400 via-indigo-500 to-indigo-600 opacity-60 blur-lg group-hover:opacity-100 transition duration-500"></div>
+        <div class="relative w-44 h-56 sm:w-52 sm:h-64 rounded-2xl overflow-hidden border-2 border-cyan-400/40 bg-slate-900 shadow-2xl">
+          <img src="assets/thuong.jpg" alt="Thuong Rejeehan - AI & Digital Transformation Consultant" class="w-full h-full object-cover object-top filter brightness-95 contrast-105 hover:scale-105 transition-transform duration-500" />
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xs uppercase tracking-widest text-cyan-400 font-bold mb-2">Người Đồng Hành Cùng Bạn</div>
+        <h3 class="heading-font text-2xl sm:text-3xl font-bold text-white mb-2">Thuong Rejeehan</h3>
+        <p class="text-xs sm:text-sm text-indigo-300 font-medium mb-5">AI & Digital Transformation Consultant | Systems Architect</p>
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+          "Đa phần các chủ doanh nghiệp và người làm việc chuyên nghiệp không gặp vấn đề về công nghệ — mà họ gặp vấn đề về <strong>thời gian và cách biến công nghệ thành đòn bẩy vận hành thực tế</strong>. Thương không dạy bạn những mẹo vặt hàn lâm, mà hướng dẫn bạn tư duy và phương pháp để bắt AI làm việc thật, giải phóng năng lượng để bạn tập trung vào những việc tạo ra giá trị cao nhất."
+        </p>
+        <div class="flex flex-wrap gap-4 text-xs text-slate-400 font-medium">
+          <span class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-cyan-400"></i> Thực chiến & Dễ hiểu</span>
+          <span class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-cyan-400"></i> Tối ưu chi phí phần mềm</span>
+          <span class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-cyan-400"></i> Kèm cặp 1:1 tận tâm</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: FAQ -->
+  <section id="faq" class="relative z-10 py-24 md:py-32 px-4 sm:px-6 bg-slate-950/40 border-t border-slate-800/80">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-xs uppercase tracking-widest text-cyan-400 font-bold mb-3">Giải Đáp Thắc Mắc</div>
+        <h2 class="heading-font text-2xl sm:text-3xl font-bold text-white">Câu Hỏi Thường Gặp</h2>
+      </div>
+
+      <div class="space-y-5">
+        <!-- Question 1: Software Prep -->
+        <details class="glass-card rounded-2xl p-6 border border-slate-800 group" open>
+          <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white cursor-pointer list-none">
+            <span>Tôi cần chuẩn bị phần mềm gì trước khi học? Có tốn thêm tiền mua app không?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed">
+            Bạn <strong>hoàn toàn không cần lo lắng</strong>! Lớp học không phải dạy bạn cách sử dụng một ứng dụng AI riêng biệt nào, mà chỉ cho bạn <strong>tư duy và phương pháp áp dụng AI vào vận hành kinh doanh và cuộc sống</strong>. Vì vậy, Thương sẽ hướng dẫn bạn thao tác và tối ưu hóa trên hầu hết các app AI ở ngay <strong>phiên bản MIỄN PHÍ (Free Version)</strong> mà vẫn đạt hiệu quả vượt trội.
+          </p>
+        </details>
+
+        <!-- Question 2: Tech background -->
+        <details class="glass-card rounded-2xl p-6 border border-slate-800 group">
+          <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white cursor-pointer list-none">
+            <span>Tôi không rành công nghệ, không biết code thì có học được không?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed">
+            100% được bạn nhé. Đối tượng học viên của Thương là người có tư duy kinh doanh (Business-savvy) nhưng công nghệ chỉ ở mức cơ bản (Technology-light). Chỉ cần bạn biết dùng máy tính, biết gửi email hay trả lời tin nhắn là học được. Tất cả đều là thao tác kéo-thả và tư duy câu lệnh trực quan.
+          </p>
+        </details>
+
+        <!-- Question 3: 4-5 people cohort -->
+        <details class="glass-card rounded-2xl p-6 border border-slate-800 group">
+          <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white cursor-pointer list-none">
+            <span>Tại sao mỗi lớp chỉ nhận tối đa 4–5 người?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed">
+            Vì đây là lớp thực chiến mổ xẻ bài toán cụ thể của từng học viên, không phải hội thảo lý thuyết đông người. Nhóm 4–5 người giúp Thương có đủ thời gian mổ xẻ trực tiếp quy trình của bạn, sửa prompt trực tiếp và đảm bảo bạn làm chủ được hệ thống ngay tại lớp.
+          </p>
+        </details>
+
+        <!-- Question 4: Level 2 direct jump -->
+        <details class="glass-card rounded-2xl p-6 border border-slate-800 group">
+          <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white cursor-pointer list-none">
+            <span>Tôi có thể đăng ký học thẳng lên Level 2 được không?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed">
+            Được, nhưng Thương sẽ có 1 buổi trò chuyện 1:1 khoảng 15 phút với bạn trước để kiểm tra xem nền tảng hiện tại của bạn đã đủ để học Level 2 chưa, tránh việc bạn bị ngợp và lãng phí tiền bạc.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA BANNER -->
+  <section class="relative z-10 py-24 md:py-32 px-4 sm:px-6 text-center">
+    <div class="max-w-4xl mx-auto glass-card rounded-3xl p-10 sm:p-16 border border-indigo-500/30 glow-indigo relative overflow-hidden">
+      <h2 class="heading-font text-2xl sm:text-4xl font-extrabold text-white mb-5">
+        Sẵn Sàng Nâng Tầm Hiệu Suất & Tinh Gọn Vận Hành?
+      </h2>
+      <p class="text-sm sm:text-base text-slate-300 max-w-xl mx-auto mb-10 leading-relaxed">
+        Mỗi cohort chỉ nhận đúng 4–5 học viên để đảm bảo kèm cặp trực tiếp trên bài toán của bạn.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+        <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-500 shadow-xl shadow-indigo-600/30 transition">
+          Đăng Ký Level 1 ($150 AUD)
+        </button>
+        <button onclick="openRegistrationModal('Level 2: AI Business Builder ($450 AUD)')" class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-bold text-cyan-300 bg-slate-900 border border-cyan-500/40 hover:text-white transition">
+          Đăng Ký Level 2 ($450 AUD)
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 py-10 px-4 sm:px-6 border-t border-slate-800 text-center text-xs text-slate-500">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <p>© 2026 Thuong Rejeehan. AI & Digital Transformation Advisory. Direct: <a href="mailto:thuongrejeehan@gmail.com" class="text-cyan-400 hover:underline">thuongrejeehan@gmail.com</a></p>
+      <div class="flex gap-8">
+        <a href="#target-audience" class="hover:text-slate-300">Đối tượng</a>
+        <a href="#curriculum" class="hover:text-slate-300">Khóa học</a>
+        <a href="#faq" class="hover:text-slate-300">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- FLOATING INTERACTIVE SALES CHATBOT WIDGET (BOTTOM RIGHT) -->
+  <!-- ======================================================== -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    
+    <!-- CHAT WINDOW (POPUP) -->
+    <div id="chatWindow" class="hidden w-[360px] sm:w-[390px] h-[530px] glass-card rounded-3xl border border-cyan-500/40 glow-cyan flex flex-col shadow-2xl overflow-hidden mb-4 animate-fade-in transition-all">
+      
+      <!-- Chat Header -->
+      <div class="px-5 py-4 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <div class="w-10 h-10 rounded-full overflow-hidden border border-cyan-400/50 shadow-md">
+              <img src="assets/thuong.jpg" alt="Thuong Rejeehan" class="w-full h-full object-cover" />
+            </div>
+            <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-slate-900"></span>
+          </div>
+          <div>
+            <h4 class="heading-font text-sm font-bold text-white">Trợ lý Thương Rejeehan</h4>
+            <p class="text-[11px] text-cyan-400 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> Đang trực tuyến
+            </p>
+          </div>
+        </div>
+        <button onclick="toggleChatbot()" class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Chat Messages Container -->
+      <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3.5 chat-scroll text-xs sm:text-sm">
+        <!-- Initial Bot Greeting Message -->
+        <div class="flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-full overflow-hidden border border-cyan-400/40 shrink-0 mt-0.5">
+            <img src="assets/thuong.jpg" alt="Thuong" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-3.5 rounded-2xl rounded-tl-none bg-slate-800/90 border border-slate-700 text-slate-200 leading-relaxed max-w-[85%]">
+            Chào bạn! Mình là trợ lý của <strong>Thương Rejeehan</strong>. Bạn đang tìm cách ứng dụng AI để giải phóng bớt việc admin hàng ngày, nâng cao kỹ năng làm việc chiến lược (high-level), hay chuẩn bị mở business mới vậy?
+          </div>
+        </div>
+
+        <div class="flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-full overflow-hidden border border-cyan-400/40 shrink-0 mt-0.5">
+            <img src="assets/thuong.jpg" alt="Thuong" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-3.5 rounded-2xl rounded-tl-none bg-slate-800/90 border border-slate-700 text-slate-200 leading-relaxed max-w-[85%]">
+            Bạn có thể bấm vào các câu hỏi bên dưới hoặc nhắn tin để mình hỗ trợ nhé 👇
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Reply Suggestions / Chips -->
+      <div class="p-2.5 bg-slate-950/80 border-t border-slate-800/80 flex gap-1.5 overflow-x-auto text-[11px] chat-scroll">
+        <button onclick="sendQuickReply('Nên học Level 1 hay Level 2?')" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 transition">
+          Nên học Level 1 hay 2?
+        </button>
+        <button onclick="sendQuickReply('Cần chuẩn bị phần mềm gì? Có tốn tiền mua app không?')" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+          Có tốn tiền mua app?
+        </button>
+        <button onclick="sendQuickReply('Tôi không rành công nghệ học được không?')" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+          Không rành công nghệ?
+        </button>
+        <button onclick="sendQuickReply('Tôi chuẩn bị mở business mới có hợp không?')" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+          Chuẩn bị mở business?
+        </button>
+      </div>
+
+      <!-- Chat Input Field -->
+      <form id="chatForm" onsubmit="handleUserChat(event)" class="p-3 bg-slate-900 border-t border-slate-800 flex items-center gap-2">
+        <input type="text" id="chatInput" placeholder="Nhắn tin cho Thương..." class="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-cyan-400 placeholder:text-slate-500" />
+        <button type="submit" class="p-2.5 rounded-xl bg-cyan-400 text-slate-950 font-bold hover:bg-cyan-300 transition">
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+
+    </div>
+
+    <!-- FLOATING TOGGLE BUTTON WITH ACTUAL AVATAR -->
+    <button onclick="toggleChatbot()" class="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-600 to-indigo-700 text-white font-bold text-xs sm:text-sm shadow-2xl shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all border border-cyan-400/30">
+      <div class="relative w-7 h-7 rounded-full overflow-hidden border border-white/50">
+        <img src="assets/thuong.jpg" alt="Thuong Rejeehan" class="w-full h-full object-cover" />
+        <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 border border-slate-900 animate-ping"></span>
+      </div>
+      <span>Hỏi Thương Về Khóa Học</span>
+    </button>
+  </div>
+
+  <!-- SMART REGISTRATION & QUALIFICATION MODAL -->
+  <div id="regModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="glass-card max-w-xl w-full rounded-3xl p-6 sm:p-8 border border-cyan-500/40 glow-cyan relative my-8">
+      
+      <!-- Close Button -->
+      <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/80">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- MODAL FORM VIEW -->
+      <div id="modalFormView">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl overflow-hidden border border-cyan-400/50">
+            <img src="assets/thuong.jpg" alt="Thuong" class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <h3 class="heading-font text-lg sm:text-xl font-bold text-white">Đăng Ký Khóa Học & Đặt Hẹn 1:1</h3>
+            <p class="text-[12px] text-cyan-300 font-medium" id="modalTierTitle">Selected: Level 1 — AI for Real Work ($150 AUD)</p>
+          </div>
+        </div>
+
+        <!-- Trust & Philosophy Notice -->
+        <div class="p-3.5 rounded-xl bg-indigo-950/60 border border-indigo-500/30 text-indigo-200 text-xs leading-relaxed mb-6">
+          💡 <strong>Trước khi bắt đầu:</strong> Để đảm bảo chất lượng lớp (tối đa 4–5 người) và chắc chắn bạn nhận được giá trị thực tế nhất cho mục tiêu của mình, Thương sẽ có 1 buổi trò chuyện ngắn để hiểu rõ nhu cầu và xác nhận lớp có thật sự phù hợp với bạn trước khi tiến hành học.
+        </div>
+
+        <!-- Direct FormSubmit Gateway Form -->
+        <form id="cohortIntakeForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+          <input type="hidden" id="selectedProgramInput" name="Khóa học quan tâm" value="Level 1: AI for Real Work ($150 AUD)" />
+
+          <!-- Full Name -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Họ và Tên (Full Name) <span class="text-red-400">*</span></label>
+            <input type="text" id="inputFullName" name="Họ và tên" required placeholder="e.g. Alex Nguyen" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400" />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Email liên hệ <span class="text-red-400">*</span></label>
+            <input type="email" id="inputEmail" name="Email" required placeholder="alex@business.com.au" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400" />
+          </div>
+
+          <!-- Phone Number with Country Code Dropdown -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Số điện thoại (WhatsApp / Phone) <span class="text-red-400">*</span></label>
+            <div class="flex gap-2">
+              <select id="selectCountryCode" name="Mã quốc gia" class="w-36 px-2.5 py-3 rounded-xl bg-slate-900 border border-slate-700 text-xs sm:text-sm text-white focus:outline-none focus:border-cyan-400 cursor-pointer shrink-0">
+                <option value="+61" selected>🇦🇺 Australia (+61)</option>
+                <option value="+84">🇻🇳 Vietnam (+84)</option>
+                <option value="+1">🇺🇸 USA / CA (+1)</option>
+                <option value="+64">🇳🇿 New Zealand (+64)</option>
+                <option value="+44">🇬🇧 UK (+44)</option>
+                <option value="+65">🇸🇬 Singapore (+65)</option>
+                <option value="Khác">🌐 Khác</option>
+              </select>
+              <input type="tel" id="inputPhone" name="Số điện thoại" required placeholder="412 345 678" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400" />
+            </div>
+          </div>
+
+          <!-- Business Name & Industry -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Doanh nghiệp hiện tại / Dự án đang ấp ủ <span class="text-red-400">*</span></label>
+            <input type="text" id="inputBusiness" name="Doanh nghiệp & Lĩnh vực" required placeholder="e.g. Chủ SME, Quản lý, Solo-founder, hoặc Dự định mở business mới..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400" />
+          </div>
+
+          <!-- Current AI Usage Note -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mục tiêu lớn nhất của bạn khi học AI đợt này?</label>
+            <textarea id="inputChallenge" name="Khó khăn & Nhu cầu" rows="2" placeholder="e.g. Muốn giảm bớt việc admin, nâng cao kỹ năng làm việc chiến lược, hoặc chuẩn hóa mô hình tinh gọn..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400"></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="submitBtn" class="w-full py-4 px-6 rounded-xl text-sm font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-indigo-400 hover:from-cyan-300 hover:to-indigo-300 shadow-xl shadow-cyan-500/25 transition transform active:scale-95 flex items-center justify-center gap-2">
+            <span id="btnText">Gửi Thông Tin & Đặt Lịch Trò Chuyện 1:1</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-slate-950"></i>
+          </button>
+          <p class="text-center text-[11px] text-slate-500">Thông tin được gửi trực tiếp tới thuongrejeehan@gmail.com</p>
+        </form>
+      </div>
+
+      <!-- MODAL SUCCESS & PAYMENT INFO VIEW -->
+      <div id="modalSuccessView" class="hidden text-center py-4">
+        <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+        </div>
+
+        <h3 class="heading-font text-2xl font-bold text-white mb-2">Đăng Ký Thành Công!</h3>
+        <p class="text-xs sm:text-sm text-slate-300 max-w-md mx-auto mb-6">
+          Cảm ơn bạn đã gửi thông tin. Thương sẽ liên hệ qua WhatsApp / Email trong vòng 12–24h để trao đổi và gửi lịch hẹn kết nối 1:1.
+        </p>
+
+        <!-- Bank Transfer Box Updated with User's Exact Details -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-700 text-left mb-6 max-w-md mx-auto bg-slate-900/90">
+          <div class="text-xs font-bold uppercase text-cyan-400 tracking-wider mb-2 flex items-center gap-1.5">
+            <i data-lucide="credit-card" class="w-4 h-4"></i> Thông tin chuyển khoản giữ chỗ sớm (Tùy chọn)
+          </div>
+          <div class="space-y-2 text-xs text-slate-300 border-t border-slate-800 pt-2.5">
+            <div class="flex justify-between"><span class="text-slate-400">Ngân hàng Úc (BSB):</span> <span class="font-mono font-bold text-white text-sm">062692</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Account Number:</span> <span class="font-mono font-bold text-white text-sm">77944591</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">PayID / Email:</span> <span class="font-mono font-bold text-cyan-300 text-sm">thuongrejeehan@gmail.com</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Nội dung CK:</span> <span class="font-mono text-amber-300">[Tên của bạn] + [Level 1 hoặc 2]</span></div>
+          </div>
+        </div>
+
+        <button onclick="closeModal()" class="px-6 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+          Đóng cửa sổ
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Lucide Icon Initialization & Scripts -->
+  <script>
+    lucide.createIcons();
+
+    // MODAL HANDLERS
+    function openRegistrationModal(tierName) {
+      document.getElementById('regModal').classList.remove('hidden');
+      document.getElementById('modalFormView').classList.remove('hidden');
+      document.getElementById('modalSuccessView').classList.add('hidden');
+      
+      if (tierName) {
+        document.getElementById('modalTierTitle').innerText = 'Selected: ' + tierName;
+        document.getElementById('selectedProgramInput').value = tierName;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('regModal').classList.add('hidden');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      btnText.innerText = 'Đang gửi thông tin...';
+      submitBtn.disabled = true;
+
+      const payload = {
+        _subject: "⚡ Khách đăng ký Cohort: " + document.getElementById('inputFullName').value,
+        _template: "table",
+        "Khóa học quan tâm": document.getElementById('selectedProgramInput').value,
+        "Họ và tên": document.getElementById('inputFullName').value,
+        "Email": document.getElementById('inputEmail').value,
+        "Số điện thoại": document.getElementById('selectCountryCode').value + " " + document.getElementById('inputPhone').value,
+        "Doanh nghiệp & Lĩnh vực": document.getElementById('inputBusiness').value,
+        "Mục tiêu / Nhu cầu": document.getElementById('inputChallenge').value || "Không có ghi chú thêm"
+      };
+
+      fetch("https://formsubmit.co/ajax/thuongrejeehan@gmail.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('modalFormView').classList.add('hidden');
+        document.getElementById('modalSuccessView').classList.remove('hidden');
+        btnText.innerText = 'Gửi Thông Tin & Đặt Lịch Trò Chuyện 1:1';
+        submitBtn.disabled = false;
+      })
+      .catch(error => {
+        document.getElementById('modalFormView').classList.add('hidden');
+        document.getElementById('modalSuccessView').classList.remove('hidden');
+        btnText.innerText = 'Gửi Thông Tin & Đặt Lịch Trò Chuyện 1:1';
+        submitBtn.disabled = false;
+      });
+    }
+
+    // ==========================================
+    // CHATBOT LOGIC
+    // ==========================================
+    function toggleChatbot() {
+      const chatWindow = document.getElementById('chatWindow');
+      chatWindow.classList.toggle('hidden');
+      if (!chatWindow.classList.contains('hidden')) {
+        setTimeout(() => {
+          document.getElementById('chatInput').focus();
+        }, 100);
+      }
+    }
+
+    function appendUserMessage(text) {
+      const container = document.getElementById('chatMessages');
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'flex justify-end';
+      msgDiv.innerHTML = `
+        <div class="p-3.5 rounded-2xl rounded-tr-none bg-indigo-600 text-white leading-relaxed max-w-[85%]">
+          ${text}
+        </div>
+      `;
+      container.appendChild(msgDiv);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendBotMessage(html) {
+      const container = document.getElementById('chatMessages');
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'flex items-start gap-2.5';
+      msgDiv.innerHTML = `
+        <div class="w-7 h-7 rounded-full overflow-hidden border border-cyan-400/40 shrink-0 mt-0.5">
+          <img src="assets/thuong.jpg" alt="Thuong" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-3.5 rounded-2xl rounded-tl-none bg-slate-800/90 border border-slate-700 text-slate-200 leading-relaxed max-w-[85%] space-y-2">
+          ${html}
+        </div>
+      `;
+      container.appendChild(msgDiv);
+      container.scrollTop = container.scrollHeight;
+      lucide.createIcons();
+    }
+
+    function sendQuickReply(query) {
+      appendUserMessage(query);
+      generateBotResponse(query);
+    }
+
+    function handleUserChat(e) {
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      
+      appendUserMessage(text);
+      input.value = '';
+      generateBotResponse(text);
+    }
+
+    function generateBotResponse(userInput) {
+      const text = userInput.toLowerCase();
+      
+      setTimeout(() => {
+        if (text.includes('khác gì') || text.includes('việt nam') || text.includes('khoá khác')) {
+          appendBotMessage(`
+            <p>Thật ra tùy vào mức độ cảm nhận của mỗi người bạn nhé.</p>
+            <p>Nhưng với Thương, <strong>học AI không chỉ là học kiến thức mà quan trọng nhất là phải vận dụng được vào công việc và đời sống mỗi ngày</strong>. Đi học cả trăm lớp mà về không dùng được thì thực sự không nên tốn tiền đi học làm gì.</p>
+            <p>Ở đây, Thương kèm bạn trên chính bài toán thực tế của bạn để học xong là có trợ lý AI làm việc được ngay.</p>
+            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition flex items-center justify-center gap-1.5">
+              <span>Đăng ký trao đổi 1:1 cùng Thương</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          `);
+        } else if (text.includes('copilot') || text.includes('công ty')) {
+          appendBotMessage(`
+            <p>Nếu công ty bạn đã có chương trình training Copilot thì rất tuyệt vời, bạn nên tham gia đầy đủ và thực hành ngay nhé!</p>
+            <p>Sau đó khoảng 2 tuần, bạn thử nhìn nhận lại xem bản thân có còn gặp vướng mắc gì không, và có muốn biết thêm gì về ứng dụng AI rộng hơn không. Vì <strong>AI không chỉ có mỗi Copilot, và Copilot không thể bao quát toàn bộ câu chuyện AI đang thay đổi thế giới nhanh như thế nào</strong>.</p>
+          `);
+        } else if (text.includes('phần mềm') || text.includes('app') || text.includes('chuẩn bị') || text.includes('mua') || text.includes('tốn tiền')) {
+          appendBotMessage(`
+            <p>Bạn <strong>hoàn toàn không cần lo lắng</strong> nhé!</p>
+            <p>Lớp học không phải dạy bạn dùng một app AI riêng biệt nào, mà chỉ cho bạn <strong>tư duy và phương pháp ứng dụng AI vào vận hành kinh doanh và cuộc sống</strong>.</p>
+            <p>Thương sẽ hướng dẫn bạn thao tác và tối ưu hóa trên hầu hết các app AI ở ngay <strong>phiên bản MIỄN PHÍ (Free Version)</strong> mà vẫn đạt hiệu quả vượt trội.</p>
+          `);
+        } else if (text.includes('mới') || text.includes('chuẩn bị') || text.includes('startup') || text.includes('tinh gọn')) {
+          appendBotMessage(`
+            <p>Rất phù hợp bạn nhé! Khóa học giúp bạn <strong>dùng AI để chuẩn hóa mô hình kinh doanh tinh gọn ngay từ ngày đầu</strong>.</p>
+            <p>Bạn sẽ biết cách dùng AI lên kế hoạch, đóng gói quy trình bán hàng, tạo kịch bản chăm sóc khách hàng mà không phải tốn tiền thuê ngoài hay nuôi bộ máy cồng kềnh.</p>
+            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition flex items-center justify-center gap-1.5">
+              <span>Đăng ký trao đổi 1:1 cùng Thương</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          `);
+        } else if (text.includes('level 1') || text.includes('level 2') || text.includes('nên học') || text.includes('bắt đầu')) {
+          appendBotMessage(`
+            <p>Rất đơn giản thế này bạn nhé:</p>
+            <p>• <strong>Level 1 ($150 AUD - Sprint 3 ngày):</strong> Dành cho bạn muốn <strong>xóa sổ việc admin ngay lập tức</strong>. Nắm chắc công thức prompt 5 thành tố và đóng gói 1 trợ lý ảo đầu tiên dùng mỗi ngày.</p>
+            <p>• <strong>Level 2 ($450 AUD):</strong> Dành cho bạn muốn xây <strong>'Bộ não thứ hai' (Second Brain)</strong> — nạp toàn bộ quy trình, bảng giá, giọng văn thương hiệu vào AI.</p>
+            <p>👉 <em>Khuyên bạn:</em> Nếu chưa từng học bài bản với Thương, bạn nên bắt đầu từ Level 1 nhé.</p>
+            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition flex items-center justify-center gap-1.5">
+              <span>Đăng ký giữ chỗ Level 1 ($150)</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          `);
+        } else if (text.includes('không rành') || text.includes('không biết') || text.includes('code') || text.includes('công nghệ')) {
+          appendBotMessage(`
+            <p>Bạn yên tâm 100% nhé! 90% học viên của Thương là người có tư duy kinh doanh tốt nhưng không chuyên về công nghệ (Technology-light).</p>
+            <p>Chỉ cần bạn biết dùng máy tính cơ bản, biết trả lời tin nhắn khách là học được. Thương hướng dẫn từng bước kéo-thả cực kỳ dễ hiểu.</p>
+            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-indigo-600 text-white font-bold text-xs hover:bg-indigo-500 transition">
+              Đăng ký trao đổi 1:1 cùng Thương →
+            </button>
+          `);
+        } else if (text.includes('học phí') || text.includes('giá') || text.includes('tiền') || text.includes('chi phí')) {
+          appendBotMessage(`
+            <p>Học phí đầu tư 1 lần trọn gói:</p>
+            <p>• <strong>Level 1 (Thực chiến 3 ngày):</strong> $150 AUD</p>
+            <p>• <strong>Level 2 (Bộ não AI chuyên sâu):</strong> $450 AUD</p>
+            <p>Mỗi lớp chỉ nhận đúng <strong>4–5 người</strong> để kèm sát từng bạn trên chính bài toán thực tế.</p>
+            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition">
+              Đăng ký giữ chỗ đợt này →
+            </button>
+          `);
+        } else {
+          appendBotMessage(`
+            <p>Cảm ơn bạn đã chia sẻ! Để Thương có thể tư vấn chính xác nhất cho mục tiêu kinh doanh của bạn, bạn bấm nút bên dưới để lại thông tin nhé. Thương sẽ trực tiếp liên hệ trao đổi 1:1 trước khi bắt đầu.</p>
+            <button onclick="openRegistrationModal('Level 1: AI for Real Work ($150 AUD)')" class="mt-2 w-full py-2 px-3 rounded-lg bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition flex items-center justify-center gap-1.5">
+              <span>Để lại thông tin nhận tư vấn 1:1</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          `);
+        }
+      }, 500);
+    }
+  </script>
+
+</body>
+</html>
