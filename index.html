@@ -820,18 +820,21 @@
         body: JSON.stringify(payload)
       })
       .then(response => response.json())
-      .then(data => {
-        document.getElementById('modalFormView').classList.add('hidden');
-        document.getElementById('modalSuccessView').classList.remove('hidden');
-        btnText.innerText = 'Gửi Thông Tin & Đặt Lịch Trò Chuyện 1:1';
-        submitBtn.disabled = false;
-      })
-      .catch(error => {
-        document.getElementById('modalFormView').classList.add('hidden');
-        document.getElementById('modalSuccessView').classList.remove('hidden');
-        btnText.innerText = 'Gửi Thông Tin & Đặt Lịch Trò Chuyện 1:1';
-        submitBtn.disabled = false;
-      });
+     .then(data => {
+    
+    const customerName = document.getElementById('inputFullName').value;
+    const customerEmail = document.getElementById('inputEmail').value;
+
+    fetch('/.netlify/functions/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ customerName, customerEmail })
+    }).catch(err => console.error("Lỗi gửi Email 1:", err));
+
+
+    document.getElementById('modalFormView').classList.add('hidden');
+    document.getElementById('modalSuccessView').classList.remove('hidden');
+   
     }
 
     // ==========================================

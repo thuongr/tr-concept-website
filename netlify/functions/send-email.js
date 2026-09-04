@@ -6,13 +6,11 @@ export const handler = async (event, context) => {
   }
 
   try {
+    try {
     const dataBody = JSON.parse(event.body);
-    
-    // Bóc tách linh hoạt: hỗ trợ cả Netlify Form payload lẫn fetch trực tiếp
-    const payload = dataBody.payload ? (dataBody.payload.data || dataBody.payload) : dataBody;
-    const customerEmail = payload.customerEmail || payload.email;
-    const customerName = payload.customerName || payload.name;
+    const { customerEmail, customerName } = dataBody;
     const firstName = customerName ? customerName.split(' ')[0] : 'bạn';
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const { data, error } = await resend.emails.send({
