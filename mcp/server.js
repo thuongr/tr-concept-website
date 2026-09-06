@@ -172,7 +172,10 @@ function getServer() {
   return server;
 }
 
-const app = createMcpExpressApp({ host });
+const app = createMcpExpressApp({
+  host,
+  allowedHosts: ['127.0.0.1', 'localhost', '172.18.0.1']
+});
 app.use(express.json());
 
 app.post('/mcp', async (req, res) => {
