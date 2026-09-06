@@ -97,6 +97,29 @@ app.post('/api/registrations', (req, res) => {
   }
 });
 
+app.get('/api/registrations', (req, res) => {
+  const limit = Number(req.query.limit || 100);
+  const sinceDays = Number(req.query.since_days || 3650);
+  if (!Number.isInteger(limit) || limit < 1 || limit > 500 || !Number.isInteger(sinceDays) || sinceDays < 1 || sinceDays > 3650) {
+    return res.status(400).json({ success: false, error: 'limit must be 1-500 and since_days must be 1-3650' });
+  }
+
+  try {
+    const registrations = db.prepare(`
+      SELECT id, customer_name, customer_email, customer_phone, customer_business,
+             selected_program, customer_challenge, status, follow_up_sent_at, created_at
+      FROM registrations
+      WHERE datetime(created_at) >= datetime('now', ?)
+      ORDER BY datetime(created_at) DESC, id DESC
+      LIMIT ?
+    `).all(`-${sinceDays} days`, limit);
+    return res.json({ success: true, registrations });
+  } catch (dbError) {
+    console.error(new Date().toISOString(), 'registration.list.error', dbError);
+    return res.status(500).json({ success: false, error: 'Database read failed' });
+  }
+});
+
 app.post('/admin/orders', async (req, res) => {
   const { customerName, customerEmail, productId, quantity, totalAmount } = req.body;
 
