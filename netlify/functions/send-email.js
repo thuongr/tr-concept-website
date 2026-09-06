@@ -24,17 +24,59 @@ export const handler = async (event, context) => {
       customerChallenge
     } = dataBody;
 
-    if (!customerEmail) {
+    const normalizedEmail = typeof customerEmail === 'string' ? customerEmail.trim() : '';
+    const normalizedPhone = typeof customerPhone === 'string' ? customerPhone.trim() : '';
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^\+?[\d\s().-]{7,20}$/;
+
+    if (!emailPattern.test(normalizedEmail)) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ success: false, error: 'Customer email is required' })
+        body: JSON.stringify({ success: false, error: 'Please provide a valid email address' })
+      };
+    }
+
+    if (!phonePattern.test(normalizedPhone) || normalizedPhone.replace(/\D/g, '').length < 7) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ success: false, error: 'Please provide a valid phone number' })
+      };
+    }
+
+    const websiteApiUrl = (process.env.WEBSITE_API_URL || 'https://api.trconcept.co').replace(/\/$/, '');
+    const registrationResponse = await fetch(`${websiteApiUrl}/api/registrations`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        customerName,
+        customerEmail: normalizedEmail,
+        customerPhone: normalizedPhone,
+        customerBusiness,
+        selectedProgram,
+        customerChallenge
+      })
+    });
+    const registrationResult = await registrationResponse.json();
+    if (!registrationResponse.ok || !registrationResult.success) {
+      console.error('Không thể lưu registration vào website API:', registrationResult);
+      return {
+        statusCode: 502,
+        headers,
+        body: JSON.stringify({
+          success: false,
+          error: 'Registration could not be saved',
+          message: registrationResult.message || registrationResult.error || 'Website API rejected the registration'
+        })
       };
     }
 
     const firstName = customerName ? customerName.trim().split(' ')[0] : 'bạn';
-    // Lấy API key từ biến môi trường Netlify hoặc fallback hợp lệ
-    const apiKey = process.env.RESEND_API_KEY || ['re', '_KysvCdu3', '_NwKfUhPdWKpVFLWFor1kdznk'].join('');
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY is not configured');
+    }
 
     // Helper gửi mail qua Resend HTTP API trực tiếp (nhanh, chuẩn xác, không kén module)
     const sendResendEmail = async (payload) => {
@@ -53,12 +95,12 @@ export const handler = async (event, context) => {
     // 1. Gửi Email 1 (Welcome & Cảm ơn) cho khách hàng
     const customerPayload = {
       from: 'Thương từ TR Concept <hi@trconcept.co>',
-      to: [customerEmail],
+      to: [normalizedEmail],
       subject: 'Welcome to AI for Real Work',
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #2C2C2C; max-width: 600px; margin: 0 auto; padding: 24px; line-height: 1.6;">
           <p>Hi ${firstName},</p>
-          
+
           <p>Welcome to AI for Real Work — I’m glad to have you with us.</p>
           
           <p>I’m Thương, and I help business owners use AI in practical ways to work smarter, save time, and improve how their business operates.</p>
@@ -79,14 +121,15 @@ export const handler = async (event, context) => {
 
     // 2. Gửi Email Thông Báo có khách mới cho Thương (thuongrejeehan@gmail.com)
     const adminPayload = {
-      from: 'TR Concept System <hi@trconcept.co>',
+      from: 'TR Concept <hi@trconcept.co>',
       to: ['thuongrejeehan@gmail.com'],
-      subject: `🔥 [Khách mới đăng ký] ${customerName || 'Khách hàng'} - ${selectedProgram || 'AI Course'}`,
+      reply_to: normalizedEmail,
+      subject: `[TR Concept] Hoc vien moi dang ky: ${customerName || 'Khach hang'} - ${selectedProgram || 'AI Course'}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #2C2C2C; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #E2E8F0; border-radius: 12px; line-height: 1.6;">
           <h2 style="color: #0F172A; margin-top: 0; padding-bottom: 12px; border-bottom: 2px solid #38BDF8;">🎉 Có Học Viên Mới Đăng Ký!</h2>
           <p style="font-size: 14px; color: #64748B;">Thông tin chi tiết được gửi tự động từ landing page trconcept.co:</p>
-          
+
           <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px;">
             <tr style="background: #F8FAFC;">
               <td style="padding: 10px; font-weight: 600; width: 40%; border: 1px solid #E2E8F0;">Họ và tên:</td>
@@ -114,7 +157,7 @@ export const handler = async (event, context) => {
             </tr>
           </table>
 
-          <p style="font-size: 12px; color: #94A3B8; margin-top: 20px;">Thời gian đăng ký: ${new Date().toLocaleString('vi-VN', { timeZone: 'Australia/Sydney' })} (AEST - Giờ Úc)</p>
+            <p style="font-size: 12px; color: #94A3B8; margin-top: 20px;">Thời gian đăng ký: ${new Date().toLocaleString('vi-VN', { timeZone: 'Australia/Sydney' })} (AEST - Giờ Úc)</p>
         </div>
       `
     };
@@ -129,6 +172,7 @@ export const handler = async (event, context) => {
       headers,
       body: JSON.stringify({
         success: true,
+        registrationId: registrationResult.registrationId,
         customerResult: customerRes,
         adminResult: adminRes
       })
