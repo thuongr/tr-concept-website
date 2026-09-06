@@ -1,0 +1,20 @@
+[Unit]
+Description=TR Concept website MCP server
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/my-website
+EnvironmentFile=/etc/tr-concept-website/mcp.env
+ExecStart=/usr/bin/node /var/www/my-website/mcp/server.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/var/www/my-website
+
+[Install]
+WantedBy=multi-user.target

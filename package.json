@@ -2,7 +2,12 @@
   "name": "my-website",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "mcp:start": "node mcp/server.js"
+  },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "better-sqlite3": "^13.0.3",
     "express": "^5.2.1",
     "node-fetch": "^3.3.2",
