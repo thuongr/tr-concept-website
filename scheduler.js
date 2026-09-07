@@ -30,9 +30,9 @@ async function run() {
     if (sent) continue;
     const preparation = preparationFileFor(registration.selected_program, projectRoot);
     const email = buildClassScheduleEmail(registration, registration, preparation.name);
-    const isLevel1 = String(registration.selected_program || '').toLowerCase().includes('real work') || String(registration.selected_program || '').toLowerCase().includes('level 1');
+    const isInlinePreparation = /real work|level 1|business builder|level 2/i.test(registration.selected_program || '');
     try {
-      const response = await sendClassEmail({ apiKey, from, to: registration.customer_email, ...email, attachmentPath: isLevel1 ? undefined : preparation.path, attachmentName: isLevel1 ? undefined : preparation.name });
+      const response = await sendClassEmail({ apiKey, from, to: registration.customer_email, ...email, attachmentPath: isInlinePreparation ? undefined : preparation.path, attachmentName: isInlinePreparation ? undefined : preparation.name });
       db.prepare(`INSERT INTO email_events (registration_id, class_id, email_type, recipient_email, provider_message_id, status, sent_at) VALUES (?, ?, ?, ?, ?, 'sent', datetime('now'))`)
         .run(registration.registration_id, registration.class_id, eventType, registration.customer_email, response.id || null);
     } catch (error) {

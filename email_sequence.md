@@ -119,7 +119,7 @@ Timezone: Australia/Brisbane
 Google Meet:
 [Google Meet Link]
 
-Please read the attached Level 2 preparation file before the first session.
+The Level 2 preparation instructions are included directly in this email; no attachment is needed.
 
 Please also prepare:
 
@@ -134,11 +134,7 @@ Warm regards,
 Thuong Rejeehan & The Fox Circus Team
 ```
 
-Attachment:
-
-```text
-level-2-preparation.txt
-```
+The email includes the Level 2 reflection task directly in the message body.
 
 ## 6. Waiting List
 
