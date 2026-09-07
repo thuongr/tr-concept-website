@@ -101,11 +101,7 @@ Warm regards,
 Thuong Rejeehan & The Fox Circus Team
 ```
 
-Attachment:
-
-```text
-level-1-preparation.txt
-```
+The Level 1 preparation instructions are included directly in the email; no attachment is needed.
 
 ## 5. Level 2 Class Schedule
 

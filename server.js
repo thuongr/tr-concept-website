@@ -463,8 +463,8 @@ app.post('/api/registrations/:id/mark-paid', async (req, res) => {
           from: process.env.EMAIL_FROM || 'Thuong Rejeehan & The Fox Circus Team <hi@trconcept.co>',
           to: registration.customer_email,
           ...scheduleEmail,
-          attachmentPath: preparation.path,
-          attachmentName: preparation.name
+          attachmentPath: String(registration.selected_program || '').toLowerCase().includes('real work') ? undefined : preparation.path,
+          attachmentName: String(registration.selected_program || '').toLowerCase().includes('real work') ? undefined : preparation.name
         });
         db.prepare(`INSERT INTO email_events (registration_id, student_id, class_id, email_type, recipient_email, provider_message_id, status, sent_at) VALUES (?, ?, ?, ?, ?, ?, 'sent', datetime('now'))`)
           .run(registrationId, result.student_id, result.class_id, 'payment_confirmed', registration.customer_email, paymentResponse.id || null);

@@ -31,9 +31,29 @@ export function buildPaymentConfirmedEmail(registration, classInfo) {
 
 export function buildClassScheduleEmail(registration, classInfo, attachmentName) {
   const name = escapeHtml(firstName(registration.customer_name));
+  const isLevel1 = String(registration.selected_program || '').toLowerCase().includes('real work') || String(registration.selected_program || '').toLowerCase().includes('level 1');
+  const preparation = isLevel1 ? `
+    <h3>Before the class starts</h3>
+    <p>Please complete the following preparation:</p>
+    <h4>1. Download AI Apps</h4>
+    <p>Install these generative AI tools on your phone or computer:</p>
+    <ul>
+      <li><strong>ChatGPT</strong> - <a href="https://chat.openai.com">chat.openai.com</a></li>
+      <li><strong>Claude</strong> - <a href="https://claude.ai">claude.ai</a></li>
+      <li><strong>Gemini</strong> - <a href="https://gemini.google.com">gemini.google.com</a></li>
+    </ul>
+    <h4>2. Create 2 New Email Accounts</h4>
+    <p>We recommend using Gmail accounts when signing up for AI tools. Keeping these accounts separate helps keep your AI work organized.</p>
+    <h4>3. Reflection Task</h4>
+    <p>Think about and write down:</p>
+    <ul>
+      <li>What problems do you think AI can help you with?</li>
+      <li>One task you want to optimize or prioritize.</li>
+    </ul>
+    <p>Bring your answers to class - we’ll discuss them together.</p>` : `<p>Please read the attached preparation file before the first session.</p><p><strong>Preparation file:</strong> ${escapeHtml(attachmentName)}</p>`;
   return {
     subject: `${classInfo.name} - class details`,
-    html: `<p>Hi ${name},</p><p>Your place in <strong>${escapeHtml(classInfo.name)}</strong> is confirmed.</p><p><strong>Date/time:</strong> ${escapeHtml(classInfo.start_at)}${classInfo.end_at ? ` - ${escapeHtml(classInfo.end_at)}` : ''}<br><strong>Timezone:</strong> ${escapeHtml(classInfo.timezone)}</p><p><strong>Google Meet:</strong> <a href="${escapeHtml(classInfo.meeting_url || '')}">${escapeHtml(classInfo.meeting_url || 'Link will follow')}</a></p><p>Please read the attached preparation file before the first session.</p><p><strong>Preparation file:</strong> ${escapeHtml(attachmentName)}</p><p>Warm regards,<br>${signature}</p>`
+    html: `<p>Hi ${name},</p><p>Your place in <strong>${escapeHtml(classInfo.name)}</strong> is confirmed.</p><p><strong>Date/time:</strong> ${escapeHtml(classInfo.start_at)}${classInfo.end_at ? ` - ${escapeHtml(classInfo.end_at)}` : ''}<br><strong>Timezone:</strong> ${escapeHtml(classInfo.timezone)}</p><p><strong>Google Meet:</strong> <a href="${escapeHtml(classInfo.meeting_url || '')}">${escapeHtml(classInfo.meeting_url || 'Link will follow')}</a></p>${preparation}<p>Warm regards,<br>${signature}</p>`
   };
 }
 
