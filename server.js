@@ -247,6 +247,58 @@ app.get('/api/registrations', (req, res) => {
   }
 });
 
+app.get('/api/customers', (_req, res) => {
+  try {
+    const customers = db.prepare(`
+      SELECT c.id, c.name, c.email, c.phone, c.business, c.created_at,
+             s.id AS student_id, s.student_status
+      FROM customers c
+      LEFT JOIN students s ON s.customer_email = c.email
+      ORDER BY datetime(c.created_at) DESC, c.id DESC
+    `).all();
+    return res.json({ success: true, customers });
+  } catch (error) {
+    console.error(new Date().toISOString(), 'customer.list.error', error);
+    return res.status(500).json({ success: false, error: 'Customer read failed' });
+  }
+});
+
+app.get('/api/orders', (_req, res) => {
+  try {
+    const orders = db.prepare(`
+      SELECT o.id, o.customer_id, o.registration_id, c.name AS customer_name,
+             c.email AS customer_email, o.program_name, o.amount, o.currency,
+             o.status, o.created_at, o.updated_at
+      FROM orders o
+      LEFT JOIN customers c ON c.id = o.customer_id
+      ORDER BY datetime(o.created_at) DESC, o.id DESC
+    `).all();
+    return res.json({ success: true, orders });
+  } catch (error) {
+    console.error(new Date().toISOString(), 'order.list.error', error);
+    return res.status(500).json({ success: false, error: 'Order read failed' });
+  }
+});
+
+app.get('/api/students', (_req, res) => {
+  try {
+    const students = db.prepare(`
+      SELECT s.id, s.customer_email, s.student_status, s.telegram_user_id,
+             s.telegram_username, c.name, c.phone,
+             COUNT(cm.id) AS class_count
+      FROM students s
+      LEFT JOIN customers c ON c.email = s.customer_email
+      LEFT JOIN class_members cm ON cm.student_id = s.id AND cm.membership_status = 'active'
+      GROUP BY s.id
+      ORDER BY s.id DESC
+    `).all();
+    return res.json({ success: true, students });
+  } catch (error) {
+    console.error(new Date().toISOString(), 'student.list.error', error);
+    return res.status(500).json({ success: false, error: 'Student read failed' });
+  }
+});
+
 app.get('/api/classes', (_req, res) => {
   try {
     const classes = db.prepare(`
