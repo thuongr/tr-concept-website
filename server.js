@@ -1,6 +1,7 @@
 import express from 'express';
 import Database from 'better-sqlite3';
 import { sendOrderConfirmationEmail } from './emailService.js';
+import { buildPaymentConfirmedEmail, buildClassScheduleEmail, preparationFileFor, sendClassEmail } from './classEmailService.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -321,7 +322,7 @@ app.put('/api/classes/:id', (req, res) => {
   }
 });
 
-app.post('/api/registrations/:id/mark-paid', (req, res) => {
+app.post('/api/registrations/:id/mark-paid', async (req, res) => {
   const registrationId = Number(req.params.id);
   const requestedClassId = req.body?.class_id ? Number(req.body.class_id) : null;
   if (!Number.isInteger(registrationId) || registrationId < 1 || (requestedClassId !== null && (!Number.isInteger(requestedClassId) || requestedClassId < 1))) {
@@ -374,7 +375,39 @@ app.post('/api/registrations/:id/mark-paid', (req, res) => {
       return { student_id: student.id, class_id: classId };
     })();
 
-    return res.json({ success: true, message: 'Registration marked paid', ...result });
+    let emailStatus = 'not_sent';
+    if (result.class_id && process.env.RESEND_API_KEY) {
+      try {
+        const registration = db.prepare('SELECT * FROM registrations WHERE id = ?').get(registrationId);
+        const classInfo = db.prepare('SELECT * FROM classes WHERE id = ?').get(result.class_id);
+        const paymentEmail = buildPaymentConfirmedEmail(registration, classInfo);
+        const preparation = preparationFileFor(registration.selected_program, __dirname);
+        const scheduleEmail = buildClassScheduleEmail(registration, classInfo, preparation.name);
+        const paymentResponse = await sendClassEmail({
+          apiKey: process.env.RESEND_API_KEY,
+          from: process.env.EMAIL_FROM || 'Thuong Rejeehan & The Fox Circus Team <hi@trconcept.co>',
+          to: registration.customer_email,
+          ...paymentEmail
+        });
+        const scheduleResponse = await sendClassEmail({
+          apiKey: process.env.RESEND_API_KEY,
+          from: process.env.EMAIL_FROM || 'Thuong Rejeehan & The Fox Circus Team <hi@trconcept.co>',
+          to: registration.customer_email,
+          ...scheduleEmail,
+          attachmentPath: preparation.path,
+          attachmentName: preparation.name
+        });
+        db.prepare(`INSERT INTO email_events (registration_id, student_id, class_id, email_type, recipient_email, provider_message_id, status, sent_at) VALUES (?, ?, ?, ?, ?, ?, 'sent', datetime('now'))`)
+          .run(registrationId, result.student_id, result.class_id, 'payment_confirmed', registration.customer_email, paymentResponse.id || null);
+        db.prepare(`INSERT INTO email_events (registration_id, student_id, class_id, email_type, recipient_email, provider_message_id, status, sent_at) VALUES (?, ?, ?, ?, ?, ?, 'sent', datetime('now'))`)
+          .run(registrationId, result.student_id, result.class_id, 'class_schedule', registration.customer_email, scheduleResponse.id || null);
+        emailStatus = 'sent';
+      } catch (emailError) {
+        console.error(new Date().toISOString(), 'registration.mark_paid.email.error', emailError);
+        emailStatus = 'failed';
+      }
+    }
+    return res.json({ success: true, message: 'Registration marked paid', email_status: emailStatus, ...result });
   } catch (error) {
     console.error(new Date().toISOString(), 'registration.mark_paid.error', error);
     return res.status(400).json({ success: false, error: error.message });

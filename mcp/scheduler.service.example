@@ -1,0 +1,11 @@
+[Unit]
+Description=TR Concept scheduled class email worker
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/my-website
+EnvironmentFile=/etc/my-website.env
+ExecStart=/usr/bin/node /opt/my-website/scheduler.js

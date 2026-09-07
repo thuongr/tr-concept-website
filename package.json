@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "mcp:start": "node mcp/server.js"
+    "mcp:start": "node mcp/server.js",
+    "scheduler:run": "node scheduler.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",

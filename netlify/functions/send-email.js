@@ -97,24 +97,19 @@ export const handler = async (event, context) => {
     const customerPayload = {
       from: 'Thương từ TR Concept <hi@trconcept.co>',
       to: [normalizedEmail],
-      subject: 'Welcome to AI for Real Work',
+      subject: 'Thank you for registering with TR Concept',
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #2C2C2C; max-width: 600px; margin: 0 auto; padding: 24px; line-height: 1.6;">
           <p>Hi ${firstName},</p>
 
-          <p>Welcome to AI for Real Work — I’m glad to have you with us.</p>
-          
-          <p>I’m Thương, and I help business owners use AI in practical ways to work smarter, save time, and improve how their business operates.</p>
-          
-          <p>I’ve received your registration and will personally contact you within the next 24 hours with the next steps.</p>
-          
-          <p>In the meantime, think of one real task you’d love AI to help you with. We’ll start there.</p>
-          
-          <p>Looking forward to working with you.</p>
+          <p>Thank you for registering your interest in ${selectedProgram || 'our program'}.</p>
+          <p>We’ve received your registration details. Thuong will contact you within the next 24 hours for a short conversation about your goals and to make sure the program is the right fit for you.</p>
+          <p>No payment is required at this stage. Your registration is currently being reviewed.</p>
+          <p>If you have any urgent questions, simply reply to this email.</p>
           
           <p style="margin-top: 24px;">
-            Warmly,<br>
-            <strong>Thương Rejeehan</strong>
+            Warm regards,<br>
+            <strong>Thuong Rejeehan &amp; The Fox Circus Team</strong>
           </p>
         </div>
       `
