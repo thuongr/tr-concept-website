@@ -399,6 +399,14 @@ app.post('/api/registrations/:id/mark-paid', async (req, res) => {
         db.prepare("UPDATE students SET student_status = 'active', updated_at = datetime('now') WHERE id = ?").run(student.id);
       }
 
+      let customerId = registration.customer_id;
+      if (!customerId) {
+        const existingCustomer = db.prepare('SELECT id FROM customers WHERE email = ?').get(registration.customer_email);
+        customerId = existingCustomer?.id || Number(db.prepare('INSERT INTO customers (name, email, phone, business) VALUES (?, ?, ?, ?)')
+          .run(registration.customer_name, registration.customer_email, registration.customer_phone, registration.customer_business).lastInsertRowid);
+        db.prepare('UPDATE registrations SET customer_id = ? WHERE id = ?').run(customerId, registrationId);
+      }
+
       let classId = requestedClassId;
       if (!classId) {
         const availableClass = db.prepare(`
@@ -423,13 +431,17 @@ app.post('/api/registrations/:id/mark-paid', async (req, res) => {
 
       db.prepare("UPDATE registrations SET status = ?, payment_status = 'paid', paid_at = COALESCE(paid_at, datetime('now')), student_id = ?, updated_at = datetime('now') WHERE id = ?")
         .run(classId ? 'assigned' : 'paid_waiting_for_class', student.id, registrationId);
-      if (registration.order_id) {
-        db.prepare("UPDATE orders SET status = 'completed', updated_at = datetime('now') WHERE id = ?").run(registration.order_id);
+      let orderId = registration.order_id;
+      if (!orderId) {
+        orderId = Number(db.prepare("INSERT INTO orders (customer_id, registration_id, program_name, amount, currency, status) VALUES (?, ?, ?, ?, 'AUD', 'processing')")
+          .run(customerId, registrationId, registration.selected_program, getProgramPrice(registration.selected_program)).lastInsertRowid);
+        db.prepare('UPDATE registrations SET order_id = ? WHERE id = ?').run(orderId, registrationId);
       }
+      db.prepare("UPDATE orders SET status = 'completed', updated_at = datetime('now') WHERE id = ?").run(orderId);
 
       db.prepare(`INSERT INTO audit_logs (actor_type, actor_id, action, target_type, target_id, metadata_json) VALUES (?, ?, ?, ?, ?, ?)`)
         .run('admin', 'system', 'registration.marked_paid', 'registration', String(registrationId), JSON.stringify({ student_id: student.id, class_id: classId }));
-      return { student_id: student.id, class_id: classId };
+      return { student_id: student.id, class_id: classId, order_id: orderId };
     })();
 
     let emailStatus = 'not_sent';
