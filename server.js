@@ -124,8 +124,9 @@ function validateRegistration(input) {
   if (!emailPattern.test(registration.customerEmail) || registration.customerEmail.length > 254) {
     return { error: 'customerEmail must be a valid email address' };
   }
-  if (!phonePattern.test(registration.customerPhone) || registration.customerPhone.replace(/\D/g, '').length < 7) {
-    return { error: 'customerPhone must be a valid phone number' };
+  const phoneDigits = registration.customerPhone.replace(/\D/g, '');
+  if (!phonePattern.test(registration.customerPhone) || phoneDigits.length < 7 || phoneDigits.length > 15) {
+    return { error: 'customerPhone must contain between 7 and 15 digits' };
   }
   if (!registration.selectedProgram || registration.selectedProgram.length > 200) {
     return { error: 'selectedProgram is required and must be at most 200 characters' };

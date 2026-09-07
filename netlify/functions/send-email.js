@@ -37,11 +37,12 @@ export const handler = async (event, context) => {
       };
     }
 
-    if (!phonePattern.test(normalizedPhone) || normalizedPhone.replace(/\D/g, '').length < 7) {
+    const phoneDigits = normalizedPhone.replace(/\D/g, '');
+    if (!phonePattern.test(normalizedPhone) || phoneDigits.length < 7 || phoneDigits.length > 15) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ success: false, error: 'Please provide a valid phone number' })
+        body: JSON.stringify({ success: false, error: 'Phone number must contain between 7 and 15 digits' })
       };
     }
 

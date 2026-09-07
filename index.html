@@ -699,7 +699,7 @@
           <!-- Email -->
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1.5">Email liên hệ <span class="text-red-400">*</span></label>
-            <input type="email" id="inputEmail" name="Email" required placeholder="alex@business.com.au" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400" />
+            <input type="email" id="inputEmail" name="Email" required autocomplete="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="Vui lòng nhập email hợp lệ, ví dụ alex@business.com.au" placeholder="alex@business.com.au" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400" />
           </div>
 
           <!-- Phone Number with Country Code Dropdown -->
@@ -715,7 +715,7 @@
                 <option value="+65">🇸🇬 Singapore (+65)</option>
                 <option value="Khác">🌐 Khác</option>
               </select>
-              <input type="tel" id="inputPhone" name="Số điện thoại" required placeholder="412 345 678" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400" />
+              <input type="tel" id="inputPhone" name="Số điện thoại" required autocomplete="tel" inputmode="tel" minlength="7" maxlength="20" pattern="[0-9 .()\-]{7,20}" title="Vui lòng nhập số điện thoại có 7–15 chữ số" placeholder="412 345 678" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400" />
             </div>
           </div>
 
@@ -845,6 +845,26 @@
     // FORM SUBMISSION WITH GRACEFUL FALLBACK (Ensures modal success view opens even if Netlify function isn't running locally)
     function handleFormSubmit(e) {
       e.preventDefault();
+
+      const form = document.getElementById('cohortIntakeForm');
+      if (!form || !form.reportValidity()) return;
+
+      const emailInput = document.getElementById('inputEmail');
+      const phoneInput = document.getElementById('inputPhone');
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneDigits = phoneInput ? phoneInput.value.replace(/\D/g, '') : '';
+      if (!emailInput || !emailPattern.test(emailInput.value.trim())) {
+        emailInput?.setCustomValidity('Vui lòng nhập email hợp lệ.');
+        emailInput?.reportValidity();
+        return;
+      }
+      emailInput.setCustomValidity('');
+      if (!phoneInput || phoneDigits.length < 7 || phoneDigits.length > 15) {
+        phoneInput?.setCustomValidity('Vui lòng nhập số điện thoại hợp lệ (7–15 chữ số).');
+        phoneInput?.reportValidity();
+        return;
+      }
+      phoneInput.setCustomValidity('');
       
       const submitBtn = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
