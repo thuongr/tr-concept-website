@@ -232,12 +232,17 @@ app.get('/api/registrations', (req, res) => {
 
   try {
     const registrations = db.prepare(`
-            SELECT id, customer_name, customer_email, customer_phone, customer_business,
-              selected_program, customer_challenge, status, payment_status, order_id,
+                  SELECT r.id, r.customer_name, r.customer_email, r.customer_phone, r.customer_business,
+                    r.selected_program, r.customer_challenge, r.status, r.payment_status, r.order_id,
+                    r.customer_id, r.student_id,
+                    CASE WHEN r.student_id IS NOT NULL OR EXISTS (
+                 SELECT 1 FROM registrations previous
+                 WHERE previous.customer_email = r.customer_email AND previous.id < r.id
+                    ) THEN 'returning_student' ELSE 'new_student' END AS applicant_type,
               follow_up_sent_at, created_at
-      FROM registrations
-      WHERE datetime(created_at) >= datetime('now', ?)
-      ORDER BY datetime(created_at) DESC, id DESC
+                  FROM registrations r
+                  WHERE datetime(r.created_at) >= datetime('now', ?)
+                  ORDER BY datetime(r.created_at) DESC, r.id DESC
       LIMIT ?
     `).all(`-${sinceDays} days`, limit);
     return res.json({ success: true, registrations });
@@ -394,12 +399,6 @@ app.post('/api/registrations/:id/mark-paid', async (req, res) => {
         db.prepare("UPDATE students SET student_status = 'active', updated_at = datetime('now') WHERE id = ?").run(student.id);
       }
 
-      db.prepare("UPDATE registrations SET payment_status = 'paid', paid_at = COALESCE(paid_at, datetime('now')), student_id = ?, updated_at = datetime('now') WHERE id = ?")
-        .run(student.id, registrationId);
-      if (registration.order_id) {
-        db.prepare("UPDATE orders SET status = 'completed', updated_at = datetime('now') WHERE id = ?").run(registration.order_id);
-      }
-
       let classId = requestedClassId;
       if (!classId) {
         const availableClass = db.prepare(`
@@ -420,6 +419,12 @@ app.post('/api/registrations/:id/mark-paid', async (req, res) => {
         const enrolled = db.prepare("SELECT COUNT(*) AS count FROM class_members WHERE class_id = ? AND membership_status = 'active'").get(classId).count;
         if (enrolled >= targetClass.max_students) throw new Error('Class is full');
         db.prepare("INSERT OR IGNORE INTO class_members (class_id, student_id, membership_status) VALUES (?, ?, 'active')").run(classId, student.id);
+      }
+
+      db.prepare("UPDATE registrations SET status = ?, payment_status = 'paid', paid_at = COALESCE(paid_at, datetime('now')), student_id = ?, updated_at = datetime('now') WHERE id = ?")
+        .run(classId ? 'assigned' : 'paid_waiting_for_class', student.id, registrationId);
+      if (registration.order_id) {
+        db.prepare("UPDATE orders SET status = 'completed', updated_at = datetime('now') WHERE id = ?").run(registration.order_id);
       }
 
       db.prepare(`INSERT INTO audit_logs (actor_type, actor_id, action, target_type, target_id, metadata_json) VALUES (?, ?, ?, ?, ?, ?)`)
