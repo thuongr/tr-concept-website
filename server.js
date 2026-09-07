@@ -34,6 +34,26 @@ db.exec(`
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     updated_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
+  CREATE TABLE IF NOT EXISTS customers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    phone TEXT,
+    business TEXT,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+  CREATE TABLE IF NOT EXISTS orders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id INTEGER NOT NULL REFERENCES customers(id),
+    registration_id INTEGER REFERENCES registrations(id),
+    program_name TEXT NOT NULL,
+    amount REAL NOT NULL,
+    currency TEXT NOT NULL DEFAULT 'AUD',
+    status TEXT NOT NULL DEFAULT 'processing',
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+  );
   CREATE TABLE IF NOT EXISTS classes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -104,9 +124,22 @@ if (!registrationColumns.includes('paid_at')) {
 if (!registrationColumns.includes('student_id')) {
   db.exec('ALTER TABLE registrations ADD COLUMN student_id INTEGER REFERENCES students(id)');
 }
+if (!registrationColumns.includes('customer_id')) {
+  db.exec('ALTER TABLE registrations ADD COLUMN customer_id INTEGER REFERENCES customers(id)');
+}
+if (!registrationColumns.includes('order_id')) {
+  db.exec('ALTER TABLE registrations ADD COLUMN order_id INTEGER REFERENCES orders(id)');
+}
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^\+?[\d\s().-]{7,20}$/;
+
+function getProgramPrice(programName) {
+  const normalized = programName.toLowerCase();
+  if (normalized.includes('business builder') || normalized.includes('level 2')) return 450;
+  if (normalized.includes('retreat')) return 450;
+  return 150;
+}
 
 function validateRegistration(input) {
   const registration = {
@@ -149,25 +182,39 @@ app.post('/api/registrations', (req, res) => {
   }
 
   try {
-    const insert = db.prepare(`
-      INSERT INTO registrations (
-        customer_name, customer_email, customer_phone, customer_business,
-        selected_program, customer_challenge
-      ) VALUES (?, ?, ?, ?, ?, ?)
-    `);
-    const result = insert.run(
-      value.customerName,
-      value.customerEmail,
-      value.customerPhone,
-      value.customerBusiness,
-      value.selectedProgram,
-      value.customerChallenge
-    );
+    const result = db.transaction(() => {
+      const existingCustomer = db.prepare('SELECT id FROM customers WHERE email = ?').get(value.customerEmail);
+      const customerId = existingCustomer?.id || Number(db.prepare(`
+        INSERT INTO customers (name, email, phone, business) VALUES (?, ?, ?, ?)
+      `).run(value.customerName, value.customerEmail, value.customerPhone, value.customerBusiness).lastInsertRowid);
+      if (existingCustomer) {
+        db.prepare('UPDATE customers SET name = ?, phone = ?, business = ?, updated_at = datetime(\'now\') WHERE id = ?')
+          .run(value.customerName, value.customerPhone, value.customerBusiness, customerId);
+      }
+
+      const registrationId = Number(db.prepare(`
+        INSERT INTO registrations (
+          customer_name, customer_email, customer_phone, customer_business,
+          selected_program, customer_challenge, customer_id
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+      `).run(value.customerName, value.customerEmail, value.customerPhone, value.customerBusiness, value.selectedProgram, value.customerChallenge, customerId).lastInsertRowid);
+      const orderId = Number(db.prepare(`
+        INSERT INTO orders (customer_id, registration_id, program_name, amount, status)
+        VALUES (?, ?, ?, ?, 'processing')
+      `).run(customerId, registrationId, value.selectedProgram, getProgramPrice(value.selectedProgram)).lastInsertRowid);
+      db.prepare('UPDATE registrations SET order_id = ? WHERE id = ?').run(orderId, registrationId);
+      db.prepare(`INSERT INTO audit_logs (actor_type, actor_id, action, target_type, target_id, metadata_json) VALUES (?, ?, ?, ?, ?, ?)`)
+        .run('system', 'registration-api', 'registration.created', 'registration', String(registrationId), JSON.stringify({ customer_id: customerId, order_id: orderId }));
+      return { registrationId, customerId, orderId };
+    })();
 
     return res.status(201).json({
       success: true,
       message: 'Registration saved successfully',
-      registrationId: Number(result.lastInsertRowid)
+      registrationId: result.registrationId,
+      customerId: result.customerId,
+      orderId: result.orderId,
+      orderStatus: 'processing'
     });
   } catch (dbError) {
     console.error(new Date().toISOString(), 'registration.create.error', dbError);
@@ -184,8 +231,9 @@ app.get('/api/registrations', (req, res) => {
 
   try {
     const registrations = db.prepare(`
-      SELECT id, customer_name, customer_email, customer_phone, customer_business,
-             selected_program, customer_challenge, status, follow_up_sent_at, created_at
+            SELECT id, customer_name, customer_email, customer_phone, customer_business,
+              selected_program, customer_challenge, status, payment_status, order_id,
+              follow_up_sent_at, created_at
       FROM registrations
       WHERE datetime(created_at) >= datetime('now', ?)
       ORDER BY datetime(created_at) DESC, id DESC
@@ -295,6 +343,9 @@ app.post('/api/registrations/:id/mark-paid', (req, res) => {
 
       db.prepare("UPDATE registrations SET payment_status = 'paid', paid_at = COALESCE(paid_at, datetime('now')), student_id = ?, updated_at = datetime('now') WHERE id = ?")
         .run(student.id, registrationId);
+      if (registration.order_id) {
+        db.prepare("UPDATE orders SET status = 'completed', updated_at = datetime('now') WHERE id = ?").run(registration.order_id);
+      }
 
       let classId = requestedClassId;
       if (!classId) {

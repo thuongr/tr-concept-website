@@ -880,6 +880,13 @@
       const selectedProgram = document.getElementById('selectedProgramInput') ? document.getElementById('selectedProgramInput').value : '';
       const customerChallenge = document.getElementById('inputChallenge') ? document.getElementById('inputChallenge').value : '';
 
+      localStorage.setItem('trconcept_registration_contact', JSON.stringify({
+        customerName,
+        customerEmail,
+        customerPhone,
+        customerBusiness
+      }));
+
       fetch('/.netlify/functions/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -907,6 +914,31 @@
       if (successView) successView.classList.remove('hidden');
       initIcons();
     }
+
+    function restoreSavedContact() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('trconcept_registration_contact') || 'null');
+        if (!saved) return;
+        const emailInput = document.getElementById('inputEmail');
+        if (!emailInput || !saved.customerEmail) return;
+        emailInput.addEventListener('blur', () => {
+          if (emailInput.value.trim().toLowerCase() !== saved.customerEmail.toLowerCase()) return;
+          const fields = {
+            inputFullName: saved.customerName,
+            inputPhone: saved.customerPhone.replace(/^\+\d+\s*/, ''),
+            inputBusiness: saved.customerBusiness
+          };
+          Object.entries(fields).forEach(([id, value]) => {
+            const field = document.getElementById(id);
+            if (field && !field.value && value) field.value = value;
+          });
+        });
+      } catch (error) {
+        console.warn('Could not restore saved registration contact', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', restoreSavedContact);
 
     // CHATBOT HANDLERS
     function toggleChatbot() {
