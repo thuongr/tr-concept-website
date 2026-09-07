@@ -29,3 +29,4 @@ Netlify Dev sẽ chạy website và function cùng lúc. Không mở `.env` tron
 - Chỉ dùng `RESEND_API_KEY` ở server/Netlify Function, không đặt API key trong HTML.
 - API key đã từng xuất hiện trong source nên cần revoke và tạo key mới trên Resend trước khi deploy thật; cập nhật key mới vào `.env` local và Netlify.
 - Sao lưu `brain.db` định kỳ và lưu bản sao ở nơi có quyền truy cập hạn chế.
+- The old `email_automation.py` marketing sequence is retired. Transactional emails are handled by the Netlify Function, the website API, and the class scheduler.

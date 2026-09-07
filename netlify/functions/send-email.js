@@ -95,7 +95,7 @@ export const handler = async (event, context) => {
 
     // 1. Gửi Email 1 (Welcome & Cảm ơn) cho khách hàng
     const customerPayload = {
-      from: 'Thương từ TR Concept <hi@trconcept.co>',
+         from: 'Thuong Rejeehan & The Fox Circus Team <hi@trconcept.co>',
       to: [normalizedEmail],
       subject: 'Thank you for registering with TR Concept',
       html: `
@@ -109,7 +109,7 @@ export const handler = async (event, context) => {
           
           <p style="margin-top: 24px;">
             Warm regards,<br>
-            <strong>Thuong Rejeehan &amp; The Fox Circus Team</strong>
+               <strong>Thuong Rejeehan &amp; The Fox Circus Team</strong>
           </p>
         </div>
       `
