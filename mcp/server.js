@@ -108,6 +108,140 @@ function getServer() {
     }
   });
 
+  server.registerTool('create_class', {
+    description: 'Create a scheduled class with a maximum of five students.',
+    inputSchema: {
+      name: z.string().trim().min(1).max(160),
+      program_level: z.string().trim().min(1).max(80),
+      start_at: z.string().trim().min(1).max(80),
+      end_at: z.string().trim().max(80).optional(),
+      timezone: z.string().trim().min(1).max(80).default('Australia/Brisbane'),
+      meeting_url: z.string().url().optional(),
+      max_students: z.number().int().min(1).max(5).default(5)
+    }
+  }, async (input) => {
+    try {
+      const created = db.prepare(`
+        INSERT INTO classes (name, program_level, max_students, start_at, end_at, timezone, meeting_provider, meeting_url)
+        VALUES (?, ?, ?, ?, ?, ?, 'google_meet', ?)
+      `).run(input.name, input.program_level, input.max_students, input.start_at, input.end_at || null, input.timezone, input.meeting_url || null);
+      const classId = Number(created.lastInsertRowid);
+      db.prepare(`INSERT INTO audit_logs (actor_type, actor_id, action, target_type, target_id, metadata_json) VALUES (?, ?, ?, ?, ?, ?)`)
+        .run('agent', 'mama-fox', 'class.created', 'class', String(classId), JSON.stringify(input));
+      return successful('create_class', input, { message: `Class ${input.name} created`, class_id: classId });
+    } catch (error) {
+      return failed('create_class', input, `Could not create class: ${error.message}`);
+    }
+  });
+
+  server.registerTool('update_class', {
+    description: 'Update a class schedule or Google Meet details.',
+    inputSchema: {
+      class_id: z.number().int().positive(),
+      name: z.string().trim().min(1).max(160).optional(),
+      start_at: z.string().trim().min(1).max(80).optional(),
+      end_at: z.string().trim().max(80).optional(),
+      timezone: z.string().trim().min(1).max(80).optional(),
+      meeting_url: z.string().url().optional(),
+      status: z.enum(['scheduled', 'completed', 'cancelled']).optional()
+    }
+  }, async ({ class_id, ...changes }) => {
+    const input = { class_id, ...changes };
+    try {
+      const allowed = Object.entries(changes).filter(([, value]) => value !== undefined);
+      if (!allowed.length) return failed('update_class', input, 'At least one class field is required');
+      const setClause = allowed.map(([field]) => `${field} = ?`).join(', ');
+      db.prepare(`UPDATE classes SET ${setClause}, updated_at = datetime('now') WHERE id = ?`)
+        .run(...allowed.map(([, value]) => value), class_id);
+      db.prepare(`INSERT INTO audit_logs (actor_type, actor_id, action, target_type, target_id, metadata_json) VALUES (?, ?, ?, ?, ?, ?)`)
+        .run('agent', 'mama-fox', 'class.updated', 'class', String(class_id), JSON.stringify(changes));
+      return successful('update_class', input, { message: `Class ${class_id} updated` });
+    } catch (error) {
+      return failed('update_class', input, `Could not update class: ${error.message}`);
+    }
+  });
+
+  server.registerTool('get_class_capacity', {
+    description: 'Show class schedule, capacity, and enrolled students count.',
+    inputSchema: { class_id: z.number().int().positive() }
+  }, async ({ class_id }) => {
+    const input = { class_id };
+    try {
+      const classInfo = db.prepare(`
+        SELECT c.*, COUNT(cm.id) AS enrolled_count
+        FROM classes c
+        LEFT JOIN class_members cm ON cm.class_id = c.id AND cm.membership_status = 'active'
+        WHERE c.id = ? GROUP BY c.id
+      `).get(class_id);
+      if (!classInfo) return failed('get_class_capacity', input, `Class ${class_id} was not found`);
+      return successful('get_class_capacity', input, {
+        message: `${classInfo.name} has ${classInfo.enrolled_count}/${classInfo.max_students} students`,
+        class: classInfo
+      });
+    } catch (error) {
+      return failed('get_class_capacity', input, `Could not read class capacity: ${error.message}`);
+    }
+  });
+
+  server.registerTool('mark_registration_paid', {
+    description: 'Mark one registration paid, create or reuse its student, and optionally assign a class.',
+    inputSchema: {
+      registration_id: z.number().int().positive(),
+      class_id: z.number().int().positive().optional()
+    }
+  }, async ({ registration_id, class_id }) => {
+    const input = { registration_id, class_id };
+    try {
+      const output = db.transaction(() => {
+        const registration = db.prepare('SELECT * FROM registrations WHERE id = ?').get(registration_id);
+        if (!registration) throw new Error(`Registration ${registration_id} was not found`);
+        let student = db.prepare('SELECT * FROM students WHERE customer_email = ?').get(registration.customer_email);
+        if (!student) {
+          const inserted = db.prepare("INSERT INTO students (customer_email, student_status) VALUES (?, 'active')").run(registration.customer_email);
+          student = db.prepare('SELECT * FROM students WHERE id = ?').get(inserted.lastInsertRowid);
+        } else {
+          db.prepare("UPDATE students SET student_status = 'active', updated_at = datetime('now') WHERE id = ?").run(student.id);
+        }
+        db.prepare("UPDATE registrations SET payment_status = 'paid', paid_at = COALESCE(paid_at, datetime('now')), student_id = ?, updated_at = datetime('now') WHERE id = ?").run(student.id, registration_id);
+        if (class_id) {
+          const classInfo = db.prepare('SELECT * FROM classes WHERE id = ?').get(class_id);
+          if (!classInfo) throw new Error(`Class ${class_id} was not found`);
+          const count = db.prepare("SELECT COUNT(*) AS count FROM class_members WHERE class_id = ? AND membership_status = 'active'").get(class_id).count;
+          if (count >= classInfo.max_students) throw new Error(`Class ${class_id} is full`);
+          db.prepare("INSERT OR IGNORE INTO class_members (class_id, student_id, membership_status) VALUES (?, ?, 'active')").run(class_id, student.id);
+        }
+        db.prepare(`INSERT INTO audit_logs (actor_type, actor_id, action, target_type, target_id, metadata_json) VALUES (?, ?, ?, ?, ?, ?)`)
+          .run('agent', 'mama-fox', 'registration.marked_paid', 'registration', String(registration_id), JSON.stringify({ student_id: student.id, class_id: class_id || null }));
+        return { student_id: student.id, class_id: class_id || null, payment_status: 'paid' };
+      })();
+      return successful('mark_registration_paid', input, { message: `Registration ${registration_id} marked paid`, ...output });
+    } catch (error) {
+      return failed('mark_registration_paid', input, `Could not mark registration paid: ${error.message}`);
+    }
+  });
+
+  server.registerTool('assign_student_to_class', {
+    description: 'Assign an existing paid student to a class with a maximum capacity of five.',
+    inputSchema: {
+      student_id: z.number().int().positive(),
+      class_id: z.number().int().positive()
+    }
+  }, async ({ student_id, class_id }) => {
+    const input = { student_id, class_id };
+    try {
+      const student = db.prepare("SELECT * FROM students WHERE id = ? AND student_status = 'active'").get(student_id);
+      const classInfo = db.prepare('SELECT * FROM classes WHERE id = ?').get(class_id);
+      if (!student) return failed('assign_student_to_class', input, `Active student ${student_id} was not found`);
+      if (!classInfo) return failed('assign_student_to_class', input, `Class ${class_id} was not found`);
+      const count = db.prepare("SELECT COUNT(*) AS count FROM class_members WHERE class_id = ? AND membership_status = 'active'").get(class_id).count;
+      if (count >= classInfo.max_students) return failed('assign_student_to_class', input, `Class ${class_id} is full`);
+      db.prepare("INSERT OR IGNORE INTO class_members (class_id, student_id, membership_status) VALUES (?, ?, 'active')").run(class_id, student_id);
+      return successful('assign_student_to_class', input, { message: `Student ${student_id} assigned to class ${class_id}` });
+    } catch (error) {
+      return failed('assign_student_to_class', input, `Could not assign student: ${error.message}`);
+    }
+  });
+
   server.registerTool('send_registration_follow_up', {
     description: 'Send a follow-up email to one registration and mark it contacted.',
     inputSchema: {
