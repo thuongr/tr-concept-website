@@ -17,7 +17,7 @@ export default async function AdminCommunityPage() {
       <div className="shell admin-two-column">
         <div>
           <p className="eyebrow">Admin · Community</p>
-          <h1>Sessions</h1>
+          <h1>Sessions</h1>\n          <p><a className="text-link" href="/admin/community/registrations">Manage registrations & attendance →</a></p>
 
           <div className="admin-table">
             {(sessions || []).map((session) => (
