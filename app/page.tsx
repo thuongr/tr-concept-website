@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { ArchitectureReveal } from "@/components/ArchitectureReveal";
-import { getBusinessSettings, getHomeHeroContent } from "@/lib/site-content";
+import { getBusinessSettings, getFeaturedTestimonial, getHomeHeroContent } from "@/lib/site-content";
 
 export default async function HomePage() {
-  const [hero, settings] = await Promise.all([
+  const [hero, settings, testimonial] = await Promise.all([
     getHomeHeroContent(),
     getBusinessSettings(),
+    getFeaturedTestimonial(),
   ]);
 
   return (
@@ -14,7 +15,7 @@ export default async function HomePage() {
         <div className="shell hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">Practical AI education &amp; business systems</p>
-            <h1>{hero.heading.includes("structure") ? <>AI works better with <mark>structure.</mark></> : hero.heading}</h1>
+            <h1>{hero.heading === "AI works better with structure." ? <>AI works better with <mark>structure.</mark></> : hero.heading}</h1>
             <p className="hero-lead">{hero.body}</p>
 
             <div className="button-row">
@@ -166,10 +167,20 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <blockquote className="story-quote">
-            “The course gave me a clearer structure and finally made AI feel practical for my business.”
-            <footer>Student story · published with permission</footer>
-          </blockquote>
+          {testimonial ? (
+            <blockquote className="story-quote">
+              “{testimonial.quote}”
+              <footer>
+                {testimonial.displayName}
+                {testimonial.businessName ? ` · ${testimonial.businessName}` : ""}
+              </footer>
+            </blockquote>
+          ) : (
+            <div className="empty-state proof-empty">
+              <strong>Approved stories coming soon.</strong>
+              <p>TRConcept only publishes identifiable proof after permission is recorded.</p>
+            </div>
+          )}
         </div>
       </section>
 
