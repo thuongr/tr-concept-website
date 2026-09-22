@@ -73,3 +73,32 @@ export async function getBusinessSettings(): Promise<BusinessSettings> {
     heroImageUrl: data.hero_image_url || fallbackSettings.heroImageUrl,
   };
 }
+
+
+export type FeaturedTestimonial = {
+  quote: string;
+  displayName: string;
+  businessName: string | null;
+};
+
+export async function getFeaturedTestimonial(): Promise<FeaturedTestimonial | null> {
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) return null;
+
+  const { data } = await supabase
+    .from("testimonials")
+    .select("quote,display_name,business_name")
+    .eq("status", "PUBLISHED")
+    .eq("permission_status", "APPROVED")
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (!data) return null;
+
+  return {
+    quote: data.quote,
+    displayName: data.display_name,
+    businessName: data.business_name || null,
+  };
+}
