@@ -22,8 +22,9 @@ export async function Footer() {
         </div>
 
         <div className="footer-meta">
-          <p>Brisbane, Queensland, Australia</p>
+          <p>TRConcept · operated by Thương Rejeehan</p>
           <p>ABN 99 372 263 957</p>
+          <p>Brisbane, Queensland, Australia</p>
           <p>hello@trconcept.co</p>
 
           <div className="legal-links">
