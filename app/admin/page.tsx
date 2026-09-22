@@ -11,7 +11,7 @@ export default async function AdminPage() {
           <p className="eyebrow">Admin setup</p>
           <h1>Connect Supabase first.</h1>
           <p className="page-lead">
-            Add the Supabase environment variables, run the migration and create your admin user.
+            Add the Supabase environment variables, run the migrations and create your admin user.
           </p>
         </div>
       </section>
@@ -42,8 +42,11 @@ export default async function AdminPage() {
             <p className="eyebrow">TRConcept Control Centre</p>
             <h1>Dashboard</h1>
           </div>
+
           <form action="/api/admin/logout" method="post">
-            <button className="button button-dark" type="submit">Sign out</button>
+            <button className="button button-dark" type="submit">
+              Sign out
+            </button>
           </form>
         </div>
 
@@ -55,6 +58,7 @@ export default async function AdminPage() {
         </div>
 
         <div className="admin-links">
+          <Link href="/admin/content">Website content →</Link>
           <Link href="/admin/community">Community sessions →</Link>
           <Link href="/admin/enrolments">Enrolments →</Link>
           <Link href="/admin/contacts">Contacts →</Link>
