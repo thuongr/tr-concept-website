@@ -1,32 +1,26 @@
-# TR Concept website
+# TRConcept Website V2
 
-Landing page and Netlify Function for the TR Concept course registration form.
+Clean rebuild of the TRConcept public website + lightweight business admin.
 
-## Deploy cơ bản lên Netlify
+## Stack
+- Next.js + TypeScript
+- Supabase Postgres + Auth
+- Resend
+- Netlify
 
-1. Đẩy thư mục này lên GitHub/GitLab, nhớ kiểm tra `.env` không được commit.
-2. Trong Netlify, chọn **Add new site** rồi import repository.
-3. Dùng các cài đặt:
-   - **Build command:** để trống
-   - **Publish directory:** `.`
-   - **Functions directory:** `netlify/functions`
-4. Vào **Site configuration > Environment variables** và tạo:
-   - `RESEND_API_KEY`: API key thật của Resend
-   - `WEBSITE_API_URL`: `https://api.trconcept.co`
-5. Deploy site, sau đó gửi thử form và kiểm tra cả email khách hàng lẫn email thông báo quản trị.
+## Core architecture
+- Education first.
+- Public website does **not** read internal Brain/Heart files.
+- Business records are saved before email is attempted.
+- Detailed class scheduling remains human-managed.
+- The website works without agents.
+- Future agents connect through controlled APIs, not direct database access.
 
-## Chạy local
+## Setup
+1. Copy `.env.example` to `.env.local`.
+2. Create a Supabase project and run `supabase/migrations/001_initial.sql`.
+3. Create at least one Supabase Auth admin user.
+4. Configure Resend.
+5. Run `npm install && npm run dev`.
 
-```bash
-npm install
-npx netlify dev
-```
-
-Netlify Dev sẽ chạy website và function cùng lúc. Không mở `.env` trong trình duyệt và không đưa file này lên repository.
-
-## Lưu ý bảo mật
-
-- Chỉ dùng `RESEND_API_KEY` ở server/Netlify Function, không đặt API key trong HTML.
-- API key đã từng xuất hiện trong source nên cần revoke và tạo key mới trên Resend trước khi deploy thật; cập nhật key mới vào `.env` local và Netlify.
-- Sao lưu `brain.db` định kỳ và lưu bản sao ở nơi có quyền truy cập hạn chế.
-- The old `email_automation.py` marketing sequence is retired. Transactional emails are handled by the Netlify Function, the website API, and the class scheduler.
+Hero/founder imagery is replaceable through `NEXT_PUBLIC_HERO_IMAGE_URL`.
