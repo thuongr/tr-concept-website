@@ -16,7 +16,6 @@ jobs:
         with:
           node-version: "22"
       - run: npm install
-      - run: npm run typecheck
-      - run: npm run build
+      - run: npm run check
         env:
           NEXT_PUBLIC_SITE_URL: http://localhost:3000
