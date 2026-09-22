@@ -9,3 +9,6 @@
 
 .admin-enrolment-list{display:grid;gap:14px;margin-top:30px}.admin-enrolment-card{display:grid;grid-template-columns:.72fr 1.28fr;gap:24px;align-items:start;background:white;border:1px solid var(--line);padding:22px}.admin-enrolment-card p{margin:.35rem 0;color:var(--grey);font-size:.86rem}.inline-admin-form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px}.inline-admin-form select{min-width:0;border:1px solid #aeb8c1;background:#fffefb;padding:10px}.button-small{padding:9px 12px;background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
 @media(max-width:900px){.admin-enrolment-card{grid-template-columns:1fr}.inline-admin-form{grid-template-columns:1fr 1fr}}@media(max-width:560px){.inline-admin-form{grid-template-columns:1fr}}
+
+.permission-form{margin-top:40px}.permission-grid{border:1px solid var(--line);padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.permission-grid legend{font-weight:800;padding:0 8px}.permission-grid label{display:flex;gap:10px;align-items:flex-start;font-size:.9rem}.permission-confirm{padding-top:8px}.inline-admin-form.compact{grid-template-columns:1fr auto}
+@media(max-width:640px){.permission-grid{grid-template-columns:1fr}.inline-admin-form.compact{grid-template-columns:1fr}}
