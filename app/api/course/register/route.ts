@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { sendTransactionalEmail } from "@/lib/email";
+import { escapeHtml, isValidEmail } from "@/lib/validation";
 
 function clean(value: unknown, max = 300) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
@@ -15,7 +16,7 @@ export async function POST(request: Request) {
   const business = clean(body?.business, 200);
   const marketingConsent = body?.marketingConsent === true;
 
-  if (!courseSlug || !name || !email.includes("@")) {
+  if (!courseSlug || !name || !isValidEmail(email)) {
     return NextResponse.json(
       { error: "Please complete the required fields." },
       { status: 400 }
@@ -128,10 +129,13 @@ export async function POST(request: Request) {
     });
   }
 
+  const safeName = escapeHtml(name);
+  const safeOfferName = escapeHtml(offer.name);
+
   const mail = await sendTransactionalEmail({
     to: email,
-    subject: `TRConcept — registration received for ${offer.name}`,
-    html: `<p>Hi ${name},</p><p>We’ve received your registration for <strong>${offer.name}</strong>.</p><p>TRConcept classes are intentionally small. Cohort and session details are arranged directly once your place is confirmed.</p><p>Thương<br/>TRConcept</p>`,
+    subject: `TRConcept — registration received for ${offer.name.replace(/[\r\n]+/g, " ")}`,
+    html: `<p>Hi ${safeName},</p><p>We’ve received your registration for <strong>${safeOfferName}</strong>.</p><p>TRConcept classes are intentionally small. Cohort and session details are arranged directly once your place is confirmed.</p><p>Thương<br/>TRConcept</p>`,
   });
 
   await supabase.from("email_logs").insert({
