@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { sendTransactionalEmail } from "@/lib/email";
+import { escapeHtml, isValidEmail } from "@/lib/validation";
 
 function clean(value: unknown, max = 300) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
@@ -15,7 +16,7 @@ export async function POST(request: Request) {
   const business = clean(body?.business, 200);
   const marketingConsent = body?.marketingConsent === true;
 
-  if (!sessionId || !name || !email.includes("@")) {
+  if (!sessionId || !name || !isValidEmail(email)) {
     return NextResponse.json(
       { error: "Please complete the required fields." },
       { status: 400 }
@@ -125,10 +126,14 @@ export async function POST(request: Request) {
     timeZone: "Australia/Brisbane",
   });
 
+  const safeName = escapeHtml(name);
+  const safeTitle = escapeHtml(session.title);
+  const safeWhen = escapeHtml(when);
+
   const mail = await sendTransactionalEmail({
     to: email,
-    subject: `TRConcept session confirmed — ${session.title}`,
-    html: `<p>Hi ${name},</p><p>Your seat is reserved for <strong>${session.title}</strong>.</p><p>${when}</p><p>Zoom/session access details will be sent before the session.</p><p>Thương<br/>TRConcept</p>`,
+    subject: `TRConcept session confirmed — ${session.title.replace(/[\r\n]+/g, " ")}`,
+    html: `<p>Hi ${safeName},</p><p>Your seat is reserved for <strong>${safeTitle}</strong>.</p><p>${safeWhen}</p><p>Zoom/session access details will be sent before the session.</p><p>Thương<br/>TRConcept</p>`,
   });
 
   await supabase.from("email_logs").insert({
