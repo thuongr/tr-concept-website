@@ -4,3 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# This Netlify project predates the V2 Next.js rebuild.
+# Explicitly enable the Next.js runtime so Deploy Previews do not serve
+# the raw .next directory (which has no root index.html).
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
