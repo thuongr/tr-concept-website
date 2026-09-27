@@ -62,7 +62,6 @@ export default async function HomePage() {
 
       <section className="section section-architecture">
         <div className="shell section-grid">
-          <div className="section-number">01</div>
           <div className="section-copy">
             <p className="eyebrow">From prompt to possibility</p>
             <h2>
@@ -82,7 +81,6 @@ export default async function HomePage() {
 
       <section className="section">
         <div className="shell section-grid">
-          <div className="section-number">02</div>
           <div className="section-copy">
             <p className="eyebrow">Learn · AI for real work</p>
             <h2>Practical AI courses for real work.</h2>
@@ -126,7 +124,6 @@ export default async function HomePage() {
 
       <section className="section community-band">
         <div className="shell section-grid">
-          <div className="section-number">03</div>
           <div className="section-copy">
             <p className="eyebrow">Community · Learn. Share. Grow.</p>
             <h2>TRConcept AI Community Sessions</h2>
@@ -157,7 +154,6 @@ export default async function HomePage() {
 
       <section className="section">
         <div className="shell section-grid">
-          <div className="section-number">04</div>
           <div className="section-copy">
             <p className="eyebrow">Real people · Real results</p>
             <h2>From ideas to impact.</h2>
@@ -186,7 +182,6 @@ export default async function HomePage() {
 
       <section className="section">
         <div className="shell section-grid">
-          <div className="section-number">05</div>
           <div className="section-copy">
             <p className="eyebrow">More ways to work together</p>
             <h2>Solve or Build. Same purpose.</h2>
