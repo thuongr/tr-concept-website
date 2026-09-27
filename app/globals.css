@@ -108,3 +108,53 @@ body{background:var(--white)}
  .pathway-grid{border:0;gap:10px}
  .pathway-grid article{border:1px solid var(--line)}
 }
+
+
+/* V2.2 palette + alignment correction — inspired by supplied editorial palette */
+:root{
+ --blue:#223382;
+ --ink:#111144;
+ --paper:#dad1c8;
+ --white:#f4f1ec;
+ --yellow:#f98513;
+ --grey:#68708b;
+ --line:#cbc4bd;
+ --pale-blue:#9bacd8;
+}
+body{background:var(--white);color:var(--ink)}
+.site-header{background:rgba(244,241,236,.96);border-color:#dad1c8}
+.mobile-menu summary{background:var(--ink);color:var(--white)}
+.button-yellow{background:var(--yellow);border-color:var(--yellow);box-shadow:5px 5px 0 rgba(17,17,68,.18)}
+.hero{background:var(--ink)}
+.hero:before{background-image:linear-gradient(rgba(155,172,216,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(155,172,216,.10) 1px,transparent 1px)}
+.hero h1 mark{color:var(--yellow)}
+.hero h1 mark:after{background:var(--yellow)}
+.hero .button-dark{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+.hero-photo{background:#223382;border-color:rgba(155,172,216,.35)}
+.hero-photo:not(.has-photo){background:radial-gradient(circle at 72% 24%,#394b9b 0,transparent 40%),linear-gradient(145deg,#223382,#111144)}
+.photo-fallback{box-shadow:18px 18px 0 rgba(249,133,19,.24)}
+.hero-annotation{border-color:var(--yellow)}
+.section-grid{grid-template-columns:minmax(260px,360px) minmax(0,1fr);gap:clamp(42px,7vw,96px);align-items:start}
+.section-copy{grid-column:1}
+.architecture-reveal,.course-cards,.community-points,.story-quote,.pathway-grid,.proof-empty{grid-column:2}
+.section-architecture{background:var(--paper)}
+.section-architecture:after{color:rgba(17,17,68,.045)}
+.arch-node,.business-node{background:rgba(244,241,236,.78);border-color:#9bacd8}
+.course-card-blue{background:var(--pale-blue)}
+.tag{background:var(--yellow);color:var(--ink)}
+.course-manifesto{background:var(--ink)}
+.community-band{background:var(--blue)}
+.community-points{border-color:#9bacd8}
+.community-points div{border-color:var(--yellow)}
+.story-quote{border-color:var(--yellow);background:var(--paper)}
+.site-footer{background:var(--ink)}
+@media(max-width:980px){
+ .section-grid{grid-template-columns:1fr;gap:34px}
+ .section-copy,.architecture-reveal,.course-cards,.community-points,.story-quote,.pathway-grid,.proof-empty{grid-column:1}
+}
+@media(max-width:640px){
+ .section-grid{display:block}
+ .section-copy{margin-bottom:34px}
+ .section-copy h2{max-width:12ch}
+ .architecture-reveal,.course-cards,.community-points,.story-quote,.pathway-grid,.proof-empty{width:100%}
+}
