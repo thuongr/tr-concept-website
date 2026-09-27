@@ -182,3 +182,8 @@ body{background:var(--white);color:var(--ink)}
  .post-course-cta{display:grid;margin-top:20px}
  .post-course-cta .button{width:100%}
 }
+
+
+/* V2.4 mobile navigation hierarchy */
+.mobile-menu nav a[href="/learn"]{font-size:.68rem;font-weight:850;letter-spacing:.14em;text-transform:uppercase;color:#6d7084;background:#ebe6df}
+.mobile-menu nav a[href="/learn/level-1"],.mobile-menu nav a[href="/learn/level-2"]{padding-left:20px;font-size:.88rem}
