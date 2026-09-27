@@ -118,6 +118,10 @@ export default async function HomePage() {
               <br />
               <strong>A bigger future.</strong>
             </aside>
+            <div className="post-course-cta">
+              <Link className="button button-orange" href="/start-here">Find your starting point →</Link>
+              <span>Not sure which level fits? Start here.</span>
+            </div>
           </div>
         </div>
       </section>
