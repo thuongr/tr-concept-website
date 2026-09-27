@@ -222,3 +222,15 @@ body{background:var(--white);color:var(--ink)}
  .definition-grid article h3,.three-steps article h3{margin:.35rem 0 .65rem}
  .definition-grid article p,.three-steps article p{margin-bottom:0}
 }
+
+
+.learn-paths{display:grid;grid-template-columns:1fr 1fr;margin-top:38px;border:1px solid var(--ink)}
+.learn-paths article{padding:36px;min-height:390px;display:flex;flex-direction:column;align-items:flex-start;border-right:1px solid var(--ink)}
+.learn-paths article:last-child{border-right:0}
+.learn-paths h3{font-family:Inter,Aptos,sans-serif;font-size:2.15rem;font-weight:800;letter-spacing:-.05em;margin:22px 0 10px}
+.learn-paths .path-kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#68708b;margin:18px 0 0}
+.learn-paths strong{font-size:1.45rem;margin:auto 0 18px}
+.learn-path-dark{background:#111144;color:#f4f1ec}
+.learn-path-dark p{color:#d8def0}
+.learn-path-dark .path-kicker{color:#9bacd8}
+@media(max-width:700px){.learn-paths{grid-template-columns:1fr;border:0;gap:12px}.learn-paths article{min-height:330px;border:1px solid var(--ink)!important;padding:26px}.learn-paths h3{font-size:1.8rem}}
