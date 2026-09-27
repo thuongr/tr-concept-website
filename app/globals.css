@@ -158,3 +158,27 @@ body{background:var(--white);color:var(--ink)}
  .section-copy h2{max-width:12ch}
  .architecture-reveal,.course-cards,.community-points,.story-quote,.pathway-grid,.proof-empty{width:100%}
 }
+
+
+/* V2.3 UX correction pass */
+.section-architecture:after{display:none}
+.section-copy p,.course-card p,.community-points span,.pathway-grid p,.proof-empty p{text-align:left}
+.architecture-reveal{text-align:left}
+.architecture-reveal>div:first-child{padding:22px;background:#f4f1ec;border-top:4px solid #9bacd8}
+.architecture-reveal>div:last-child{padding:22px;background:#111144;color:#f4f1ec}
+.architecture-reveal>div:last-child .micro-label{color:#9bacd8}
+.architecture-reveal>div:last-child .business-node{background:#f98513;color:#111144;border-color:#f98513;box-shadow:6px 6px 0 rgba(155,172,216,.35);padding:18px}
+.architecture-reveal>div:last-child .business-node span{color:#111144}
+.architecture-reveal>div:last-child .arch-node{background:#223382;border-color:#9bacd8;color:#f4f1ec}
+.architecture-reveal>div:last-child .arch-node span{color:#d8def0}
+.architecture-reveal>div:first-child .arch-node:first-child{border-left:5px solid #f98513}
+.arch-bridge{color:#f98513;font-weight:900;opacity:.7}
+.post-course-cta{grid-column:2;margin-top:22px;padding:22px 0;display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-top:1px solid var(--line)}
+.post-course-cta span{font-size:.82rem;color:var(--grey)}
+.button-orange{background:#f98513;border-color:#f98513;color:#111144;box-shadow:5px 5px 0 rgba(17,17,68,.16)}
+@media(max-width:980px){.post-course-cta{grid-column:1}}
+@media(max-width:640px){
+ .architecture-reveal>div:first-child,.architecture-reveal>div:last-child{padding:18px}
+ .post-course-cta{display:grid;margin-top:20px}
+ .post-course-cta .button{width:100%}
+}
