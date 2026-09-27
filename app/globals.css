@@ -234,3 +234,43 @@ body{background:var(--white);color:var(--ink)}
 .learn-path-dark p{color:#d8def0}
 .learn-path-dark .path-kicker{color:#9bacd8}
 @media(max-width:700px){.learn-paths{grid-template-columns:1fr;border:0;gap:12px}.learn-paths article{min-height:330px;border:1px solid var(--ink)!important;padding:26px}.learn-paths h3{font-size:1.8rem}}
+
+
+/* V2.5 typography ratio pass — mobile-first reading rhythm */
+:root{
+  --type-display:clamp(3rem,7.2vw,6.2rem);
+  --type-h1:clamp(2.65rem,5.8vw,5rem);
+  --type-h2:clamp(2rem,3.6vw,3.35rem);
+  --type-h3:clamp(1.3rem,2vw,1.75rem);
+  --type-body:clamp(1rem,1.15vw,1.125rem);
+  --type-small:.78rem;
+  --measure-body:64ch;
+}
+body{font-size:var(--type-body);line-height:1.65}
+p,li{max-width:var(--measure-body)}
+.eyebrow{font-size:var(--type-small);line-height:1.45;letter-spacing:.15em}
+.page-hero h1{font-size:var(--type-h1);line-height:.96;letter-spacing:-.052em}
+.page-hero .page-lead{font-size:clamp(1.05rem,1.45vw,1.3rem);line-height:1.58;max-width:58ch}
+.prose h2{font-size:var(--type-h2);line-height:1.02;letter-spacing:-.045em;margin-bottom:1.35rem}
+.prose h3{font-size:var(--type-h3);line-height:1.15}
+.prose p,.prose li{font-size:var(--type-body);line-height:1.7}
+.meta-line{font-size:.9rem;line-height:1.55}
+.principle{font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.35}
+.architecture-line{font-size:clamp(.74rem,.9vw,.88rem);letter-spacing:.045em}
+.learn-paths h3{font-size:clamp(1.65rem,2.6vw,2.2rem);line-height:1.05}
+.learn-paths p{font-size:1rem;line-height:1.6}
+.route-card p{font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.45}
+@media(max-width:800px){
+  :root{--type-body:1rem;--measure-body:38rem}
+  .page-hero h1{font-size:clamp(2.55rem,10.8vw,3.65rem);line-height:.98;letter-spacing:-.045em;max-width:11.5ch}
+  .page-hero .page-lead{font-size:1.05rem;line-height:1.62}
+  .prose h2{font-size:clamp(2rem,8.3vw,2.75rem);line-height:1.04;max-width:15ch}
+  .prose h3{font-size:1.35rem}
+  .prose p,.prose li{font-size:1rem;line-height:1.68}
+  .eyebrow{font-size:.72rem;letter-spacing:.14em}
+  .principle{font-size:1.25rem}
+}
+@media(max-width:390px){
+  .page-hero h1{font-size:clamp(2.35rem,10.5vw,3rem)}
+  .prose h2{font-size:clamp(1.85rem,8vw,2.35rem)}
+}
