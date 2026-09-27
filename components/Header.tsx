@@ -25,8 +25,9 @@ export function Header() {
           <details className="mobile-menu">
             <summary aria-label="Open navigation">Menu</summary>
             <nav aria-label="Mobile navigation">
-              <Link href="/learn/level-1">Learn</Link>
-              <Link href="/learn/level-2">Level 2</Link>
+              <Link href="/learn">Learn</Link>
+              <Link href="/learn/level-1">Level 1 · AI for Real Work</Link>
+              <Link href="/learn/level-2">Level 2 · Business Builder</Link>
               <Link href="/community">Community</Link>
               <Link href="/solve">Solve</Link>
               <Link href="/build">Build</Link>
