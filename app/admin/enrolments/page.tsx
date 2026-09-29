@@ -16,7 +16,7 @@ export default async function AdminEnrolmentsPage() {
 
   const [{ data: contacts }, { data: courses }, { data: cohorts }] = await Promise.all([
     contactIds.length
-      ? supabase.from("contacts").select("id,name,email").in("id", contactIds)
+      ? supabase.from("contacts").select("id,name,email,phone,country,state_region").in("id", contactIds)
       : Promise.resolve({ data: [] }),
     courseIds.length
       ? supabase.from("courses").select("id,offer_id").in("id", courseIds)
@@ -61,7 +61,7 @@ export default async function AdminEnrolmentsPage() {
               <article className="admin-enrolment-card" key={row.id}>
                 <div>
                   <strong>{contact?.name || contact?.email || "Unknown contact"}</strong>
-                  <p>{contact?.email}</p>
+                  <p>{contact?.email}</p>\n                  <p>{contact?.phone}</p>\n                  <p>{[contact?.state_region, contact?.country].filter(Boolean).join(" · ")}</p>
                   <p>{offer?.name || "Course"}</p>
                 </div>
 
