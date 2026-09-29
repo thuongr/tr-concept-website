@@ -429,3 +429,16 @@ p,li{max-width:var(--measure-body)}
  .pathway-grid{grid-template-columns:1fr}
  .pathway-grid article{min-height:250px}
 }
+
+
+/* V3.2 form UX — clearer, useful registration data */
+.course-registration-form{border:0;background:#f4f1ec;padding:32px;box-shadow:14px 14px 0 rgba(155,172,216,.28)}
+.course-registration-form .form-intro{padding-bottom:20px;border-bottom:1px solid #dad1c8}
+.course-registration-form .form-intro strong{display:block;font-family:Georgia,"Times New Roman",serif;font-size:1.7rem;font-weight:400;color:#111144}
+.course-registration-form .form-intro p{margin:.45rem 0 0;color:#667282;font-size:.88rem}
+.course-registration-form input,.course-registration-form select{border:1px solid #b9b4ae;background:#fff;padding:14px 15px;border-radius:0;font:inherit}
+.course-registration-form input:focus,.course-registration-form select:focus{outline:3px solid rgba(155,172,216,.45);outline-offset:1px;border-color:#223382}
+.course-registration-form label{color:#111144}
+.course-registration-form label span{font-weight:500;color:#667282}
+.course-registration-form .button{background:#f98513;border-color:#f98513;color:#111144}
+@media(max-width:560px){.course-registration-form{padding:22px;box-shadow:8px 8px 0 rgba(155,172,216,.28)}}
