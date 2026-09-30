@@ -4,211 +4,53 @@ import { getBusinessSettings, getFeaturedTestimonial, getHomeHeroContent } from 
 
 export default async function HomePage() {
   const [hero, settings, testimonial] = await Promise.all([
-    getHomeHeroContent(),
-    getBusinessSettings(),
-    getFeaturedTestimonial(),
+    getHomeHeroContent(), getBusinessSettings(), getFeaturedTestimonial(),
   ]);
-
-  return (
-    <>
-      <section className="hero">
-        <div className="shell hero-grid">
-          <div className="hero-copy">
-            <p className="eyebrow">Practical AI education &amp; business systems</p>
-            <h1>{hero.heading === "AI works better with structure." ? <>AI works better with <mark>structure.</mark></> : hero.heading}</h1>
-            <p className="hero-lead">{hero.body}</p>
-
-            <div className="button-row">
-              <Link className="button button-dark" href={hero.ctaUrl}>
-                {hero.ctaLabel} →
-              </Link>
-              <Link className="text-link" href="/community">
-                Join a Community Session
-              </Link>
-            </div>
-
-            <p className="hand-note">
-              Same tools. <span>A clearer way.</span>
-            </p>
-          </div>
-
-          <div className={settings.heroImageUrl ? "hero-photo has-photo" : "hero-photo"}>
-            {settings.heroImageUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={settings.heroImageUrl}
-                alt="Thương Rejeehan, founder of TRConcept"
-              />
-            ) : (
-              <div className="photo-fallback">
-                <span>REAL FOUNDER PHOTO</span>
-                <strong>Replaceable image slot</strong>
-                <p>Open posture · editorial crop · real identity</p>
-              </div>
-            )}
-
-            <div className="hero-annotation">
-              Ideas
-              <br />
-              Structure
-              <br />
-              Systems
-              <br />
-              <strong>Real results</strong>
-            </div>
-          </div>
+  return <>
+    <section className="home-hero">
+      <div className="shell home-hero-grid">
+        <div className="home-hero-copy">
+          <p className="eyebrow">Practical AI education &amp; business systems</p>
+          <h1>{hero.heading === "AI works better with structure." ? <>AI works better with <em>structure.</em></> : hero.heading}</h1>
+          <p className="home-hero-lead">{hero.body}</p>
+          <div className="button-row"><Link className="button home-primary" href={hero.ctaUrl}>{hero.ctaLabel} →</Link><Link className="home-secondary" href="/community">Join a Community Session</Link></div>
         </div>
-      </section>
-
-      <section className="section section-architecture">
-        <div className="shell section-grid">
-          <div className="section-copy">
-            <p className="eyebrow">From prompt to possibility</p>
-            <h2>
-              AI was never <mark>just the prompt.</mark>
-            </h2>
-            <p>
-              AI tools can be powerful, but real results come from structure — how you define
-              the work, provide context, design reusable skills and connect it to your business.
-            </p>
-            <Link className="text-link" href="/learn/level-1">
-              See the bigger picture →
-            </Link>
-          </div>
-          <ArchitectureReveal />
+        <div className="home-hero-visual" aria-label="TRConcept structure model">
+          <span className="visual-kicker">ONE PROMPT IS ONLY THE START</span>
+          <div className="orbit orbit-a">TASK</div><div className="orbit orbit-b">CONTEXT</div><div className="orbit orbit-c">SKILLS</div>
+          <div className="visual-core"><small>TRCONCEPT</small><strong>STRUCTURE</strong><span>makes AI useful</span></div>
+          <div className="visual-caption">Same tools.<br/><b>A clearer way.</b></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section className="section">
-        <div className="shell section-grid">
-          <div className="section-copy">
-            <p className="eyebrow">Learn · AI for real work</p>
-            <h2>Practical AI courses for real work.</h2>
-            <p>
-              Small-group learning for business owners and professionals who want more clarity,
-              confidence and structure.
-            </p>
-          </div>
+    <section className="home-story">
+      <div className="shell">
+        <div className="story-intro"><p className="eyebrow">The bigger picture</p><h2>AI was never <em>just the prompt.</em></h2><p>Real results come from how you define the work, provide context, build reusable capability and connect AI to the business.</p></div>
+        <div className="architecture-stage"><ArchitectureReveal /></div>
+      </div>
+    </section>
 
-          <div className="course-cards">
-            <article className="course-card">
-              <span className="tag">Level 1</span>
-              <h3>AI for Real Work</h3>
-              <p>Learn the fundamentals and teach AI how to do one real job well.</p>
-              <div className="card-bottom">
-                <strong>A$150</strong>
-                <Link href="/learn/level-1">Explore Level 1 →</Link>
-              </div>
-            </article>
-
-            <article className="course-card course-card-blue">
-              <span className="tag">Level 2</span>
-              <h3>AI for Business Builder</h3>
-              <p>Take a more structured approach to applying AI across your business.</p>
-              <div className="card-bottom">
-                <strong>A$450</strong>
-                <Link href="/learn/level-2">Explore Level 2 →</Link>
-              </div>
-            </article>
-
-            <aside className="course-manifesto">
-              Small classes.
-              <br />
-              Real progress.
-              <br />
-              <strong>A bigger future.</strong>
-            </aside>
-            <div className="post-course-cta">
-              <Link className="button button-orange" href="/start-here">Find your starting point →</Link>
-              <span>Not sure which level fits? Start here.</span>
-            </div>
-          </div>
+    <section className="home-learn">
+      <div className="shell">
+        <header className="home-section-head"><div><p className="eyebrow">Learn · AI for real work</p><h2>Start with one job.<br/>Then see the system.</h2></div><p>Two practical learning paths. Small groups. Your real work — not generic AI demonstrations.</p></header>
+        <div className="learning-path">
+          <article className="learning-card l1"><div className="learning-no">01</div><span>LEVEL 1</span><h3>AI for<br/>Real Work</h3><div className="mini-flow"><b>Task</b><i>→</i><b>Context</b><i>→</i><b>Skills</b><i>→</i><b>Assistant</b></div><p>Teach AI how to do one real job well.</p><footer><strong>A$150</strong><Link href="/learn/level-1">Explore Level 1 →</Link></footer></article>
+          <article className="learning-card l2"><div className="learning-no">02</div><span>LEVEL 2</span><h3>AI for<br/>Business Builder</h3><div className="system-dots"><b>Business</b><span>Brain</span><span>Heart</span><span>Skills</span><span>Agents</span><span>Workflow</span></div><p>Design where AI fits across your business.</p><footer><strong>A$450</strong><Link href="/learn/level-2">Explore Level 2 →</Link></footer></article>
         </div>
-      </section>
+        <div className="learn-route"><strong>Not sure where to begin?</strong><Link href="/start-here">Find your starting point →</Link></div>
+      </div>
+    </section>
 
-      <section className="section community-band">
-        <div className="shell section-grid">
-          <div className="section-copy">
-            <p className="eyebrow">Community · Learn. Share. Grow.</p>
-            <h2>TRConcept AI Community Sessions</h2>
-            <p>
-              Practical online conversations for exploring how AI fits into real work and business.
-            </p>
-            <Link className="button button-yellow" href="/community">
-              Reserve a seat →
-            </Link>
-          </div>
+    <section className="home-community">
+      <div className="shell community-composition">
+        <div className="community-title"><p className="eyebrow">Community · Learn. Share. Grow.</p><h2>Real conversations.<br/><em>Real work.</em></h2><p>Practical online sessions for exploring how AI fits into work and business — without pretending every problem needs more technology.</p><Link className="button community-button" href="/community">Reserve a seat →</Link></div>
+        <div className="community-board"><div className="board-main"><span>TRCONCEPT AI COMMUNITY</span><strong>Bring a question.<br/>Leave with a clearer next step.</strong></div><div className="board-note n1">PRACTICAL<br/><b>not theoretical</b></div><div className="board-note n2">BUSINESS<br/><b>before tools</b></div><div className="board-note n3">HUMAN<br/><b>judgement stays</b></div></div>
+      </div>
+    </section>
 
-          <div className="community-points">
-            <div>
-              <strong>Real conversations</strong>
-              <span>Practical topics, real questions</span>
-            </div>
-            <div>
-              <strong>New perspectives</strong>
-              <span>Learn from people building real businesses</span>
-            </div>
-            <div>
-              <strong>Next steps</strong>
-              <span>Find the path that fits you</span>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section className="home-proof"><div className="shell proof-composition"><div><p className="eyebrow">Proof, when it is real</p><h2>From ideas<br/>to impact.</h2><p>TRConcept publishes identifiable stories only after permission is recorded.</p><Link href="/work">See the work →</Link></div>{testimonial ? <blockquote>“{testimonial.quote}”<footer>{testimonial.displayName}{testimonial.businessName ? ` · ${testimonial.businessName}` : ""}</footer></blockquote> : <div className="proof-placeholder"><span>REAL PEOPLE / REAL RESULTS</span><strong>No invented testimonials.<br/>No vanity metrics.</strong><p>Approved student and project stories will appear here as the evidence library grows.</p></div>}</div></section>
 
-      <section className="section">
-        <div className="shell section-grid">
-          <div className="section-copy">
-            <p className="eyebrow">Real people · Real results</p>
-            <h2>From ideas to impact.</h2>
-            <p>Stories from students, founders and community projects putting AI to work.</p>
-            <Link className="text-link" href="/work">
-              See more stories →
-            </Link>
-          </div>
-
-          {testimonial ? (
-            <blockquote className="story-quote">
-              “{testimonial.quote}”
-              <footer>
-                {testimonial.displayName}
-                {testimonial.businessName ? ` · ${testimonial.businessName}` : ""}
-              </footer>
-            </blockquote>
-          ) : (
-            <div className="empty-state proof-empty">
-              <strong>Approved stories coming soon.</strong>
-              <p>TRConcept only publishes identifiable proof after permission is recorded.</p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="shell section-grid">
-          <div className="section-copy">
-            <p className="eyebrow">More ways to work together</p>
-            <h2>Solve or Build. Same purpose.</h2>
-            <p>
-              Different needs. A shared goal — helping you make AI work for what matters most.
-            </p>
-          </div>
-
-          <div className="pathway-grid">
-            <article>
-              <h3>Solve</h3>
-              <p>1:1 consulting for AI transformation and business systems.</p>
-              <Link href="/solve">Learn more →</Link>
-            </article>
-
-            <article>
-              <h3>Build</h3>
-              <p>Focused landing pages and selected digital projects for small businesses.</p>
-              <Link href="/build">Learn more →</Link>
-            </article>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+    <section className="home-paths"><div className="shell"><header className="home-section-head"><div><p className="eyebrow">More ways to work together</p><h2>Need a clearer next move?</h2></div><p>Different needs. Same rule: start with the business, then decide what AI or digital work is actually useful.</p></header><div className="path-panels"><Link href="/solve"><span>01 / SOLVE</span><strong>Untangle the business problem.</strong><p>1:1 AI &amp; business transformation.</p><i>→</i></Link><Link href="/build"><span>02 / BUILD</span><strong>Turn clarity into a focused digital experience.</strong><p>Business-first landing pages &amp; selected projects.</p><i>→</i></Link></div></div></section>
+  </>;
 }
