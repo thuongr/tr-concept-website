@@ -26,33 +26,23 @@ export default async function HomePage() {
     <section className="home-story">
       <div className="shell">
         <div className="story-intro"><p className="eyebrow">The bigger picture</p><h2>AI was never <em>just the prompt.</em></h2><p>Real results come from how you define the work, provide context, build reusable capability and connect AI to the business.</p></div>
-        <div className="growth-stage growth-stage-organic growth-v5" aria-label="TRConcept AI growth system">
+        <div className="growth-stage growth-v6" aria-label="TRConcept AI growth system">
   <div className="growth-copy"><span>STRUCTURE → CAPABILITY → OUTCOME</span><strong>Build the system.<br/>Then let it grow.</strong></div>
-  <svg className="organic-tree" viewBox="0 0 720 820" role="img" aria-label="A growing business system">
-    <g className="roots">
-      <path d="M360 675 C315 704 252 710 170 752"/><path d="M360 675 C410 704 480 718 574 758"/><path d="M360 675 C350 716 340 752 334 792"/><path d="M360 675 C286 687 222 678 126 712"/><path d="M360 675 C438 687 514 682 628 720"/><path d="M360 675 C300 730 272 752 230 788"/><path d="M360 675 C420 730 452 758 492 792"/>
-    </g>
-    <g className="tree-lines">
-      <path className="trunk-line" d="M360 675 C342 598 372 536 350 458 C333 395 346 322 370 246 C382 208 381 170 377 126"/>
-      <path d="M350 475 C308 430 262 392 198 354 C166 335 144 307 130 276"/><path d="M355 403 C402 360 440 310 480 258 C504 226 523 194 534 156"/><path d="M348 540 C410 510 468 468 530 418 C558 396 584 366 605 332"/><path d="M358 337 C318 299 292 252 276 202"/><path d="M370 255 C411 226 446 198 468 158"/><path d="M349 450 C392 430 424 400 448 365"/>
-    </g>
-    <g className="leaves">
-      <path d="M210 370 C166 337 157 300 171 277 C206 290 228 320 210 370Z"/><path d="M286 424 C250 393 246 358 261 338 C293 354 306 385 286 424Z"/><path d="M430 345 C462 307 496 300 517 313 C505 347 477 364 430 345Z"/><path d="M505 445 C539 409 574 408 595 423 C578 457 548 468 505 445Z"/><path d="M302 267 C270 235 267 201 282 181 C314 197 326 227 302 267Z"/><path d="M452 220 C480 182 514 174 536 185 C527 220 499 239 452 220Z"/><path d="M394 430 C420 399 448 394 466 405 C456 434 433 449 394 430Z"/><path d="M252 352 C230 329 228 305 239 291 C261 303 269 324 252 352Z"/>
-    </g>
-    <g className="blooms">
-      <g transform="translate(130 275)"><circle r="3.5"/><path d="M0-8 C-13-24-22-10-9 1 C-22 10-9 22 1 9 C11 22 24 10 10 0 C22-11 11-23 0-8Z"/></g>
-      <g transform="translate(534 155)"><circle r="3.5"/><path d="M0-8 C-13-24-22-10-9 1 C-22 10-9 22 1 9 C11 22 24 10 10 0 C22-11 11-23 0-8Z"/></g>
-      <g transform="translate(605 330)"><circle r="3.5"/><path d="M0-8 C-13-24-22-10-9 1 C-22 10-9 22 1 9 C11 22 24 10 10 0 C22-11 11-23 0-8Z"/></g>
-      <g transform="translate(276 200)"><circle r="3"/><path d="M0-7 C-11-20-19-9-8 1 C-19 9-8 19 1 8 C10 19 21 9 9 0 C20-10 10-20 0-7Z"/></g>
-      <g transform="translate(468 157)"><circle r="3"/><path d="M0-7 C-11-20-19-9-8 1 C-19 9-8 19 1 8 C10 19 21 9 9 0 C20-10 10-20 0-7Z"/></g>
-    </g>
-    <g className="energy"><circle cx="360" cy="650" r="4"/><circle cx="351" cy="475" r="3"/><circle cx="370" cy="255" r="3"/><circle cx="530" cy="418" r="3"/></g>
-  </svg>
-  <div className="system-node node-brain"><i>◎</i><b>BRAIN</b><span>Your knowledge,<br/>context and data.</span></div>
-  <div className="system-node node-skills"><i>◇</i><b>SKILLS</b><span>Turn knowledge<br/>into real capability.</span></div>
-  <div className="system-node node-heart"><i>♡</i><b>HEART</b><span>Your voice, principles<br/>and ways of working.</span></div>
-  <div className="system-node node-flow"><i>⚙</i><b>WORKFLOW</b><span>Connect, automate<br/>and make it flow.</span></div>
-  <div className="business-root"><b>BUSINESS</b><span>A clear foundation<br/>for sustainable growth.</span></div>
+  <div className="botanical-art" aria-hidden="true">
+    <svg viewBox="0 0 700 820">
+      <defs><filter id="warmGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <g className="v6-roots"><path d="M350 675C302 700 240 700 150 752M350 675C405 703 478 716 578 760M350 675C340 720 335 755 330 800M350 675C275 684 208 678 108 716M350 675C430 684 510 680 640 722M350 675C298 731 265 758 215 795M350 675C411 730 450 760 505 798"/></g>
+      <g className="v6-tree"><path className="v6-trunk" d="M350 675C330 600 360 535 342 465C325 397 335 330 362 250C378 204 380 162 376 112"/><path d="M343 480C304 435 256 395 192 358C160 339 137 307 122 270"/><path d="M346 414C397 370 438 315 480 258C505 225 525 188 538 145"/><path d="M340 548C405 515 468 470 536 416C565 393 592 360 616 320"/><path d="M352 344C315 305 286 255 270 198"/><path d="M365 258C407 228 444 194 470 145"/><path d="M340 458C389 438 423 402 453 360"/></g>
+      <g className="v6-leaves"><path d="M201 372C158 338 150 300 166 276C202 290 223 321 201 372Z"/><path d="M280 430C244 397 241 360 257 338C291 354 304 387 280 430Z"/><path d="M426 348C458 308 495 300 518 313C504 350 474 367 426 348Z"/><path d="M505 450C541 411 578 409 600 425C581 462 550 472 505 450Z"/><path d="M298 270C265 237 263 200 279 178C313 195 325 228 298 270Z"/><path d="M449 220C478 180 514 171 538 183C528 221 498 241 449 220Z"/><path d="M391 432C419 398 449 392 469 404C457 436 432 452 391 432Z"/></g>
+      <g className="v6-flowers"><g transform="translate(122 270)"><path d="M0-7C-15-26-26-11-10 2C-25 12-10 26 2 10C13 26 28 12 11 0C25-13 12-26 0-7Z"/><circle r="3"/></g><g transform="translate(538 145)"><path d="M0-7C-15-26-26-11-10 2C-25 12-10 26 2 10C13 26 28 12 11 0C25-13 12-26 0-7Z"/><circle r="3"/></g><g transform="translate(616 320)"><path d="M0-7C-15-26-26-11-10 2C-25 12-10 26 2 10C13 26 28 12 11 0C25-13 12-26 0-7Z"/><circle r="3"/></g><g transform="translate(270 198)"><path d="M0-6C-12-21-22-9-8 1C-21 10-8 21 1 8C11 21 23 10 9 0C21-11 10-21 0-6Z"/><circle r="3"/></g></g>
+      <g className="v6-energy" filter="url(#warmGlow)"><circle cx="350" cy="650" r="3"/><circle cx="343" cy="480" r="3"/><circle cx="365" cy="258" r="3"/><circle cx="536" cy="416" r="3"/><circle cx="192" cy="358" r="3"/></g>
+    </svg>
+  </div>
+  <div className="v6-node n-brain"><i>◉</i><b>BRAIN</b><span>Your knowledge,<br/>context and data.</span></div>
+  <div className="v6-node n-skills"><i>◇</i><b>SKILLS</b><span>Turn knowledge<br/>into real capability.</span></div>
+  <div className="v6-node n-heart"><i>♡</i><b>HEART</b><span>Your voice, principles<br/>and ways of working.</span></div>
+  <div className="v6-node n-flow"><i>⚙</i><b>WORKFLOW</b><span>Connect, automate<br/>and make it flow.</span></div>
+  <div className="v6-business"><b>BUSINESS</b><span>A clear foundation<br/>for sustainable growth.</span></div>
   <div className="growth-outcome"><span>BLOOM</span><b>Useful AI is an outcome<br/>of good structure.</b></div>
 </div>
       </div>
