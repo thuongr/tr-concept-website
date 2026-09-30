@@ -1,43 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PageHero } from "@/components/PageHero";
-
 export const metadata: Metadata = { title: "Learn" };
-
-export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Learn · Practical AI for real work"
-        title="Start with one job. Then design the bigger system."
-        body="Two learning paths, built for different stages. Level 1 helps you structure AI for one real job. Level 2 helps you design how AI should fit across a business."
-        primary="Compare the two levels"
-        primaryHref="#paths"
-      />
-      <section id="paths" className="content-section">
-        <div className="shell narrow prose">
-          <p className="eyebrow">Choose by the problem you are solving</p>
-          <h2>You do not need the most advanced course. You need the right next step.</h2>
-          <div className="learn-paths">
-            <article>
-              <span className="tag">Level 1</span>
-              <p className="path-kicker">One job · Individual work</p>
-              <h3>AI for Real Work</h3>
-              <p>For people who want clearer, more reusable AI work instead of starting from scratch every time.</p>
-              <strong>A$150</strong>
-              <Link className="button button-orange" href="/learn/level-1">Explore Level 1 →</Link>
-            </article>
-            <article className="learn-path-dark">
-              <span className="tag">Level 2</span>
-              <p className="path-kicker">Whole business · Architecture</p>
-              <h3>AI for Business Builder</h3>
-              <p>For business owners ready to decide what AI should know, do, connect and leave human.</p>
-              <strong>A$450</strong>
-              <Link className="button button-orange" href="/learn/level-2">Explore Level 2 →</Link>
-            </article>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
+export default function Page(){return <main className="learn-landing">
+<section className="learn-intro"><div className="shell learn-intro-grid"><div><p className="eyebrow">Learn · Practical AI for real work</p><h1>Learn AI by <em>building how you work.</em></h1><p className="learn-short">Start practical. Build structure. Go deeper when your work or business needs it.</p></div><div className="learn-mark" aria-hidden="true"><span>TR</span><b>LEARN</b></div></div></section>
+<section className="learn-options"><div className="shell"><div className="learn-option-grid">
+<Link href="/learn/level-1" className="learn-option level-one"><span>LEVEL 1</span><h2>AI for<br/>Real Work</h2><p>Teach AI how to do one job well.</p><footer><strong>A$150</strong><i>Explore →</i></footer></Link>
+<Link href="/learn/level-2" className="learn-option level-two"><span>LEVEL 2</span><h2>AI for<br/>Business Builder</h2><p>Design how AI fits across your business.</p><footer><strong>A$450</strong><i>Explore →</i></footer></Link>
+</div><div className="learn-footnote"><span>Not sure where to start?</span><Link href="/start-here">Start here →</Link></div></div></section>
+</main>}
