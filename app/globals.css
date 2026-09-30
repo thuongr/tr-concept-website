@@ -539,3 +539,24 @@ p,li{max-width:var(--measure-body)}
  .learn-option p{font-size:.95rem}
  .learn-route-line{margin-bottom:18px;gap:9px;font-size:.52rem}
 }
+
+
+/* V4.2 motion language — purposeful system motion, no heavy JS */
+@keyframes tr-float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
+@keyframes tr-pulse{0%,100%{box-shadow:0 0 0 14px rgba(249,133,19,.08)}50%{box-shadow:0 0 0 28px rgba(249,133,19,.025)}}
+@keyframes tr-orbit-a{0%,100%{transform:translate(0,0)}50%{transform:translate(12px,-8px)}}
+@keyframes tr-orbit-b{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,10px)}}
+@keyframes tr-scan{0%{transform:translateX(-120%)}100%{transform:translateX(220%)}}
+@keyframes tr-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tr-drift{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(1deg) translateY(-8px)}}
+.home-hero-copy>*{animation:tr-rise .65s both}.home-hero-copy>*:nth-child(2){animation-delay:.08s}.home-hero-copy>*:nth-child(3){animation-delay:.16s}.home-hero-copy>*:nth-child(4){animation-delay:.24s}
+.home-hero-visual{animation:tr-rise .8s .15s both;overflow:hidden}.home-hero-visual:after{content:"";position:absolute;top:0;bottom:0;width:22%;background:linear-gradient(90deg,transparent,rgba(155,172,216,.12),transparent);animation:tr-scan 7s linear infinite;pointer-events:none}
+.visual-core{animation:tr-pulse 3.8s ease-in-out infinite}.orbit-a{animation:tr-orbit-a 5.5s ease-in-out infinite}.orbit-b{animation:tr-orbit-b 6.5s ease-in-out infinite}.orbit-c{animation:tr-orbit-a 7s ease-in-out infinite reverse}
+.learning-card,.path-panels a,.architecture-stage,.proof-placeholder,.proof-composition blockquote{transition:transform .28s ease,box-shadow .28s ease}
+.learning-card:hover,.path-panels a:hover{transform:translateY(-7px)}.architecture-stage:hover{transform:translateY(-4px);box-shadow:20px 20px 0 rgba(34,51,130,.13)}
+.community-board{animation:tr-drift 7s ease-in-out infinite}.board-note{animation:tr-float 4.8s ease-in-out infinite}.board-note.n2{animation-delay:-1.4s}.board-note.n3{animation-delay:-2.6s}
+.button,.home-secondary,.learning-card a,.path-panels a{transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease}.button:hover{transform:translateY(-3px)}.home-primary:hover{box-shadow:12px 12px 0 rgba(155,172,216,.25)}
+.learn-mark{overflow:hidden}.learn-mark:before{content:"";position:absolute;inset:-30%;border:1px solid rgba(155,172,216,.3);border-radius:50%;animation:tr-pulse 4s ease-in-out infinite}.learn-mark b{animation:tr-float 5s ease-in-out infinite}
+.journey-outcome,.system-core{transition:transform .3s ease}.journey-outcome:hover,.system-core:hover{transform:translateY(-6px)}
+@media(max-width:700px){.home-hero-visual:after{animation-duration:9s}.community-board{animation-duration:9s}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
