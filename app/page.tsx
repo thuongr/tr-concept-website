@@ -26,20 +26,34 @@ export default async function HomePage() {
     <section className="home-story">
       <div className="shell">
         <div className="story-intro"><p className="eyebrow">The bigger picture</p><h2>AI was never <em>just the prompt.</em></h2><p>Real results come from how you define the work, provide context, build reusable capability and connect AI to the business.</p></div>
-        <div className="growth-stage growth-stage-organic" aria-label="TRConcept AI growth system">
+        <div className="growth-stage growth-stage-organic growth-v5" aria-label="TRConcept AI growth system">
   <div className="growth-copy"><span>STRUCTURE → CAPABILITY → OUTCOME</span><strong>Build the system.<br/>Then let it grow.</strong></div>
-  <svg className="organic-tree" viewBox="0 0 720 760" role="img" aria-label="A growing business system">
-    <g className="roots"><path d="M360 650 C320 684 270 692 205 720"/><path d="M360 650 C398 686 454 700 530 728"/><path d="M360 650 C350 696 342 718 335 748"/><path d="M360 650 C300 668 248 665 168 686"/><path d="M360 650 C425 664 484 662 566 686"/></g>
-    <g className="tree-lines"><path className="trunk-line" d="M360 650 C345 575 366 510 350 438 C338 380 348 320 365 250 C374 210 372 172 370 128"/><path d="M351 456 C310 418 270 382 210 350 C180 334 160 306 146 275"/><path d="M354 390 C398 354 432 310 470 260 C492 230 510 198 520 162"/><path d="M348 515 C405 490 456 452 510 410 C536 390 560 362 580 330"/><path d="M356 330 C320 294 294 250 280 205"/><path d="M367 250 C405 224 438 198 458 164"/></g>
-    <g className="leaves"><path d="M225 360 C185 330 175 296 188 274 C220 286 240 312 225 360Z"/><path d="M286 405 C252 376 248 344 262 326 C292 342 305 370 286 405Z"/><path d="M425 335 C454 300 485 294 505 306 C494 337 468 352 425 335Z"/><path d="M485 432 C516 399 548 398 568 412 C552 443 525 453 485 432Z"/><path d="M305 260 C276 230 273 199 286 181 C316 196 326 223 305 260Z"/><path d="M438 216 C463 181 494 173 514 183 C506 216 481 233 438 216Z"/></g>
-    <g className="blooms"><g transform="translate(145 270)"><circle r="5"/><path d="M0-7 C-12-22-20-9-8 1 C-20 9-8 20 1 8 C10 20 22 9 9 0 C20-10 10-21 0-7Z"/></g><g transform="translate(520 158)"><circle r="5"/><path d="M0-7 C-12-22-20-9-8 1 C-20 9-8 20 1 8 C10 20 22 9 9 0 C20-10 10-21 0-7Z"/></g><g transform="translate(582 327)"><circle r="5"/><path d="M0-7 C-12-22-20-9-8 1 C-20 9-8 20 1 8 C10 20 22 9 9 0 C20-10 10-21 0-7Z"/></g><g transform="translate(280 202)"><circle r="4"/><path d="M0-6 C-10-18-18-8-7 1 C-18 8-7 17 1 7 C9 17 19 8 8 0 C18-9 9-18 0-6Z"/></g></g>
+  <svg className="organic-tree" viewBox="0 0 720 820" role="img" aria-label="A growing business system">
+    <g className="roots">
+      <path d="M360 675 C315 704 252 710 170 752"/><path d="M360 675 C410 704 480 718 574 758"/><path d="M360 675 C350 716 340 752 334 792"/><path d="M360 675 C286 687 222 678 126 712"/><path d="M360 675 C438 687 514 682 628 720"/><path d="M360 675 C300 730 272 752 230 788"/><path d="M360 675 C420 730 452 758 492 792"/>
+    </g>
+    <g className="tree-lines">
+      <path className="trunk-line" d="M360 675 C342 598 372 536 350 458 C333 395 346 322 370 246 C382 208 381 170 377 126"/>
+      <path d="M350 475 C308 430 262 392 198 354 C166 335 144 307 130 276"/><path d="M355 403 C402 360 440 310 480 258 C504 226 523 194 534 156"/><path d="M348 540 C410 510 468 468 530 418 C558 396 584 366 605 332"/><path d="M358 337 C318 299 292 252 276 202"/><path d="M370 255 C411 226 446 198 468 158"/><path d="M349 450 C392 430 424 400 448 365"/>
+    </g>
+    <g className="leaves">
+      <path d="M210 370 C166 337 157 300 171 277 C206 290 228 320 210 370Z"/><path d="M286 424 C250 393 246 358 261 338 C293 354 306 385 286 424Z"/><path d="M430 345 C462 307 496 300 517 313 C505 347 477 364 430 345Z"/><path d="M505 445 C539 409 574 408 595 423 C578 457 548 468 505 445Z"/><path d="M302 267 C270 235 267 201 282 181 C314 197 326 227 302 267Z"/><path d="M452 220 C480 182 514 174 536 185 C527 220 499 239 452 220Z"/><path d="M394 430 C420 399 448 394 466 405 C456 434 433 449 394 430Z"/><path d="M252 352 C230 329 228 305 239 291 C261 303 269 324 252 352Z"/>
+    </g>
+    <g className="blooms">
+      <g transform="translate(130 275)"><circle r="3.5"/><path d="M0-8 C-13-24-22-10-9 1 C-22 10-9 22 1 9 C11 22 24 10 10 0 C22-11 11-23 0-8Z"/></g>
+      <g transform="translate(534 155)"><circle r="3.5"/><path d="M0-8 C-13-24-22-10-9 1 C-22 10-9 22 1 9 C11 22 24 10 10 0 C22-11 11-23 0-8Z"/></g>
+      <g transform="translate(605 330)"><circle r="3.5"/><path d="M0-8 C-13-24-22-10-9 1 C-22 10-9 22 1 9 C11 22 24 10 10 0 C22-11 11-23 0-8Z"/></g>
+      <g transform="translate(276 200)"><circle r="3"/><path d="M0-7 C-11-20-19-9-8 1 C-19 9-8 19 1 8 C10 19 21 9 9 0 C20-10 10-20 0-7Z"/></g>
+      <g transform="translate(468 157)"><circle r="3"/><path d="M0-7 C-11-20-19-9-8 1 C-19 9-8 19 1 8 C10 19 21 9 9 0 C20-10 10-20 0-7Z"/></g>
+    </g>
+    <g className="energy"><circle cx="360" cy="650" r="4"/><circle cx="351" cy="475" r="3"/><circle cx="370" cy="255" r="3"/><circle cx="530" cy="418" r="3"/></g>
   </svg>
-  <div className="organic-label label-brain"><b>BRAIN</b><span>knowledge · context · data</span></div>
-  <div className="organic-label label-skills"><b>SKILLS</b><span>knowledge → capability</span></div>
-  <div className="organic-label label-heart"><b>HEART</b><span>voice · principles · ways of working</span></div>
-  <div className="organic-label label-flow"><b>WORKFLOW</b><span>connect · automate · flow</span></div>
-  <div className="organic-label label-business"><b>BUSINESS</b><span>the foundation</span></div>
-  <div className="growth-outcome"><span>BLOOM</span><b>Useful AI is an outcome of good structure.</b></div>
+  <div className="system-node node-brain"><i>◎</i><b>BRAIN</b><span>Your knowledge,<br/>context and data.</span></div>
+  <div className="system-node node-skills"><i>◇</i><b>SKILLS</b><span>Turn knowledge<br/>into real capability.</span></div>
+  <div className="system-node node-heart"><i>♡</i><b>HEART</b><span>Your voice, principles<br/>and ways of working.</span></div>
+  <div className="system-node node-flow"><i>⚙</i><b>WORKFLOW</b><span>Connect, automate<br/>and make it flow.</span></div>
+  <div className="business-root"><b>BUSINESS</b><span>A clear foundation<br/>for sustainable growth.</span></div>
+  <div className="growth-outcome"><span>BLOOM</span><b>Useful AI is an outcome<br/>of good structure.</b></div>
 </div>
       </div>
     </section>
