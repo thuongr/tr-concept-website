@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArchitectureReveal } from "@/components/ArchitectureReveal";
 import { getBusinessSettings, getFeaturedTestimonial, getHomeHeroContent } from "@/lib/site-content";
 
 export default async function HomePage() {
@@ -27,7 +26,18 @@ export default async function HomePage() {
     <section className="home-story">
       <div className="shell">
         <div className="story-intro"><p className="eyebrow">The bigger picture</p><h2>AI was never <em>just the prompt.</em></h2><p>Real results come from how you define the work, provide context, build reusable capability and connect AI to the business.</p></div>
-        <div className="architecture-stage"><ArchitectureReveal /></div>
+        <div className="growth-stage" aria-label="TRConcept AI growth system">
+  <div className="growth-copy"><span>STRUCTURE → CAPABILITY → OUTCOME</span><strong>Build the system.<br/>Then let it grow.</strong></div>
+  <div className="growth-tree" aria-hidden="true">
+    <div className="tree-canopy canopy-a"></div><div className="tree-canopy canopy-b"></div><div className="tree-canopy canopy-c"></div>
+    <div className="tree-trunk"></div>
+    <div className="tree-branch branch-a"></div><div className="tree-branch branch-b"></div><div className="tree-branch branch-c"></div><div className="tree-branch branch-d"></div>
+    <div className="tree-root root-a"></div><div className="tree-root root-b"></div><div className="tree-root root-c"></div>
+    <span className="tree-label label-business">BUSINESS</span><span className="tree-label label-brain">BRAIN</span><span className="tree-label label-heart">HEART</span><span className="tree-label label-skills">SKILLS</span><span className="tree-label label-flow">WORKFLOW</span>
+    <i className="flower f1"></i><i className="flower f2"></i><i className="flower f3"></i><i className="flower f4"></i><i className="flower f5"></i>
+  </div>
+  <div className="growth-outcome"><span>BLOOM</span><b>Useful AI is an outcome of good structure.</b></div>
+</div>
       </div>
     </section>
 
