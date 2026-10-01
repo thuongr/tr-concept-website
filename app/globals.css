@@ -625,3 +625,11 @@ transform:rotate(-8deg) scale(1.15)}
 /* V7.6 hotfix — remove legacy line-tree if artwork image is unavailable */
 .growth-v7 .growth-tree,.growth-v7 .tree-svg,.growth-v7 .tree-trunk,.growth-v7 .tree-branch,.growth-v7 .tree-leaf,.growth-v7 .tree-root,.growth-v7 .tree-node{display:none!important}
 .growth-v7{background-image:none!important}
+
+
+/* V7.7 — artwork is the visual; one seamless organic field */
+.live-blooms{display:none!important}
+.growth-v7,.growth-v7:before,.growth-v7:after{background-color:#07163d!important}
+.growth-v7:after{opacity:.11!important}
+.tree-artwork{background-size:cover!important;background-position:center center!important;left:0!important;right:0!important;top:0!important;height:100%!important}
+.tree-artwork:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,22,61,.08),transparent 18%,transparent 80%,rgba(7,22,61,.18));pointer-events:none}
