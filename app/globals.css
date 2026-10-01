@@ -689,3 +689,57 @@ radial-gradient(ellipse at 20% 70%,transparent 0 24%,rgba(155,172,216,.55) 24.3%
 radial-gradient(ellipse at 82% 28%,transparent 0 19%,rgba(155,172,216,.42) 19.3% 19.55%,transparent 19.8% 29%,rgba(242,162,58,.28) 29.3% 29.55%,transparent 29.8%)}
 .community-board,.proof-placeholder,.path-panels{position:relative;overflow:hidden}
 .community-board>* ,.proof-placeholder>* ,.path-panels>*{position:relative;z-index:1}
+
+
+/* V9 — unified TRConcept dark editorial system */
+:root{--tr-night:#061631;--tr-cream:#f4f1ec;--tr-blue:#9bacd8;--tr-orange:#f98513;--tr-royal:#223382;--tr-muted:#aebada}
+
+/* One continuous canvas */
+body,.home-hero,.home-story,.home-learn,.home-community,.home-proof,.home-paths{background:var(--tr-night)!important;color:var(--tr-cream)!important}
+.home-story,.home-learn,.home-community,.home-proof,.home-paths{position:relative;isolation:isolate}
+.home-story>.container,.home-learn>.container,.home-community>.container,.home-proof>.container,.home-paths>.container{position:relative;z-index:2}
+
+/* Type hierarchy for dark canvas */
+.home-story h1,.home-story h2,.home-story h3,
+.home-learn h1,.home-learn h2,.home-learn h3,
+.home-community h1,.home-community h2,.home-community h3,
+.home-proof h1,.home-proof h2,.home-proof h3,
+.home-paths h1,.home-paths h2,.home-paths h3{color:var(--tr-cream)!important}
+.home-story p,.home-learn p,.home-community p,.home-proof p,.home-paths p{color:#c7d0e2}
+.home-story .eyebrow,.home-learn .eyebrow,.home-community .eyebrow,.home-proof .eyebrow,.home-paths .eyebrow{color:var(--tr-blue)!important}
+.home-story em,.home-learn em,.home-community em,.home-proof em,.home-paths em{color:var(--tr-blue)}
+.home-story a,.home-learn a,.home-community a,.home-proof a,.home-paths a{color:inherit}
+
+/* Header stays deliberately light and readable */
+.site-header,.site-nav{background:rgba(244,241,236,.97)!important;color:#111144!important}
+.site-header a,.site-nav a,.site-header button,.site-nav button{color:#111144!important}
+.site-header .button,.site-nav .button,.site-header .btn-primary{background:var(--tr-orange)!important;color:#111144!important}
+
+/* Remove every legacy square-grid treatment from homepage */
+.home-hero:before,.home-story:before,.home-learn:before,.home-community:before,.home-proof:before,.home-paths:before{background-image:none!important}
+.home-hero{background-image:none!important}
+
+/* Shared organic wave divider: layered contours + warm energy seam */
+.home-story:after,.home-learn:after,.home-community:after,.home-proof:after{display:block!important;content:""!important;position:absolute!important;z-index:3!important;left:0!important;right:0!important;bottom:-54px!important;height:108px!important;pointer-events:none!important;opacity:1!important;background:
+radial-gradient(85% 95% at 18% 0%,transparent 66%,rgba(155,172,216,.22) 66.4%,rgba(155,172,216,.22) 66.9%,transparent 67.3%),
+radial-gradient(90% 100% at 73% 100%,transparent 69%,rgba(155,172,216,.13) 69.4%,rgba(155,172,216,.13) 69.9%,transparent 70.3%),
+radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,rgba(249,133,19,.55) 72.65%,transparent 73%)!important;filter:drop-shadow(0 0 7px rgba(249,133,19,.10));transform:none!important;animation:tr-wave-breathe 9s ease-in-out infinite alternate!important}
+@keyframes tr-wave-breathe{from{transform:translate3d(-1.2%,0,0) scaleX(1.02)!important}to{transform:translate3d(1.2%,3px,0) scaleX(1.02)!important}}
+
+/* Dark-surface cards: no accidental white slabs */
+.learning-card,.community-board,.proof-placeholder,.proof-composition blockquote,.path-panels,.path-panels a{background:rgba(9,29,62,.72)!important;color:var(--tr-cream)!important;border-color:rgba(155,172,216,.20)!important}
+.learning-card p,.community-board p,.proof-placeholder p,.proof-composition blockquote p,.path-panels p{color:#c7d0e2!important}
+.learning-card .eyebrow,.path-panels .eyebrow{color:var(--tr-blue)!important}
+.home-primary,.community-button{background:var(--tr-orange)!important;color:#111144!important;border-color:var(--tr-orange)!important}
+
+/* Let artwork merge into canvas */
+.growth-v7{border:0!important;box-shadow:none!important;background:var(--tr-night)!important}
+.growth-v7 .growth-artwork{mix-blend-mode:screen;opacity:.88}
+.growth-v7 .growth-artwork:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,var(--tr-night),transparent 12%,transparent 82%,var(--tr-night)),linear-gradient(90deg,var(--tr-night),transparent 9%,transparent 91%,var(--tr-night))}
+
+/* Mobile keeps the same system, with calmer dividers */
+@media(max-width:700px){
+ .home-story:after,.home-learn:after,.home-community:after,.home-proof:after{height:76px!important;bottom:-38px!important;opacity:.82!important}
+ .home-story,.home-learn,.home-community,.home-proof,.home-paths{overflow:hidden!important}
+}
+@media(prefers-reduced-motion:reduce){.home-story:after,.home-learn:after,.home-community:after,.home-proof:after{animation:none!important}}
