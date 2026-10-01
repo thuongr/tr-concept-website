@@ -659,3 +659,13 @@ p,li{max-width:var(--measure-body)}
 .growth-v7 .bloom-overlay{display:none!important}
 @media(max-width:700px){.petal-flower .p{stroke-width:1}.live-blooms{opacity:.9}}
 @media(prefers-reduced-motion:reduce){.petal-flower .p,.petal-flower .flower-core{animation:none!important;opacity:.8!important;transform:none!important}}
+
+
+/* V7.2 — flat artwork motion treatment: no duplicate labels */
+@keyframes treeGrowIn{0%{clip-path:inset(100% 0 0 0);filter:brightness(.65)}68%{clip-path:inset(0 0 0 0);filter:brightness(.9)}100%{clip-path:inset(0 0 0 0);filter:brightness(1)}}@keyframes bloomPulse{0%,52%{opacity:0;transform:translate(-50%,-50%) scale(.15)}72%{opacity:.85;transform:translate(-50%,-50%) scale(1.35)}100%{opacity:.18;transform:translate(-50%,-50%) scale(1)}}
+.growth-v7 .tree-artwork{animation:treeGrowIn 3.2s cubic-bezier(.3,.7,.2,1) both}
+.growth-v7 .tree-art-label,.growth-v7 .tree-art-business{display:none!important}
+.bloom-pulse{position:absolute;z-index:6;width:46px;height:46px;border:1px solid rgba(249,133,19,.75);border-radius:50%;background:radial-gradient(circle,rgba(249,133,19,.3),rgba(249,133,19,0) 68%);box-shadow:0 0 20px rgba(249,133,19,.28);opacity:0;animation:bloomPulse 1.35s 2.1s cubic-bezier(.2,1.25,.3,1) forwards;pointer-events:none}
+.bloom-1{left:34%;top:39%}.bloom-2{left:43%;top:31%;animation-delay:2.35s}.bloom-3{left:57%;top:31%;animation-delay:2.6s}.bloom-4{left:66%;top:38%;animation-delay:2.85s}.bloom-5{left:76%;top:50%;animation-delay:3.1s}
+@media(max-width:700px){.bloom-pulse{width:34px;height:34px}.bloom-1{left:31%;top:39%}.bloom-2{left:42%;top:31%}.bloom-3{left:57%;top:31%}.bloom-4{left:67%;top:39%}.bloom-5{left:76%;top:49%}}
+@media(prefers-reduced-motion:reduce){.growth-v7 .tree-artwork{clip-path:none!important;filter:none!important}.bloom-pulse{display:none!important}}
