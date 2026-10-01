@@ -600,7 +600,7 @@ p,li{max-width:var(--measure-body)}
 .growth-v7{position:relative;min-height:980px;background:#07163d!important;overflow:hidden}
 .growth-v7:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(155,172,216,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(155,172,216,.06) 1px,transparent 1px);background-size:62px 62px}
 .growth-v7 .growth-copy{position:relative;z-index:10}
-.tree-artwork{position:absolute;z-index:2;left:4%;right:4%;top:18%;height:68%;background:url("https://raw.githubusercontent.com/thuongr/tr-concept-website/main/trconcept-growth-tree.png") center/contain no-repeat;animation:artReveal .8s ease-out both}
+.tree-artwork{position:absolute;z-index:2;left:4%;right:4%;top:18%;height:68%;background:url("/trconcept-growth-tree.png") center/contain no-repeat;animation:artReveal .8s ease-out both}
 .tree-glow{position:absolute;left:50%;bottom:15%;width:34%;height:65%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(249,133,19,.17),transparent 64%);filter:blur(18px);animation:artGlow 4s ease-in-out infinite}
 .tree-crown{display:none}.tree-art-label,.tree-art-business,.bloom-overlay{display:none!important}
 .live-blooms{position:absolute;inset:0;width:100%;height:100%;z-index:6;overflow:visible;pointer-events:none}
@@ -611,3 +611,12 @@ p,li{max-width:var(--measure-body)}
 .growth-v7 .growth-outcome{position:absolute;z-index:8;max-width:360px}
 @media(max-width:700px){.growth-v7{min-height:920px}.growth-v7 .growth-copy strong{font-size:2rem}.tree-artwork{left:-11%;right:-11%;top:20%;height:66%;background-size:contain}.petal-flower .p{stroke-width:1}.growth-v7 .growth-outcome{bottom:24px;max-width:280px}.growth-v7 .growth-outcome b{font-size:1.18rem}}
 @media(prefers-reduced-motion:reduce){.tree-artwork,.tree-glow,.energy-run,.petal-flower .p,.petal-flower .flower-core{animation:none!important;opacity:.85!important;transform:none!important}}
+
+
+/* Organic contour field — replaces square-grid language on dark visual surfaces */
+.growth-v7:before{background:none!important}
+.growth-v7:after{content:"";position:absolute;inset:-8%;z-index:0;pointer-events:none;opacity:.16;background:
+radial-gradient(ellipse at 18% 28%,transparent 0 13%,rgba(155,172,216,.42) 13.2% 13.45%,transparent 13.7% 18%,rgba(155,172,216,.30) 18.2% 18.45%,transparent 18.7% 24%,rgba(155,172,216,.22) 24.2% 24.45%,transparent 24.7%),
+radial-gradient(ellipse at 82% 66%,transparent 0 12%,rgba(155,172,216,.38) 12.2% 12.45%,transparent 12.7% 19%,rgba(155,172,216,.28) 19.2% 19.45%,transparent 19.7% 27%,rgba(155,172,216,.20) 27.2% 27.45%,transparent 27.7%),
+radial-gradient(ellipse at 48% 54%,transparent 0 24%,rgba(155,172,216,.22) 24.2% 24.4%,transparent 24.6% 33%,rgba(155,172,216,.16) 33.2% 33.4%,transparent 33.6%);
+transform:rotate(-8deg) scale(1.15)}
