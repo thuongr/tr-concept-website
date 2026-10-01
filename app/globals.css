@@ -620,3 +620,8 @@ radial-gradient(ellipse at 18% 28%,transparent 0 13%,rgba(155,172,216,.42) 13.2%
 radial-gradient(ellipse at 82% 66%,transparent 0 12%,rgba(155,172,216,.38) 12.2% 12.45%,transparent 12.7% 19%,rgba(155,172,216,.28) 19.2% 19.45%,transparent 19.7% 27%,rgba(155,172,216,.20) 27.2% 27.45%,transparent 27.7%),
 radial-gradient(ellipse at 48% 54%,transparent 0 24%,rgba(155,172,216,.22) 24.2% 24.4%,transparent 24.6% 33%,rgba(155,172,216,.16) 33.2% 33.4%,transparent 33.6%);
 transform:rotate(-8deg) scale(1.15)}
+
+
+/* V7.6 hotfix — remove legacy line-tree if artwork image is unavailable */
+.growth-v7 .growth-tree,.growth-v7 .tree-svg,.growth-v7 .tree-trunk,.growth-v7 .tree-branch,.growth-v7 .tree-leaf,.growth-v7 .tree-root,.growth-v7 .tree-node{display:none!important}
+.growth-v7{background-image:none!important}
