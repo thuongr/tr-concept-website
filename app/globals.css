@@ -626,3 +626,12 @@ p,li{max-width:var(--measure-body)}
 .page-hero::before,.page-hero::after{display:none!important;content:none!important}
 .page-hero{background:#f4f1ec!important}
 @media(max-width:700px){.page-hero{padding-bottom:62px!important}}
+
+
+/* V7.2 — artwork owns labels; animate blooms as light reveals */
+@keyframes bloomLight{0%,20%{opacity:0;transform:scale(.15)}58%{opacity:.95;transform:scale(1.25)}78%{opacity:.5;transform:scale(.95)}100%{opacity:.72;transform:scale(1)}}@keyframes treePulse{0%,100%{filter:brightness(.92) saturate(.9)}50%{filter:brightness(1.12) saturate(1.08)}}
+.tree-artwork{animation:artReveal .8s ease-out both,treePulse 7s 3.8s ease-in-out infinite}
+.bloom-overlay{position:absolute;z-index:5;width:54px;height:54px;border-radius:50%;opacity:0;background:radial-gradient(circle,rgba(255,244,218,.85) 0 5%,rgba(249,133,19,.34) 16%,rgba(249,133,19,.08) 40%,transparent 70%);filter:blur(.3px);transform:scale(.15);animation:bloomLight 1.35s cubic-bezier(.2,1.3,.3,1) forwards}
+.bloom-a{left:32%;top:38%;animation-delay:1.25s}.bloom-b{left:47%;top:27%;animation-delay:1.8s}.bloom-c{left:66%;top:38%;animation-delay:2.35s}.bloom-d{left:26%;top:51%;animation-delay:2.9s}
+@media(max-width:700px){.bloom-overlay{width:42px;height:42px}.bloom-a{left:29%;top:39%}.bloom-b{left:47%;top:28%}.bloom-c{left:68%;top:39%}.bloom-d{left:24%;top:51%}}
+@media(prefers-reduced-motion:reduce){.bloom-overlay{opacity:.55!important;transform:scale(1)!important}}
