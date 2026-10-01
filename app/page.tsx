@@ -31,11 +31,7 @@ export default async function HomePage() {
   <div className="tree-artwork" role="img" aria-label="Business roots growing into Brain, Heart, Skills and Workflow">
     <div className="tree-crown crown-left"></div><div className="tree-crown crown-mid"></div><div className="tree-crown crown-right"></div>
     <div className="tree-glow"></div>
-    <div className="tree-art-label art-skills"><b>SKILLS</b><span>Turn knowledge<br/>into real capability.</span></div>
-    <div className="tree-art-label art-brain"><b>BRAIN</b><span>Your knowledge,<br/>context and data.</span></div>
-    <div className="tree-art-label art-heart"><b>HEART</b><span>Your voice, principles<br/>and ways of working.</span></div>
-    <div className="tree-art-label art-flow"><b>WORKFLOW</b><span>Connect, automate<br/>and make it flow.</span></div>
-    <div className="tree-art-business"><b>BUSINESS</b><span>A clear foundation<br/>for sustainable growth.</span></div>
+    <div className="bloom-overlay bloom-a"></div><div className="bloom-overlay bloom-b"></div><div className="bloom-overlay bloom-c"></div><div className="bloom-overlay bloom-d"></div>
     <div className="energy-run e1"></div><div className="energy-run e2"></div><div className="energy-run e3"></div>
   </div>
   <div className="growth-outcome"><span>BLOOM</span><b>Useful AI is an outcome<br/>of good structure.</b></div>
