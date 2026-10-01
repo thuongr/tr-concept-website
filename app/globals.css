@@ -645,3 +645,17 @@ p,li{max-width:var(--measure-body)}
 .bloom-a{left:25%;top:37%;animation-delay:.3s}.bloom-b{left:48%;top:26%;animation-delay:1.15s}.bloom-c{left:70%;top:38%;animation-delay:2s}.bloom-d{left:29%;top:51%;animation-delay:2.85s}
 .energy-run{animation:sapSpark 3.8s ease-in-out infinite}
 @media(max-width:700px){.bloom-overlay{width:54px;height:54px}.bloom-a{left:26%;top:37%}.bloom-b{left:48%;top:27%}.bloom-c{left:69%;top:39%}.bloom-d{left:28%;top:51%}}
+
+
+/* V7.4 — real independent petal motion layered over master artwork */
+@keyframes petalOpen{0%,18%{opacity:0;transform:scale(.05) rotate(-28deg)}48%{opacity:.95;transform:scale(1.14) rotate(5deg)}68%,100%{opacity:.82;transform:scale(1) rotate(0)}}@keyframes coreIgnite{0%,30%{opacity:0;transform:scale(.2)}55%{opacity:1;transform:scale(1.5)}75%,100%{opacity:1;transform:scale(1)}}
+.live-blooms{position:absolute;inset:0;width:100%;height:100%;z-index:6;overflow:visible;pointer-events:none}
+.petal-flower{transform-box:fill-box;transform-origin:center}.petal-flower .p{fill:rgba(244,241,236,.09);stroke:#f4f1ec;stroke-width:1.25;vector-effect:non-scaling-stroke;opacity:0;transform-box:fill-box;transform-origin:center;animation:petalOpen 5.8s cubic-bezier(.2,1.15,.3,1) infinite}
+.petal-flower .p2{animation-delay:.10s}.petal-flower .p3{animation-delay:.20s}.petal-flower .p4{animation-delay:.30s}.petal-flower .p5{animation-delay:.40s}.petal-flower .flower-core{fill:#f98513;filter:drop-shadow(0 0 7px #f98513);opacity:0;transform-box:fill-box;transform-origin:center;animation:coreIgnite 5.8s .48s ease-out infinite}
+.flower-2 .p,.flower-2 .flower-core{animation-delay:1.25s}.flower-2 .p2{animation-delay:1.35s}.flower-2 .p3{animation-delay:1.45s}.flower-2 .p4{animation-delay:1.55s}.flower-2 .p5{animation-delay:1.65s}
+.flower-3 .p,.flower-3 .flower-core{animation-delay:2.35s}.flower-3 .p2{animation-delay:2.45s}.flower-3 .p3{animation-delay:2.55s}.flower-3 .p4{animation-delay:2.65s}.flower-3 .p5{animation-delay:2.75s}
+.flower-4 .p,.flower-4 .flower-core{animation-delay:3.25s}.flower-4 .p2{animation-delay:3.35s}.flower-4 .p3{animation-delay:3.45s}.flower-4 .p4{animation-delay:3.55s}.flower-4 .p5{animation-delay:3.65s}
+.flower-5 .p,.flower-5 .flower-core{animation-delay:4.05s}.flower-5 .p2{animation-delay:4.15s}.flower-5 .p3{animation-delay:4.25s}.flower-5 .p4{animation-delay:4.35s}.flower-5 .p5{animation-delay:4.45s}
+.growth-v7 .bloom-overlay{display:none!important}
+@media(max-width:700px){.petal-flower .p{stroke-width:1}.live-blooms{opacity:.9}}
+@media(prefers-reduced-motion:reduce){.petal-flower .p,.petal-flower .flower-core{animation:none!important;opacity:.8!important;transform:none!important}}
