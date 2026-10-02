@@ -851,3 +851,42 @@ radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,r
   .growth-v7 .growth-copy strong{font-size:clamp(2rem,10vw,3rem)!important;line-height:.98!important}
   .growth-v7 .growth-outcome{left:24px!important;bottom:28px!important}
 }
+
+
+/* V12 — deterministic growth artwork: same rendering path on desktop + mobile */
+.growth-image-only{
+  position:relative!important;
+  min-height:clamp(680px,72vw,980px)!important;
+  overflow:hidden!important;
+  background:#061631!important;
+}
+.growth-image-only .tree-artwork-production{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  width:100%!important;
+  height:100%!important;
+  background:url("/trconcept-growth-tree.png") center center / cover no-repeat!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  filter:none!important;
+}
+.growth-image-only .tree-artwork-production:before{display:none!important}
+.growth-image-only .tree-artwork-production:after{
+  content:""!important;display:block!important;position:absolute!important;inset:0!important;
+  background:linear-gradient(180deg,#061631 0%,transparent 10%,transparent 86%,#061631 100%),
+             linear-gradient(90deg,#061631 0%,transparent 5%,transparent 95%,#061631 100%)!important;
+}
+.growth-image-only .growth-copy,.growth-image-only .growth-outcome{position:absolute!important;z-index:5!important}
+@media(max-width:700px){
+ .growth-image-only{min-height:680px!important}
+ .growth-image-only .tree-artwork-production{
+   background-size:auto 100%!important;background-position:center center!important
+ }
+ .growth-image-only .growth-copy{top:24px!important;left:24px!important;right:24px!important}
+ .growth-image-only .growth-outcome{left:24px!important;bottom:28px!important}
+}
+/* remove accidental escaped newline text emitted by old JSX edits */
+.energy-wave{font-size:0!important;line-height:0!important}
