@@ -928,3 +928,34 @@ radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,r
  .tree-artwork-production .sap{width:6px;height:6px}
 }
 @media(prefers-reduced-motion:reduce){.energy-trail,.tree-artwork-production .sap,.tree-artwork-production .bloom-glow{animation:none!important}.tree-artwork-production .bloom-glow{opacity:.35!important}}
+
+/* V14 — North Star homepage architecture */
+.home-hero-northstar{min-height:clamp(720px,86vh,940px)!important;padding-top:clamp(54px,6vw,92px)!important}
+.northstar-hero-grid{display:grid;grid-template-columns:minmax(320px,.72fr) minmax(560px,1.28fr);align-items:center;gap:2vw;position:relative;z-index:2}
+.northstar-hero-copy{position:relative;z-index:5;padding-bottom:9vw}
+.northstar-hero-copy h1{font-size:clamp(58px,5.6vw,94px);line-height:.94;max-width:720px;margin:18px 0 28px;color:#f4f1ec}
+.northstar-hero-copy h1 em{color:#f6a23a;font-weight:inherit}
+.northstar-hero-copy .home-hero-lead{max-width:520px;color:#c7d0e2;font-size:clamp(18px,1.45vw,24px);line-height:1.55}
+.northstar-tree{height:clamp(650px,76vw,900px)!important;margin:-40px -8vw -80px -10vw!important;border:0!important;background:none!important}
+.northstar-tree .tree-artwork-production{inset:0!important;background-size:contain!important;background-position:center bottom!important}
+.home-approach{position:relative;background:#061631;color:#f4f1ec;padding:clamp(90px,9vw,150px) 0 clamp(155px,13vw,220px);overflow:hidden}
+.approach-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:7vw;align-items:end}
+.approach-grid h2{font-family:var(--font-serif);font-size:clamp(48px,5vw,78px);line-height:1;margin:16px 0 26px}
+.approach-grid>div>p:not(.eyebrow){max-width:500px;color:#c7d0e2;font-size:18px;line-height:1.65;margin-bottom:28px}
+.approach-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.approach-pillars article{padding:12px 34px 16px;border-left:1px solid rgba(249,133,19,.24)}
+.approach-pillars span{display:inline-grid;place-items:center;width:42px;height:42px;border:1px solid rgba(249,133,19,.7);border-radius:50%;color:#f6a23a;font-size:12px}
+.approach-pillars h3{font-family:var(--font-serif);font-size:30px;margin:20px 0 8px}
+.approach-pillars p{color:#c7d0e2;line-height:1.5}
+.home-learn{padding-top:clamp(80px,8vw,130px)!important}
+.home-proof{order:initial}
+@media(max-width:800px){
+ .home-hero-northstar{min-height:auto!important;padding-top:48px!important}
+ .northstar-hero-grid{grid-template-columns:1fr;gap:0}
+ .northstar-hero-copy{padding:0 0 12px}
+ .northstar-hero-copy h1{font-size:clamp(50px,13vw,72px)}
+ .northstar-tree{height:118vw!important;min-height:590px!important;margin:-70px -18vw -25px!important}
+ .approach-grid{grid-template-columns:1fr;gap:54px}
+ .approach-pillars{grid-template-columns:1fr}
+ .approach-pillars article{padding:24px 0;border-left:0;border-top:1px solid rgba(249,133,19,.2)}
+}
