@@ -815,3 +815,39 @@ radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,r
  .growth-v7 .tree-artwork{background-size:auto 100%!important;background-position:center!important}
 }
 @media(prefers-reduced-motion:reduce){.wave-energy,.wave-light{animation:none!important}}
+
+
+/* V11 — production artwork only. Never reveal the legacy line-tree. */
+.growth-v7 .tree-artwork{
+  background-image:
+    linear-gradient(180deg,#061631 0%,rgba(6,22,49,.12) 14%,rgba(6,22,49,.08) 74%,#061631 100%),
+    linear-gradient(90deg,#061631 0%,rgba(6,22,49,.08) 12%,rgba(6,22,49,.08) 88%,#061631 100%),
+    url("/trconcept-growth-tree.png")!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+}
+/* legacy procedural tree children must never sit over the artwork */
+.growth-v7 .tree-artwork > *{display:none!important}
+.growth-v7 .tree-artwork:before{display:none!important}
+.growth-v7 .tree-artwork:after{
+  display:block!important;
+  background:
+    linear-gradient(180deg,#061631 0%,transparent 11%,transparent 84%,#061631 100%),
+    linear-gradient(90deg,#061631 0%,transparent 7%,transparent 93%,#061631 100%)!important;
+}
+/* keep editorial copy clear of artwork labels */
+.growth-v7 .growth-copy{top:clamp(28px,4vw,58px)!important;left:clamp(24px,7vw,110px)!important;max-width:430px!important}
+.growth-v7 .growth-outcome{bottom:clamp(26px,4vw,58px)!important;left:clamp(24px,7vw,110px)!important}
+@media(max-width:700px){
+  .growth-v7{min-height:680px!important}
+  .growth-v7 .tree-artwork{
+    background-size:auto 92%!important;
+    background-position:center 55%!important;
+  }
+  .growth-v7 .growth-copy{top:24px!important;left:24px!important;right:24px!important}
+  .growth-v7 .growth-copy strong{font-size:clamp(2rem,10vw,3rem)!important;line-height:.98!important}
+  .growth-v7 .growth-outcome{left:24px!important;bottom:28px!important}
+}
