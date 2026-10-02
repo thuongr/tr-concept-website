@@ -38,7 +38,7 @@ export default async function HomePage() {
     <EnergyWave />\n    </section>\n\n    <section className="home-story">
       <div className="shell">
         <div className="story-intro"><p className="eyebrow">The bigger picture</p><h2>AI was never <em>just the prompt.</em></h2><p>Real results come from how you define the work, provide context, build reusable capability and connect AI to the business.</p></div>
-        <div className="growth-stage growth-v7" aria-label="TRConcept growth system">
+        <div className="growth-stage growth-v7 growth-image-only" aria-label="TRConcept growth system">
   <div className="growth-copy"><span>STRUCTURE → CAPABILITY → OUTCOME</span><strong>Build the system.<br/>Then let it grow.</strong></div>
   <div className="tree-artwork tree-artwork-production" role="img" aria-label="Business roots growing into Brain, Heart, Skills and Workflow" />
   <div className="growth-outcome"><span>BLOOM</span><b>Useful AI is an outcome<br/>of good structure.</b></div>
