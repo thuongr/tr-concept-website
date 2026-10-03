@@ -1112,3 +1112,26 @@ radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,r
  .learning-card+ .learning-card{border-left:0!important}
  .path-panels>a+ a{border-left:0!important}
 }
+
+/* V20 — NORTH STAR LANDSCAPE, not cards */
+.home-approach,.home-learn,.home-community,.home-paths,.home-proof{position:relative;overflow:hidden}
+.home-approach:before,.home-learn:before,.home-community:before,.home-paths:before,.home-proof:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,rgba(34,51,130,.13),transparent 55%)}
+.northstar-pathway{position:relative;min-height:260px;margin-top:54px;display:grid;grid-template-columns:1fr .8fr 1fr 1fr;align-items:center;gap:22px}
+.path-line{position:absolute;left:3%;right:3%;top:50%;height:2px;background:linear-gradient(90deg,transparent,#f98513 12%,#ffd28b 48%,#f98513 82%,transparent);box-shadow:0 0 16px rgba(249,133,19,.55);transform:translateY(-50%)}
+.path-stop{position:relative;z-index:2;color:#f4f1ec;text-decoration:none;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.path-stop span{display:grid;place-items:center;width:48px;height:48px;border:1px solid rgba(255,210,139,.8);border-radius:50%;background:#061631;box-shadow:0 0 20px rgba(249,133,19,.22);color:#ffd28b;font:700 12px/1 sans-serif}
+.path-stop b{font:500 clamp(25px,2.3vw,38px)/1.05 Georgia,serif}.path-stop small{color:#9bacd8;font-size:15px}
+.path-bridge{position:relative;z-index:2;display:flex;gap:8px;align-items:center;justify-content:center;color:#9bacd8;font-size:12px}.path-bridge em{font-style:normal}.path-bridge i{color:#f98513}
+.community-principles{align-self:center;display:grid;gap:28px;padding-left:7vw}
+.community-principles p{margin:0;display:flex;align-items:center;gap:18px;color:#f4f1ec}.community-principles span{color:#f98513;font-size:12px;letter-spacing:.14em}.community-principles b{font:500 clamp(24px,2.2vw,34px)/1.1 Georgia,serif}
+.path-panels{border-top:1px solid rgba(255,210,139,.25)!important}.path-panels>a{padding:44px 4vw 50px!important}
+.site-footer{border-top:1px solid rgba(255,210,139,.16)!important}
+@media(max-width:800px){
+ .northstar-pathway{display:flex!important;flex-direction:column!important;align-items:stretch!important;min-height:0!important;margin-top:34px!important;padding-left:28px!important;gap:30px!important}
+ .path-line{left:8px!important;right:auto!important;top:8px!important;bottom:8px!important;width:2px!important;height:auto!important;transform:none!important;background:linear-gradient(180deg,#f98513,#ffd28b,#f98513)!important}
+ .path-stop{display:grid!important;grid-template-columns:48px 1fr!important;column-gap:16px!important;align-items:center!important}
+ .path-stop span{grid-row:1/3!important}.path-stop b{font-size:28px!important}.path-stop small{grid-column:2!important}
+ .path-bridge{justify-content:flex-start!important;padding-left:64px!important;flex-wrap:wrap!important}
+ .community-principles{padding:38px 0 0!important;gap:22px!important}
+ .community-principles b{font-size:26px!important}
+}
