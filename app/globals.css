@@ -981,3 +981,25 @@ radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,r
  .home-hero-northstar .northstar-tree .tree-artwork-production{background-size:auto 100%!important;background-position:center bottom!important}
  .home-hero-northstar .tree-artwork-production:after{background:linear-gradient(180deg,#061631 0%,transparent 8%,transparent 90%,#061631 100%)!important}
 }
+
+/* V16 — mobile North Star composition + remove card-like seams */
+.home-hero-northstar{padding-bottom:0!important}
+.home-hero-northstar .energy-wave{z-index:6}
+.northstar-tree{overflow:visible!important}
+.learning-card,.community-board,.proof-placeholder,.path-panels>a{border-color:rgba(155,172,216,.09)!important}
+@media(max-width:800px){
+ .home-hero-northstar{padding-top:42px!important}
+ .northstar-hero-copy{padding-bottom:0!important}
+ .northstar-hero-copy h1{font-size:clamp(48px,12.6vw,68px)!important;line-height:.94!important;margin:16px 0 24px!important}
+ .northstar-hero-copy .home-hero-lead{font-size:18px!important;line-height:1.55!important}
+ .northstar-hero-copy .button-row{margin-top:28px!important}
+ .northstar-hero-copy .button{width:auto!important;display:inline-flex!important;padding:18px 28px!important}
+ .home-hero-northstar .northstar-tree{height:112vw!important;min-height:500px!important;margin:-18px -9vw -5px!important}
+ .home-hero-northstar .northstar-tree .tree-artwork-production{background-size:contain!important;background-position:center bottom!important}
+ .home-hero-northstar .tree-artwork-production:after{background:linear-gradient(180deg,#061631 0%,transparent 12%,transparent 87%,#061631 100%)!important}
+ .home-hero-northstar .energy-wave{height:100px!important;bottom:-24px!important}
+ .home-learn,.home-community,.home-proof{padding-bottom:100px!important}
+ .learn-route{margin-bottom:0!important}
+ .community-composition{gap:42px!important}
+ .community-board{min-height:390px!important}
+}
