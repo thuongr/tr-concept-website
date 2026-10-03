@@ -1003,3 +1003,41 @@ radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,r
  .community-composition{gap:42px!important}
  .community-board{min-height:390px!important}
 }
+
+/* V17 — mobile repair: hero artwork is background composition, waves are section transitions */
+@media(max-width:800px){
+ .home-hero-northstar{padding:44px 0 88px!important;min-height:760px!important}
+ .northstar-hero-grid{display:block!important;position:relative!important;min-height:660px!important}
+ .northstar-hero-copy{position:relative!important;z-index:8!important}
+ .northstar-hero-copy h1{font-size:clamp(48px,12vw,66px)!important;line-height:.96!important}
+ .northstar-hero-copy .home-hero-lead{max-width:92%!important}
+ .northstar-hero-copy .button-row{max-width:300px!important}
+ .northstar-hero-copy .button{width:auto!important;min-width:190px!important;justify-content:center!important}
+ .home-hero-northstar .northstar-tree{
+   position:absolute!important;z-index:1!important;
+   left:50%!important;right:auto!important;top:300px!important;bottom:auto!important;
+   width:112vw!important;height:520px!important;min-height:0!important;
+   margin:0!important;transform:translateX(-50%)!important;
+   opacity:.82!important;pointer-events:none!important;
+ }
+ .home-hero-northstar .northstar-tree .tree-artwork-production{
+   background-size:auto 520px!important;background-position:center top!important;
+ }
+ .home-hero-northstar .tree-artwork-production:after{
+   background:linear-gradient(180deg,#061631 0%,rgba(6,22,49,.18) 10%,transparent 28%,transparent 78%,#061631 100%),
+              linear-gradient(90deg,#061631 0%,transparent 15%,transparent 85%,#061631 100%)!important
+ }
+ .home-hero-northstar .energy-wave{bottom:-44px!important;height:100px!important}
+ .home-approach{padding-top:88px!important}
+ .home-learn,.home-community,.home-proof{padding-bottom:128px!important}
+ .home-learn>.energy-wave,.home-community>.energy-wave,.home-proof>.energy-wave{bottom:-4px!important;height:94px!important}
+ .energy-wave svg{width:112%!important;margin-left:-6%!important}
+ .terrain.t1{opacity:.3!important}.terrain.t2{opacity:.14!important}.terrain.t3{opacity:.09!important}
+ .energy-trail{stroke-width:2.3!important}
+ .community-composition{padding-top:12px!important}
+ .community-title h2{font-size:clamp(54px,14vw,78px)!important;line-height:.95!important}
+ .community-title>p:not(.eyebrow){font-size:18px!important;line-height:1.55!important}
+ .community-button{width:auto!important;display:inline-flex!important}
+}
+/* Waves visually belong to the boundary, not empty spacer bands */
+.home-learn>.energy-wave,.home-community>.energy-wave,.home-proof>.energy-wave,.home-approach>.energy-wave{z-index:7!important}
