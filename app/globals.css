@@ -1088,3 +1088,27 @@ radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,r
  .home-learn>.energy-wave,.home-community>.energy-wave,.home-proof>.energy-wave,.home-approach>.energy-wave{height:72px!important;bottom:-2px!important}
  .energy-wave svg{width:120%!important;margin-left:-10%!important}
 }
+
+/* V19 — NORTH STAR: dissolve boxes into one continuous landscape */
+@media(min-width:801px){
+ .home-hero-northstar{min-height:760px!important;padding-bottom:70px!important}
+ .northstar-hero-grid{grid-template-columns:.72fr 1.28fr!important}
+ .northstar-tree{margin:-55px -8vw -120px -11vw!important;height:760px!important}
+ .home-approach{padding-top:55px!important}
+}
+.learning-path{position:relative!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:0!important;border-top:1px solid rgba(155,172,216,.16)!important}
+.learning-card{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.learning-card+ .learning-card{border-left:1px solid rgba(155,172,216,.14)!important}
+.learn-route{background:transparent!important;border:0!important;border-top:1px solid rgba(249,133,19,.22)!important;border-radius:0!important}
+.community-board{background:transparent!important;border:0!important;box-shadow:none!important}
+.path-panels{gap:0!important}
+.path-panels>a{background:transparent!important;border:0!important;border-top:1px solid rgba(155,172,216,.18)!important;border-radius:0!important}
+.path-panels>a+ a{border-left:1px solid rgba(155,172,216,.14)!important}
+.proof-placeholder{background:transparent!important;border:0!important;border-top:1px solid rgba(155,172,216,.18)!important;box-shadow:none!important}
+.home-learn,.home-community,.home-paths,.home-proof,.home-approach{background-color:#061631!important}
+.site-footer{background:#061631!important}
+@media(max-width:800px){
+ .learning-path{display:block!important;border-top:0!important}
+ .learning-card+ .learning-card{border-left:0!important}
+ .path-panels>a+ a{border-left:0!important}
+}
