@@ -4,6 +4,14 @@
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
 ## Current checkpoint
+- Latest visual implementation: `6bd0a911f9a823d815df8ef2ea447b6c57695bc0` (2026-10-05 Brisbane).
+- Production verified: https://tr-concept-website.vercel.app/
+- Final production screenshots inspected at 1440, 820 and 390 CSS pixels after two implementation/deployment passes.
+- See `docs/HOMEPAGE_VISUAL_QA.md` for changes, checks and remaining operational limitations.
+- Homepage styling now lives in `app/home.module.css`; reusable terrain is `components/Landscape.tsx`. Do not restore the deleted historical homepage overrides.
+- `trconcept.co` currently resolves to a Netlify 404; DNS/domain routing was not changed.
+
+### Historical handoff baseline
 - Repository: `thuongr/tr-concept-website`
 - Branch: `main`
 - Handoff baseline commit: `a0af604c18d73e669b03f781bc0c5057c757c76d`
@@ -182,7 +190,7 @@ Footer must feel like the natural final depth of the same landscape:
 - no unnecessary visual box around it.
 
 ## Implementation discipline
-Do not accumulate endless CSS overrides as the long-term solution. The current stylesheet contains historical visual passes. Once the target composition is stable:
+Do not accumulate endless CSS overrides as the long-term solution. Historical homepage visual passes were removed in the October 2026 refactor. The shared subpage stylesheet retains earlier subpage styles. For future work:
 1. identify active rules;
 2. consolidate them;
 3. remove obsolete overrides;
