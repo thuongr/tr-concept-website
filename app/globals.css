@@ -1155,3 +1155,71 @@ radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,r
  .path-bridge{padding-left:46px!important}
  .path-line{left:13px!important;width:1px!important;opacity:.55!important}
 }
+
+
+/* V22 — MOBILE CONTINUOUS LANDSCAPE: typography floats in one field, not stacked boxes */
+@media(max-width:800px){
+ .home-approach,.home-learn,.home-community,.home-paths,.home-proof{
+   padding-top:64px!important;padding-bottom:82px!important;
+   background:#061631!important;
+ }
+ .home-approach:before,.home-learn:before,.home-community:before,.home-paths:before,.home-proof:before{
+   background:radial-gradient(ellipse at 82% 12%,rgba(34,51,130,.12),transparent 52%)!important;
+ }
+ .approach-grid>div:first-child{max-width:92%}
+ .approach-pillars{margin:52px 0 0 12vw!important}
+ .approach-pillars article,.approach-pillars article+article{
+   border:0!important;padding:13px 0!important;display:grid!important;
+   grid-template-columns:22px 1fr!important;
+ }
+ .approach-pillars article span{font-size:9px!important;opacity:.65!important}
+ .approach-pillars article h3{font-size:25px!important}
+ .approach-pillars article p{font-size:15px!important;max-width:90%!important}
+
+ .home-section-head>p{display:none!important}
+ .northstar-pathway{
+   margin:44px 0 0!important;padding:0!important;display:block!important;
+ }
+ .northstar-pathway .path-line{
+   left:13px!important;top:14px!important;bottom:14px!important;width:1px!important;
+   background:linear-gradient(180deg,transparent,#f98513 15%,#ffd28b 52%,#f98513 86%,transparent)!important;
+ }
+ .path-stop{
+   display:grid!important;grid-template-columns:28px 1fr!important;
+   padding:13px 0!important;margin:0 0 15px!important;gap:0 15px!important;
+ }
+ .path-stop span{width:28px!important;height:28px!important;border:0!important;background:transparent!important}
+ .path-stop b{font-size:28px!important}.path-stop small{font-size:14px!important}
+ .path-bridge{padding:3px 0 16px 43px!important;font-size:11px!important}
+
+ .community-composition{display:grid!important;grid-template-columns:1fr!important;gap:34px!important}
+ .community-title{max-width:100%!important}
+ .community-principles{padding:10px 0 0 9vw!important;gap:17px!important}
+ .community-principles p{gap:13px!important}
+ .community-principles b{font-size:25px!important;font-weight:500!important}
+ .community-principles span{font-size:9px!important}
+
+ .home-paths .home-section-head{margin-bottom:28px!important}
+ .path-panels,.path-panels>a,.path-panels>a+ a{
+   display:block!important;border:0!important;background:transparent!important;
+ }
+ .path-panels>a{padding:24px 0!important;position:relative!important}
+ .path-panels>a+ a{margin-left:8vw!important}
+ .path-panels strong{font-size:35px!important;line-height:1.03!important;max-width:92%!important}
+ .path-panels p{font-size:15px!important;max-width:85%!important}
+
+ .proof-composition{display:block!important}
+ .proof-placeholder{
+   border:0!important;margin:40px 0 0 9vw!important;padding:0!important;background:transparent!important;
+ }
+ .proof-placeholder strong{font-size:34px!important;line-height:1.04!important}
+ .proof-placeholder p{font-size:15px!important}
+
+ /* waves are atmospheric terrain, never divider bands */
+ .home-approach>.energy-wave,.home-learn>.energy-wave,.home-community>.energy-wave,.home-proof>.energy-wave{
+   height:62px!important;bottom:-26px!important;opacity:.38!important;pointer-events:none!important;
+ }
+ .energy-wave .terrain{stroke-width:.7!important}
+ .energy-wave .energy-trail{stroke-width:1.15!important;opacity:.7!important}
+ .energy-wave svg{width:140%!important;margin-left:-20%!important}
+}
