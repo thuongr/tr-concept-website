@@ -1,55 +1,94 @@
 import Link from "next/link";
-import { getBusinessSettings, getFeaturedTestimonial, getHomeHeroContent } from "@/lib/site-content";
+import { getFeaturedTestimonial } from "@/lib/site-content";
+import { Landscape } from "@/components/Landscape";
+import styles from "./home.module.css";
 
-function EnergyWave({ quiet = false }: { quiet?: boolean }) {
-  return <div className={quiet ? "energy-wave quiet" : "energy-wave"} aria-hidden="true">
-    <svg viewBox="0 0 1440 190" preserveAspectRatio="none">
-      <defs><linearGradient id="energyGold" x1="0" x2="1"><stop offset="0" stopColor="#f98513" stopOpacity=".08"/><stop offset=".45" stopColor="#ffd28b"/><stop offset=".7" stopColor="#f98513"/><stop offset="1" stopColor="#f98513" stopOpacity=".08"/></linearGradient></defs>
-      <path className="terrain t1" d="M-80 125 C90 72 205 162 365 112 C530 60 625 154 790 102 C965 48 1060 145 1215 98 C1330 63 1430 91 1520 65"/>
-      <path className="terrain t2" d="M-90 146 C75 101 205 178 370 132 C535 87 650 169 805 122 C960 76 1085 163 1235 119 C1355 84 1450 111 1520 91"/>
-      <path className="terrain t3" d="M-70 105 C105 48 220 139 385 90 C535 45 675 132 825 82 C985 29 1090 122 1240 78 C1360 43 1450 67 1520 48"/>
-      <path className="energy-trail" pathLength="100" d="M-80 125 C90 72 205 162 365 112 C530 60 625 154 790 102 C965 48 1060 145 1215 98 C1330 63 1430 91 1520 65"/>
-      <circle className="wave-runner" r="3"><animateMotion dur="8s" repeatCount="indefinite" path="M-80 125 C90 72 205 162 365 112 C530 60 625 154 790 102 C965 48 1060 145 1215 98 C1330 63 1430 91 1520 65"/></circle>
-    </svg>
-  </div>;
+function IdeaIcon({ kind }: { kind: "clarity" | "structure" | "growth" }) {
+  return <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+    {kind === "clarity" ? <><circle cx="19" cy="21" r="11"/><circle cx="19" cy="21" r="5"/><path d="m19 21 13-14m-7 0h7v7"/></> : kind === "structure" ? <><path d="m6 14 14-7 14 7-14 7-14-7Zm0 7 14 7 14-7M6 28l14 7 14-7"/></> : <><path d="M8 32V22h5v10M18 32V15h5v17M28 32V7h5v25"/></>}
+  </svg>;
 }
 
 export default async function HomePage() {
-  const [hero, settings, testimonial] = await Promise.all([
-    getHomeHeroContent(), getBusinessSettings(), getFeaturedTestimonial(),
-  ]);
-  return <>
-    <section className="home-hero home-hero-northstar">
-      <div className="shell northstar-hero-grid">
-        <div className="northstar-hero-copy">
-          <p className="eyebrow">From structure to growth</p>
-          <h1>Build the system.<br/><em>Then let it grow.</em></h1>
-          <p className="home-hero-lead">Practical AI systems for real businesses.<br/>Less chaos. More clarity. Lasting growth.</p>
-          <div className="button-row"><Link className="button home-primary" href="/start-here">Start here →</Link></div>
+  const testimonial = await getFeaturedTestimonial();
+  return <div className={styles.world} data-home-landscape>
+    <section className={styles.hero} aria-labelledby="home-title">
+      <div className={styles.heroInner}>
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}>From structure to growth</p>
+          <h1 id="home-title">Build the system.<br/><em>Then let it grow.</em></h1>
+          <p className={styles.lead}>Practical AI systems for real businesses.<br/>Less chaos. More clarity. Lasting growth.</p>
+          <Link className={styles.primary} href="/start-here">Start here <span aria-hidden="true">↗</span></Link>
         </div>
-        <div className="growth-stage growth-v7 growth-image-only northstar-tree" aria-label="TRConcept growth system">
-          <div className="tree-artwork tree-artwork-production" role="img" aria-label="Business roots growing into Brain, Heart, Skills and Workflow"><span className="sap s1"/><span className="sap s2"/><span className="sap s3"/><span className="sap s4"/><span className="bloom-glow b1"/><span className="bloom-glow b2"/><span className="bloom-glow b3"/><span className="bloom-glow b4"/></div>
+        <figure className={styles.tree}>
+          <img src="/trconcept-growth-tree.png" width="1536" height="1024" fetchPriority="high" alt="A luminous growth tree: Business at the roots, connected to Brain, Heart, Skills and Workflow."/>
+          <div className={styles.treeLight} aria-hidden="true"/>
+          <span className={`${styles.flower} ${styles.flowerOne}`} aria-hidden="true"/>
+          <span className={`${styles.flower} ${styles.flowerTwo}`} aria-hidden="true"/>
+          <span className={`${styles.flower} ${styles.flowerThree}`} aria-hidden="true"/>
+          <figcaption className={styles.srOnly}>Structure becomes capability. Capability creates outcomes and growth.</figcaption>
+        </figure>
+      </div>
+      <Landscape id="hero-terrain"/>
+    </section>
+
+    <section className={styles.approach} aria-labelledby="approach-title">
+      <div className={`${styles.shell} ${styles.approachGrid}`}>
+        <div><p className={styles.eyebrow}>The TRConcept approach</p><h2 id="approach-title">Practical AI for<br/>real businesses.</h2><p>Structure the work first. Add AI where it genuinely helps. Build only what the business needs.</p><Link className={styles.textLink} href="/about">Explore the approach <span>↗</span></Link></div>
+        <div className={styles.pillars}>
+          <article><IdeaIcon kind="clarity"/><h3>Clarity</h3><p>Get clear on what matters and what to do next.</p></article>
+          <article><IdeaIcon kind="structure"/><h3>Structure</h3><p>Design a system that fits your business.</p></article>
+          <article><IdeaIcon kind="growth"/><h3>Growth</h3><p>Turn useful ideas into repeatable action.</p></article>
         </div>
-      </div><EnergyWave />
+      </div>
+      <Landscape id="approach-terrain" quiet reverse/>
     </section>
-    <section className="home-approach">
-      <div className="shell approach-grid">
-        <div><p className="eyebrow">The TRConcept approach</p><h2>Practical AI for<br/>real businesses.</h2><p>Structure the work first. Add AI where it genuinely helps. Build only what the business needs.</p><Link className="home-secondary" href="/about">Explore the approach →</Link></div>
-        <div className="approach-pillars"><article><span>01</span><h3>Clarity</h3><p>Get clear on what matters and what to do next.</p></article><article><span>02</span><h3>Structure</h3><p>Design a system that fits your business.</p></article><article><span>03</span><h3>Growth</h3><p>Turn useful ideas into repeatable action.</p></article></div>
-      </div><EnergyWave quiet />
+
+    <section className={styles.learn} aria-labelledby="learn-title">
+      <div className={styles.shell}>
+        <header className={styles.sectionHead}><div><p className={styles.eyebrow}>Learn · a practical pathway</p><h2 id="learn-title">One real job.<br/>Then the wider system.</h2></div><p>Start with the work in front of you. Build the wider architecture when the business needs it.</p></header>
+        <div className={styles.learningJourney}>
+          <div className={styles.foundation}>
+            <span className={styles.step}>01 <small>THE FOUNDATION</small></span>
+            <p className={styles.courseLabel}>Level 1 · AI for Real Work</p>
+            <h3>Teach AI how to do<br/><em>one job well.</em></h3>
+            <p className={styles.flow}>Task <span>→</span> Context <span>→</span> Skill Set <span>→</span> AI Assistant</p>
+            <Link className={styles.textLink} href="/learn/level-1">Explore Level 1 <span>↗</span></Link>
+          </div>
+          <div className={styles.progression} aria-hidden="true"><span>Build on your foundation</span><svg viewBox="0 0 180 90" fill="none"><path d="M0 70C55 70 65 20 170 20m-10-7 10 7-10 7"/></svg></div>
+          <div className={styles.architecture}>
+            <span className={styles.step}>02 <small>THE BUSINESS ARCHITECTURE</small></span>
+            <p className={styles.courseLabel}>Level 2 · AI for Business Builder</p>
+            <h3>Connect the work.<br/><em>Build what fits.</em></h3>
+            <p>Bring knowledge, skills and workflows together around your business.</p>
+            <Link className={styles.textLink} href="/learn/level-2">Explore Level 2 <span>↗</span></Link>
+          </div>
+        </div>
+        <p className={styles.principle}>AI-First <span>≠</span> AI-Everything.</p>
+      </div>
+      <Landscape id="learn-terrain"/>
     </section>
-    <section className="home-learn">
-      <div className="shell">
-        <header className="home-section-head"><div><p className="eyebrow">Practical pathway</p><h2>From one real job<br/>to a system that works.</h2></div><p>Start with the work in front of you. Build the wider architecture when the business needs it.</p></header>
-        <div className="northstar-pathway">
-          <div className="path-line" aria-hidden="true"/>
-          <Link className="path-stop stop-1" href="/learn/level-1"><span>01</span><b>Learn</b><small>One real job.</small></Link>
-          <div className="path-bridge"><em>Task</em><i>→</i><em>Context</em><i>→</i><em>Skills</em></div>
-          <Link className="path-stop stop-2" href="/learn/level-2"><span>02</span><b>Build the system</b><small>Business architecture.</small></Link>
-          <Link className="path-stop stop-3" href="/start-here"><span>03</span><b>Grow</b><small>Make it repeatable.</small></Link>
-        </div></div><EnergyWave quiet /></section><section className="home-community">
-      <div className="shell community-composition">
-        <div className="community-title"><p className="eyebrow">Community · Learn. Share. Grow.</p><h2>Real conversations.<br/><em>Real work.</em></h2><p>Practical online sessions for exploring how AI fits into work and business — without pretending every problem needs more technology.</p><Link className="button community-button" href="/community">Reserve a seat →</Link></div>
-        <div className="community-principles"><p><span>01</span><b>Bring a real question.</b></p><p><span>02</span><b>Explore what fits.</b></p><p><span>03</span><b>Leave with a next step.</b></p></div></div><EnergyWave /></section><section className="home-paths"><div className="shell"><header className="home-section-head"><div><p className="eyebrow">More ways to work together</p><h2>Need a clearer next move?</h2></div><p>Different needs. Same rule: start with the business, then decide what AI or digital work is actually useful.</p></header><div className="path-panels"><Link href="/solve"><span>01 / SOLVE</span><strong>Untangle the business problem.</strong><p>1:1 AI &amp; business transformation.</p><i>→</i></Link><Link href="/build"><span>02 / BUILD</span><strong>Turn clarity into a focused digital experience.</strong><p>Business-first landing pages &amp; selected projects.</p><i>→</i></Link></div></div></section>
-    <section className="home-proof"><div className="shell proof-composition"><div><p className="eyebrow">Proof, when it is real</p><h2>From ideas<br/>to impact.</h2><p>TRConcept publishes identifiable stories only after permission is recorded.</p><Link href="/work">See the work →</Link></div>{testimonial ? <blockquote>“{testimonial.quote}”<footer>{testimonial.displayName}{testimonial.businessName ? ` · ${testimonial.businessName}` : ""}</footer></blockquote> : <div className="proof-placeholder"><span>REAL PEOPLE / REAL RESULTS</span><strong>No invented testimonials.<br/>No vanity metrics.</strong><p>Approved student and project stories will appear here as the evidence library grows.</p></div>}</div><EnergyWave quiet /></section></>;
+
+    <section className={styles.community} aria-labelledby="community-title">
+      <div className={`${styles.shell} ${styles.communityGrid}`}>
+        <div><p className={styles.eyebrow}>Community · Learn. Share. Grow.</p><h2 id="community-title">Real conversations.<br/><em>Real work.</em></h2><p>Practical online sessions for exploring how AI fits into work and business — without pretending every problem needs more technology.</p><Link className={styles.primary} href="/community">Reserve a seat <span aria-hidden="true">↗</span></Link></div>
+        <ol className={styles.conversation}><li><span>01</span>Bring a real question.</li><li><span>02</span>Explore what fits.</li><li><span>03</span>Leave with a next step.</li></ol>
+      </div>
+    </section>
+
+    <section className={styles.paths} aria-labelledby="paths-title">
+      <Landscape id="paths-terrain" quiet reverse/>
+      <div className={styles.shell}>
+        <p className={styles.eyebrow}>More ways to work together</p><h2 id="paths-title">Need a clearer next move?</h2>
+        <div className={styles.services}>
+          <article><span className={styles.courseLabel}>SOLVE / 1:1</span><h3>Untangle the<br/>business problem.</h3><p>Business problem first. AI second.</p><Link className={styles.textLink} href="/solve">Explore consulting <span>↗</span></Link></article>
+          <article><span className={styles.courseLabel}>BUILD / DIGITAL EXPERIENCES</span><h3>Turn clarity into<br/>a focused website.</h3><p>Business → customer → offer → journey → page.</p><Link className={styles.textLink} href="/build">Explore Build <span>↗</span></Link></article>
+        </div>
+      </div>
+    </section>
+
+    {testimonial ? <section className={`${styles.shell} ${styles.proof}`} aria-label="An approved client story"><p className={styles.eyebrow}>From ideas to impact</p><blockquote>“{testimonial.quote}”<footer>{testimonial.displayName}{testimonial.businessName ? ` · ${testimonial.businessName}` : ""}</footer></blockquote><Link className={styles.textLink} href="/work">See the work <span>↗</span></Link></section> : null}
+
+    <section className={styles.next} aria-labelledby="next-title"><Landscape id="closing-terrain"/><div className={styles.shell}><p className={styles.eyebrow}>Your next step</p><h2 id="next-title">Start with what matters.</h2><Link className={styles.primary} href="/start-here">Find your starting point <span aria-hidden="true">↗</span></Link></div></section>
+  </div>;
 }
