@@ -1223,3 +1223,41 @@ radial-gradient(78% 100% at 42% 0%,transparent 72%,rgba(249,133,19,.55) 72.35%,r
  .energy-wave .energy-trail{stroke-width:1.15!important;opacity:.7!important}
  .energy-wave svg{width:140%!important;margin-left:-20%!important}
 }
+
+
+/* V23 — MOBILE LANDSCAPE FINAL: one continuous editorial field */
+@media(max-width:800px){
+ .home-approach,.home-learn,.home-community,.home-paths,.home-proof{overflow:visible!important}
+ .home-approach .shell,.home-learn .shell,.home-community .shell,.home-paths .shell,.home-proof .shell{position:relative;z-index:3}
+ .approach-pillars{margin:48px 0 0!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:30px 24px!important}
+ .approach-pillars article,.approach-pillars article+article{display:block!important;padding:0!important;border:0!important}
+ .approach-pillars article:nth-child(3){grid-column:2!important}
+ .approach-pillars article span{display:block!important;width:auto!important;height:auto!important;margin:0 0 7px!important;padding:0!important}
+ .approach-pillars article h3{font:500 30px/1 Georgia,serif!important}
+ .approach-pillars article p{margin:8px 0 0!important;max-width:100%!important;font-size:14px!important}
+
+ .northstar-pathway{margin-top:38px!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:34px 20px!important}
+ .northstar-pathway .path-line{left:0!important;right:0!important;top:51%!important;bottom:auto!important;width:100%!important;height:1px!important;background:linear-gradient(90deg,transparent,#f98513 18%,#ffd28b 52%,#f98513 82%,transparent)!important}
+ .path-stop{display:block!important;padding:0!important;margin:0!important}
+ .path-stop span{display:block!important;margin-bottom:6px!important;color:#f98513!important}
+ .path-stop b{display:block!important;font:500 27px/1.02 Georgia,serif!important}
+ .path-stop small{display:block!important;margin-top:6px!important}
+ .path-bridge{padding:0!important;justify-content:flex-start!important;align-self:end!important}
+
+ .community-composition{display:grid!important;grid-template-columns:1fr!important}
+ .community-principles{padding:26px 0 0!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:28px 18px!important}
+ .community-principles p{display:block!important}
+ .community-principles p:nth-child(2){transform:translateY(26px)}
+ .community-principles p:nth-child(3){grid-column:1/-1!important;margin-left:18vw!important}
+ .community-principles span{display:block!important;margin-bottom:6px!important}
+ .community-principles b{font:500 25px/1.08 Georgia,serif!important}
+
+ .path-panels{display:grid!important;grid-template-columns:1fr 1fr!important;gap:24px!important}
+ .path-panels>a,.path-panels>a+ a{margin:0!important;padding:12px 0!important}
+ .path-panels>a+ a{transform:translateY(48px)}
+ .path-panels strong{font-size:29px!important}
+ .home-paths{padding-bottom:128px!important}
+
+ .proof-placeholder{margin:44px 0 0 16vw!important}
+ .home-approach>.energy-wave,.home-learn>.energy-wave,.home-community>.energy-wave,.home-proof>.energy-wave{bottom:-38px!important;height:78px!important;opacity:.46!important}
+}
