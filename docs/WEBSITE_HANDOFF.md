@@ -3,6 +3,11 @@
 ## Purpose
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
+## Terrain and motion update — 2026-10-05
+- `5b41ce793aeec20b009363c51a6ab8705473995e`: layered dotted mesh landscape, shared footer terrain, traced root/branch illumination and artwork-based flower blooms.
+- `components/TreeMotion.tsx` owns native-artwork coordinate paths. Keep the original artwork and reduced-motion fallback.
+- See `docs/MOTION_AND_ADMIN_CHECKPOINT.md` for timing and the current admin implementation/limitations.
+
 ## Current checkpoint
 - Homepage visual implementation: `6bd0a911f9a823d815df8ef2ea447b6c57695bc0` (2026-10-05 Brisbane).
 - Production verified: https://tr-concept-website.vercel.app/
