@@ -17,6 +17,13 @@ Scope: all admin route handlers, client forms, public registration/enquiry input
 - Removed stray literal newline text from dashboard.
 - CMS hero editor and public homepage now share `hero_landscape` content with the approved current copy as fallback. Legacy `hero` records are untouched. Newline separates gold emphasis. CTA must be an internal path. Image replacement field removed because the approved tree and traced motion are a single designed asset. Footer content remains editable.
 
+## Confirmed production blocker
+- Deployment `c4e391b58662d4ff0ceeae434767a582705ff692` is READY, but `/admin` renders the Supabase setup state and the admin cohort API returns HTTP 503 (configuration missing), not an authenticated dashboard.
+- Vercel environment metadata was inspected without decrypting values. Only `RESEND_API_KEY` and `WEBSITE_API_URL` are configured for production/preview. Required `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` and `SUPABASE_SERVICE_ROLE_KEY` are absent.
+- Current code does not use `WEBSITE_API_URL`. This may be a legacy backend setting; do not guess its contract or replace it with a new database without identifying the intended backend.
+- Consequently the current Supabase-based admin and public form persistence are **not operational on production**. Configure the intended database, apply/review migrations and establish the owner account before accepting registrations. Email provider configuration alone cannot make these flows work.
+- No credentials were viewed, changed or printed. No database was provisioned or migrated.
+
 ## Remaining database/account checks — NOT certified by local tests
 1. **High priority: owner-only access.** `requireAdmin` and API handlers currently accept an authenticated Supabase user. Checked-in RLS grants authenticated users broad management rights, based on a one-owner MVP assumption. Confirm production signup is disabled and only the owner account exists; then introduce an explicit owner/admin allowlist in both server checks AND database RLS before enabling other account types. Changing only the web UI is insufficient. No guessed owner ID or email was used and no access policy was changed without knowing the actual account.
 2. **Capacity concurrency.** Application checks reject full sessions/cohorts, but count-then-write is not atomic. Database row locks/transactional RPC or triggers are needed to prevent simultaneous last-seat writes. No migration was applied in this session.
@@ -29,6 +36,7 @@ Scope: all admin route handlers, client forms, public registration/enquiry input
 - `node tests/admin-regressions.cjs`: 20 cases pass with fake database/auth/email boundaries, covering authentication, dates, duplicate registration, full cohort, missing records, safe CTA, consent and enquiry failure handling, publication permission and logout.
 - TypeScript + Next production build pass.
 - Browser checks with intercepted responses passed for cohort/session/case-study/content forms (network failure, API rejection, success), community registration (same three cases), and public course/permission/contact forms (API rejection and success). Course network failure also passed. No browser exceptions in the completed public-form run. A temporary local-only component harness was removed before final build.
+- Production homepage and Level 1 screenshots inspected at 1440/820/390 after deployment; expected CMS fallback copy renders, no horizontal overflow, hero terrain overflow is visible (not clipped).
 - Wave screenshots checked locally at 1440/820/390: no horizontal overflow, no clipped hero boundary, broad gold illumination across mesh and crests.
 
 ## Payment direction (not implemented)
