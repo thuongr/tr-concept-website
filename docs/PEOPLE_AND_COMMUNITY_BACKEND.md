@@ -107,3 +107,11 @@ Both use `security_invoker=true`; non-admin authenticated users see no people/pa
 - `npm run typecheck` and `npm run build`.
 - Local real-page rendering with synthetic fixtures at 1440/820/390, plus interactive form checks. Fixtures are not published customer evidence.
 - Embedded tests do not prove hosted Supabase/PostgREST behaviour or simultaneous real-connection concurrency. Run those checks after connection.
+
+### Production checkpoint
+
+- Foundation commit `6ded097292b2f283417081a287c4ca67d1e9654d` deployed READY on Vercel, production alias confirmed.
+- Homepage and Level 1 inspected at 1440/820/390: no horizontal overflow; terrain remains unclipped; reduced-motion mode has no active animations.
+- All nine protected admin mutation routes return setup-unavailable (503) with the missing configuration, rather than accepting writes. This is a blocker, not a passing authenticated end-to-end test.
+- Direct admin subpages initially showed an empty content area while configuration was absent; the shared admin layout now supplies the same explicit setup state on every route.
+- No Vercel drains are configured. The runtime-error query returned 403, so no clean runtime-log claim is made.

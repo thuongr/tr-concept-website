@@ -4,19 +4,8 @@ import { requireAdmin } from "@/lib/admin-auth";
 export default async function AdminPage() {
   const { supabase, setupRequired } = await requireAdmin();
 
-  if (setupRequired || !supabase) {
-    return (
-      <section className="page-hero">
-        <div className="shell narrow">
-          <p className="eyebrow">Admin setup</p>
-          <h1>Connect Supabase first.</h1>
-          <p className="page-lead">
-            Add the Supabase environment variables, run the migrations and create your admin user.
-          </p>
-        </div>
-      </section>
-    );
-  }
+  // The shared admin layout shows setup consistently for every admin route.
+  if (setupRequired || !supabase) return null;
 
   const [contacts, enrolments, registrations, failedEmails] = await Promise.all([
     supabase.from("contacts").select("*", { count: "exact", head: true }),
