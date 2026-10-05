@@ -12,6 +12,7 @@ This file is the continuity checkpoint for any ChatGPT Work session, coding agen
 - `trconcept.co` currently resolves to a Netlify 404; DNS/domain routing was not changed.
 
 ### Public subpage system — 2026-10-05
+- See `docs/SUBPAGE_VISUAL_QA.md` for production desktop/mobile/tablet checks and scope limitations.
 - Shared public layout implementation: `f92758b531cfc4e3f9e84c26655e29c65b4a2ca4`.
 - All public pages now share the homepage navy / cream / gold environment, serif–sans typography, header and footer.
 - `app/globals.css` owns shared tokens, chrome, subpage composition, diagrams, forms and responsive rules. Do not reintroduce homepage-only global chrome overrides.
