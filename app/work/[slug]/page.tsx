@@ -39,7 +39,7 @@ export default async function Page({ params }: Props) {
   if (!data) notFound();
 
   return (
-    <article className="page-hero">
+    <article className="reading-page">
       <div className="shell narrow prose">
         <p className="eyebrow">{data.type} case study</p>
         <h1>{data.title}</h1>

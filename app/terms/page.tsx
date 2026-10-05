@@ -1,6 +1,6 @@
 export default function Page() {
   return (
-    <section className="page-hero">
+    <section className="reading-page">
       <div className="shell narrow prose">
         <p className="eyebrow">Legal · Working draft</p>
         <h1>Terms</h1>
