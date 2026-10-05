@@ -4,7 +4,9 @@ Updated 2026-10-05. This is the new `thuongr/tr-concept-website` backend only. N
 
 ## Deployment status
 
-Application code and migrations are prepared and tested locally. A new Supabase project, owner membership and Vercel environment configuration are still required. Until those are connected, production admin and form persistence are **not operational**. No real participant registrations or emails were used in tests.
+Fresh project `trconcept-website` (`auxqtrwkqywpkvgqyqqt`) now exists in `thuongr’s team`, Sydney (`ap-southeast-2`), on the confirmed free plan. All repository migrations, including internal-function hardening, are applied. PostgreSQL is 17.11. The website's URL and publishable key are configured for Vercel production only.
+
+Activation is still incomplete: the server-only secret key and verified owner Auth account/membership are pending. The connected plugin supports SQL and public keys but not secret-key retrieval or Auth account management; dashboard sign-in is needed for those steps. Do not create another project or import legacy data. No real participant registrations or emails were used in tests.
 
 ## Identity and relationships
 
@@ -92,10 +94,10 @@ Both use `security_invoker=true`; non-admin authenticated users see no people/pa
 ## Fresh-project activation
 
 1. Create a new Supabase project for this site, separate from the old system. Confirm account/region/plan before paid provisioning.
-2. Apply migrations `001_initial.sql` through `006_atomic_registration.sql` in order before connecting the site. Do not import legacy data. Early migrations contain permissive historical policies; 005 replaces them before exposure.
+2. Apply all files in `supabase/migrations` in filename order, including the timestamped hardening migration. Do not import legacy data. Migration 002 no longer installs any blanket authenticated policies; 005 installs explicit membership policies.
 3. Create the owner's auth account using Supabase's authenticated owner setup. Record its actual UUID. Disable public signups if no public auth is needed.
 4. In the new project's SQL editor, insert that verified UUID into `public.admin_members(user_id,role)` with role OWNER. Do not seed public business email as an owner automatically.
-5. Set Vercel `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and server-only `SUPABASE_SERVICE_ROLE_KEY` for intended environments. A separate preview project is preferred; never run fixture tests on production.
+5. Set Vercel `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and server-only `SUPABASE_SECRET_KEY` (legacy `SUPABASE_SERVICE_ROLE_KEY` remains a compatibility fallback) for intended environments. A separate preview project is preferred; never run fixture tests on production.
 6. Keep the legacy `WEBSITE_API_URL` unused. Do not point it at the old backend. Do not change domain/DNS yet.
 7. Redeploy. Verify owner login, outsider denial, RLS, public private-link protection, one isolated test community registration → attendance → course registration → cohort/payment → follow-up → consent withdrawal. Use a controlled test inbox before enabling delivery; do not send to real participants.
 8. Recheck desktop/mobile admin, provider delivery configuration, remaining open audit items, and the production error logs. Only then call the backend operational.
@@ -115,3 +117,13 @@ Both use `security_invoker=true`; non-admin authenticated users see no people/pa
 - All nine protected admin mutation routes return setup-unavailable (503) with the missing configuration, rather than accepting writes. This is a blocker, not a passing authenticated end-to-end test.
 - Direct admin subpages initially showed an empty content area while configuration was absent; the shared admin layout now supplies the same explicit setup state on every route.
 - No Vercel drains are configured. The runtime-error query returned 403, so no clean runtime-log claim is made.
+
+
+### Hosted database verification — 2026-10-05
+
+- Applied 001–006 plus `20261005094139_harden_internal_function_access.sql` to the fresh project.
+- Automatic review rejected historical migration 002's unrestricted authenticated access. Removed that block from the repository and applied the safer migration successfully; no broad policy was approved or bypassed.
+- Moved privileged trigger handlers and the membership lookup into `private`. Public `is_admin` is an invoker wrapper; display-code generation no longer uses elevated privileges.
+- Supabase Security Advisor now has no WARN/ERROR entries. One INFO remains for `admin_members`: RLS with no direct policies is deliberate, and direct anon/authenticated table privileges are revoked. The private membership function reads only the caller's own membership. See https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy.
+- Hosted rollback-only SQL smoke test verified atomic registration, case-insensitive duplicate prevention, full-session rollback, shared identity, explicit course source, consent withdrawal, audit events, immutable identity, anonymous denial/private meeting column denial, private RPC denial and non-admin reporting denial. Persisted contacts and community sessions both remained zero. No email provider was invoked.
+- This does not yet verify a real owner login, hosted HTTP form submission, delivery or multi-connection capacity contention. Finish those after dashboard credentials/configuration are available.

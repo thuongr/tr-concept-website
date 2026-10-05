@@ -120,24 +120,7 @@ drop policy if exists "public read approved testimonials" on testimonials;
 create policy "public read approved testimonials" on testimonials
 for select to anon using (status = 'PUBLISHED' and permission_status = 'APPROVED');
 
--- Authenticated admin policies. The MVP has one owner/admin account.
-do $$
-declare
-  t text;
-begin
-  foreach t in array array[
-    'business_settings','pages','page_sections','offers','courses','cohorts','contacts',
-    'enrolments','community_sessions','community_registrations','form_submissions',
-    'case_studies','testimonials','consent_records','email_logs'
-  ]
-  loop
-    execute format('drop policy if exists "authenticated manage %s" on %I', t, t);
-    execute format(
-      'create policy "authenticated manage %s" on %I for all to authenticated using (true) with check (true)',
-      t, t
-    );
-  end loop;
-end $$;
+-- No blanket authenticated access. Explicit owner membership policies are installed by migration 005.
 
 insert into business_settings (
   business_name, legal_name, abn, business_structure, gst_registered,

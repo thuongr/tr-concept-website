@@ -30,6 +30,7 @@ Clean rebuild of the TRConcept public website + lightweight business admin.
    - `supabase/migrations/004_contact_location.sql`
    - `supabase/migrations/005_people_operations.sql`
    - `supabase/migrations/006_atomic_registration.sql`
+   - timestamped hardening migrations after these files
 4. Create the verified owner Auth account and insert its UUID into `admin_members`. Authentication alone does not grant admin access.
 5. Configure Resend and the environment variables.
 6. Run:
@@ -59,7 +60,7 @@ Admin currently supports:
 
 Read `docs/WEBSITE_HANDOFF.md` before frontend changes. The approved growth-tree artwork is fixed so traced motion stays aligned.
 
-Read `docs/PEOPLE_AND_COMMUNITY_BACKEND.md` for the ID dictionary, status definitions, agent boundaries, fresh-project activation and verification limits. Production is not operational until Supabase is connected.
+Read `docs/PEOPLE_AND_COMMUNITY_BACKEND.md` for the ID dictionary, status definitions, agent boundaries, fresh-project activation and verification limits. The new Supabase project is provisioned; production writes and owner access still require the server secret and verified owner setup.
 
 Run `npm run test:admin`, `npm run test:database`, and `npm run check`. Database regression tests run in isolated in-memory PostgreSQL with no production credentials.
 
