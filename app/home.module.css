@@ -19,15 +19,19 @@
 .world .lead{font-size:16px;line-height:1.7;margin-bottom:25px}
 .tree{position:relative;width:900px;max-width:none;aspect-ratio:3/2;margin:16px 0 0 -131px;pointer-events:none;mask-image:linear-gradient(90deg,transparent,#000 13%,#000 88%,transparent),linear-gradient(0deg,transparent,#000 15%,#000 95%,transparent);mask-composite:intersect}
 .tree img{display:block;width:100%;height:auto;mix-blend-mode:lighten}
-.treeLight{position:absolute;inset:0;background:url('/trconcept-growth-tree.png') center/100% 100%;mix-blend-mode:screen;opacity:0;mask-image:linear-gradient(0deg,transparent 28%,#000 47%,transparent 61%);mask-size:100% 300%;animation:system-awakens 14s ease-in-out infinite}
-.flower{position:absolute;width:8%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff2c84d, #ffbf481c 35%,transparent 65%);opacity:0;animation:flower-light 14s ease-in-out infinite}
-.flowerOne{left:42.5%;top:27%;animation-delay:1.5s}.flowerTwo{left:35.4%;top:36%;animation-delay:1s}.flowerThree{left:61.5%;top:40%;animation-delay:2s}
-@keyframes system-awakens{0%,12%{opacity:0;mask-position:0 0}22%{opacity:.25}48%{opacity:.2;mask-position:0 100%}58%,100%{opacity:0;mask-position:0 100%}}
-@keyframes flower-light{0%,33%,65%,100%{opacity:0}45%,51%{opacity:.8}}
+/* One 12-second cycle: roots 0–2s, branches 2–5s, blossoms 5–8s, rest. */
+.treeMotion{position:absolute;inset:0;width:100%;height:100%;overflow:visible;mix-blend-mode:screen}
+.rootEnergy{stroke:#ffe4a0;stroke-width:3;stroke-dasharray:18 82;opacity:0;animation:root-rise 12s ease-in-out infinite}
+.branchEnergy,.branchHalo{stroke:#fff0c3;stroke-width:3;stroke-dasharray:15 85;opacity:0;animation:branch-rise 12s ease-in-out infinite;animation-delay:inherit}
+.branchHalo{stroke:#ffc463;stroke-width:15}
+.flowerBloom{opacity:0;animation:petal-bloom 12s ease-in-out infinite}
+@keyframes root-rise{0%{opacity:0;stroke-dashoffset:100}4%{opacity:.95}18%{opacity:1;stroke-dashoffset:0}23%,100%{opacity:0;stroke-dashoffset:0}}
+@keyframes branch-rise{0%,16%{opacity:0;stroke-dashoffset:100}20%{opacity:1}43%{opacity:1;stroke-dashoffset:0}48%,100%{opacity:0;stroke-dashoffset:0}}
+@keyframes petal-bloom{0%,39%{opacity:0;transform:scale(.72)}48%{opacity:.95;transform:scale(1.09)}57%{opacity:.65;transform:scale(1)}69%,100%{opacity:0;transform:scale(1)}}
 .terrain{position:absolute;left:-3%;width:106%;height:255px;bottom:-103px;pointer-events:none;z-index:1;opacity:.8}
 .terrain svg{width:100%;height:100%;overflow:visible}
 .hero>.terrain{height:265px;bottom:-73px;z-index:2}
-.quiet{opacity:.5}.reverse{transform:scaleX(-1)}
+.quiet{opacity:.7}.reverse{transform:scaleX(-1)}
 .travellingLight{opacity:0;animation:landscape-light 18s linear infinite}
 @keyframes landscape-light{0%,65%{opacity:0;stroke-dashoffset:100}70%{opacity:.7}93%{opacity:.5}100%{opacity:0;stroke-dashoffset:0}}
 .approach{position:relative;padding:44px 0 114px}
@@ -91,4 +95,4 @@
  
  
 }
-@media(prefers-reduced-motion:reduce){.treeLight,.flower,.travellingLight{animation:none;opacity:0}.primary{transition:none}.primary:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.rootEnergy,.branchEnergy,.branchHalo,.flowerBloom,.travellingLight{animation:none;opacity:0}.primary{transition:none}.primary:hover{transform:none}}

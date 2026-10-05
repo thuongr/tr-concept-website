@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getFeaturedTestimonial } from "@/lib/site-content";
+import { TreeMotion } from "@/components/TreeMotion";
 import { Landscape } from "@/components/Landscape";
 import styles from "./home.module.css";
 
@@ -22,10 +23,7 @@ export default async function HomePage() {
         </div>
         <figure className={styles.tree}>
           <img src="/trconcept-growth-tree.png" width="1536" height="1024" fetchPriority="high" alt="A luminous growth tree: Business at the roots, connected to Brain, Heart, Skills and Workflow."/>
-          <div className={styles.treeLight} aria-hidden="true"/>
-          <span className={`${styles.flower} ${styles.flowerOne}`} aria-hidden="true"/>
-          <span className={`${styles.flower} ${styles.flowerTwo}`} aria-hidden="true"/>
-          <span className={`${styles.flower} ${styles.flowerThree}`} aria-hidden="true"/>
+          <TreeMotion/>
           <figcaption className={styles.srOnly}>Structure becomes capability. Capability creates outcomes and growth.</figcaption>
         </figure>
       </div>

@@ -281,6 +281,9 @@ em {
 }
 
 .site-footer {
+  position:relative;
+  isolation:isolate;
+  overflow:clip;
   background:var(--night);
   color:var(--cream);
   padding:45px 0 50px
@@ -377,7 +380,7 @@ em {
 .page-terrain>div {
   bottom:-55px;
   height:205px;
-  opacity:.25
+  opacity:.65
 }
 
 .page-hero:has(.page-terrain) {
@@ -1223,7 +1226,7 @@ em {
   .page-terrain>div {
     height:130px;
     bottom:-39px;
-    opacity:.28
+    opacity:.65
   }
   .content-section {
     padding:43px 0
@@ -1528,6 +1531,9 @@ em {
     line-height:1.85
   }
   .site-footer {
+  position:relative;
+  isolation:isolate;
+  overflow:clip;
     padding:30px 0 35px
   }
   .footer-grid {
@@ -1560,3 +1566,6 @@ em {
     transition:none!important
   }
 }
+
+.footer-terrain { position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.4; }
+.footer-terrain>div { top:-65px; bottom:auto; height:190px; }

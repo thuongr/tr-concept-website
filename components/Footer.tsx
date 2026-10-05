@@ -1,3 +1,4 @@
+import { Landscape } from "@/components/Landscape";
 import Link from "next/link";
 import { getBusinessSettings } from "@/lib/site-content";
 
@@ -6,6 +7,7 @@ export async function Footer() {
 
   return (
     <footer className="site-footer">
+      <div className="footer-terrain"><Landscape id="footer-terrain" quiet reverse/></div>
       <div className="shell footer-grid">
         <div>
           <div className="footer-brand">TRConcept</div>
