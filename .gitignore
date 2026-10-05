@@ -6,3 +6,5 @@ node_modules
 .netlify
 .DS_Store
 *.log
+
+*.tsbuildinfo

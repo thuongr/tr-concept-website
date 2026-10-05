@@ -6,16 +6,16 @@ export default async function AdminCohortsPage() {
   if (setupRequired || !supabase) return null;
 
   const [{ data: courses }, { data: cohorts }] = await Promise.all([
-    supabase.from("courses").select("id,offer_id").order("created_at"),
+    supabase.from("courses").select("id,record_code,offer_id").order("created_at"),
     supabase
       .from("cohorts")
-      .select("id,name,status,capacity,course_id,internal_group_type,internal_group_link")
+      .select("id,record_code,name,status,capacity,course_id,internal_group_type,internal_group_link")
       .order("created_at", { ascending: false }),
   ]);
 
   const offerIds = [...new Set((courses || []).map((row) => row.offer_id))];
   const { data: offers } = offerIds.length
-    ? await supabase.from("offers").select("id,name").in("id", offerIds)
+    ? await supabase.from("offers").select("id,record_code,name").in("id", offerIds)
     : { data: [] };
 
   const offerMap = new Map((offers || []).map((row) => [row.id, row.name]));
@@ -41,7 +41,7 @@ export default async function AdminCohortsPage() {
           <div className="admin-table">
             {(cohorts || []).map((cohort) => (
               <div className="admin-row" key={cohort.id}>
-                <strong>{cohort.name}</strong>
+                <div><strong>{cohort.name}</strong><p className="record-code">{cohort.record_code}</p></div>
                 <span>{courseNameMap.get(cohort.course_id)}</span>
                 <span>{cohort.status}</span>
                 <span>

@@ -31,7 +31,7 @@ export default async function AdminPage() {
     supabase
       .from("email_logs")
       .select("*", { count: "exact", head: true })
-      .eq("status", "FAILED"),
+      .in("status", ["FAILED", "QUEUED"]),
   ]);
 
   return (
@@ -54,7 +54,7 @@ export default async function AdminPage() {
           <article><strong>{contacts.count || 0}</strong><span>Contacts</span></article>
           <article><strong>{enrolments.count || 0}</strong><span>Course registrations</span></article>
           <article><strong>{registrations.count || 0}</strong><span>Community registrations</span></article>
-          <article><strong>{failedEmails.count || 0}</strong><span>Failed emails</span></article>
+          <article><strong>{failedEmails.count || 0}</strong><span>Emails to check</span></article>
         </div>
 
         <div className="admin-links">

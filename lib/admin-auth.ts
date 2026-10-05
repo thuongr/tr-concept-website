@@ -14,5 +14,8 @@ export async function requireAdmin() {
     redirect("/admin/login");
   }
 
+  const { data: allowed, error } = await supabase.rpc("is_admin");
+  if (error || allowed !== true) redirect("/admin/access-denied");
+
   return { supabase, user: data.user, setupRequired: false as const };
 }

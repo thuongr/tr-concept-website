@@ -21,5 +21,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid credentials." }, { status: 401 });
   }
 
+  const { data: allowed, error: accessError } = await supabase.rpc("is_admin");
+  if (accessError || allowed !== true) {
+    await supabase.auth.signOut();
+    return NextResponse.json({ error: "Admin access could not be verified for this account." }, { status: accessError ? 503 : 403 });
+  }
+
   return NextResponse.json({ ok: true });
 }

@@ -14,12 +14,16 @@ export function AdminEnrolmentForm({
   paymentStatus,
   cohortId,
   cohorts,
+  sourceRegistrationId,
+  communitySources,
 }: {
   enrolmentId: string;
   status: string;
   paymentStatus: string;
   cohortId: string | null;
   cohorts: CohortOption[];
+  sourceRegistrationId: string | null;
+  communitySources: CohortOption[];
 }) {
   const [saving, setSaving] = useState(false);
 
@@ -38,6 +42,7 @@ export function AdminEnrolmentForm({
         status: String(form.get("status") || status),
         paymentStatus: String(form.get("paymentStatus") || paymentStatus),
         cohortId: String(form.get("cohortId") || "") || null,
+        sourceRegistrationId: String(form.get("sourceRegistrationId") || "") || null,
       }),
     });
 
@@ -53,7 +58,7 @@ export function AdminEnrolmentForm({
 
   return (
     <form className="inline-admin-form" onSubmit={submit}>
-      <select name="status" defaultValue={status}>
+      <select aria-label="Enrolment status" name="status" defaultValue={status}>
         <option value="NEW">New</option>
         <option value="CONFIRMED">Confirmed</option>
         <option value="WAITLIST">Waitlist</option>
@@ -62,7 +67,7 @@ export function AdminEnrolmentForm({
         <option value="CANCELLED">Cancelled</option>
       </select>
 
-      <select name="paymentStatus" defaultValue={paymentStatus}>
+      <select aria-label="Payment status" name="paymentStatus" defaultValue={paymentStatus}>
         <option value="PENDING">Payment pending</option>
         <option value="PAID">Paid</option>
         <option value="PARTIAL">Partial</option>
@@ -70,7 +75,7 @@ export function AdminEnrolmentForm({
         <option value="NOT_REQUIRED">Not required</option>
       </select>
 
-      <select name="cohortId" defaultValue={cohortId || ""}>
+      <select aria-label="Cohort" name="cohortId" defaultValue={cohortId || ""}>
         <option value="">No cohort</option>
         {cohorts.map((cohort) => (
           <option key={cohort.id} value={cohort.id}>
@@ -79,6 +84,12 @@ export function AdminEnrolmentForm({
         ))}
       </select>
 
+      <label className="admin-source-select">Community source (only if known)
+        <select name="sourceRegistrationId" defaultValue={sourceRegistrationId || ""}>
+          <option value="">Not attributed</option>
+          {communitySources.map(source => <option key={source.id} value={source.id}>{source.name}</option>)}
+        </select>
+      </label>
       <button className="button button-small" type="submit" disabled={saving}>
         {saving ? "Saving…" : "Save"}
       </button>

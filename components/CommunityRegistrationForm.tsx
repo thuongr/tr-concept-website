@@ -1,4 +1,5 @@
 "use client";
+import { currentAttribution } from "@/lib/attribution";
 import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
@@ -30,6 +31,7 @@ export function CommunityRegistrationForm({
         email: String(form.get("email") || ""),
         business: String(form.get("business") || ""),
         marketingConsent: form.get("marketingConsent") === "on",
+      attribution: currentAttribution(),
       }),
     });
 

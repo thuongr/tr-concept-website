@@ -1,5 +1,6 @@
+import { isUuid } from "@/lib/validation";
 import { NextResponse } from "next/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { requireAdminApi } from "@/lib/admin-api";
 
 const allowedStatuses = new Set([
   "NEW",
@@ -19,11 +20,9 @@ const allowedPaymentStatuses = new Set([
 ]);
 
 export async function POST(request: Request) {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) return NextResponse.json({ error: "Supabase is not configured." }, { status: 503 });
-
-  const { data: auth } = await supabase.auth.getUser();
-  if (!auth.user) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+  const access = await requireAdminApi();
+  if (access.response) return access.response;
+  const { supabase } = access;
 
   const body = await request.json().catch(() => null);
 
@@ -33,6 +32,9 @@ export async function POST(request: Request) {
     typeof body?.paymentStatus === "string" ? body.paymentStatus : "";
   const cohortId =
     typeof body?.cohortId === "string" && body.cohortId ? body.cohortId : null;
+
+  const sourceRegistrationId = body?.sourceRegistrationId || null;
+  if (sourceRegistrationId !== null && !isUuid(sourceRegistrationId)) return NextResponse.json({error:"Invalid community source."},{status:400});
 
   if (
     !enrolmentId ||
@@ -83,6 +85,7 @@ export async function POST(request: Request) {
       payment_status: paymentStatus,
       cohort_id: cohortId,
       updated_at: new Date().toISOString(),
+      ...(body?.sourceRegistrationId !== undefined ? { source_community_registration_id: sourceRegistrationId } : {}),
     })
     .eq("id", enrolmentId);
 

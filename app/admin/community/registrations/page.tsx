@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AdminCommunityRegistrationForm } from "@/components/AdminCommunityRegistrationForm";
 import { requireAdmin } from "@/lib/admin-auth";
 
@@ -7,7 +8,7 @@ export default async function AdminCommunityRegistrationsPage() {
 
   const { data: registrations } = await supabase
     .from("community_registrations")
-    .select("id,community_session_id,contact_id,status,marketing_consent,registered_at")
+    .select("id,record_code,community_session_id,contact_id,status,marketing_consent,registered_at")
     .order("registered_at", { ascending: false })
     .limit(150);
 
@@ -19,7 +20,7 @@ export default async function AdminCommunityRegistrationsPage() {
       ? supabase.from("community_sessions").select("id,title").in("id", sessionIds)
       : Promise.resolve({ data: [] }),
     contactIds.length
-      ? supabase.from("contacts").select("id,name,email").in("id", contactIds)
+      ? supabase.from("contacts").select("id,record_code,name,email").in("id", contactIds)
       : Promise.resolve({ data: [] }),
   ]);
 
@@ -41,10 +42,11 @@ export default async function AdminCommunityRegistrationsPage() {
             return (
               <article className="admin-enrolment-card" key={row.id}>
                 <div>
-                  <strong>{contact?.name || contact?.email || "Unknown contact"}</strong>
+                  <Link className="text-link" href={`/admin/contacts/${row.contact_id}`}><strong>{contact?.name || contact?.email || "Unknown contact"}</strong></Link>
+                  <p className="record-code">{contact?.record_code} · {row.record_code}</p>
                   <p>{contact?.email}</p>
                   <p>{sessionMap.get(row.community_session_id) || "Community session"}</p>
-                  <p>Marketing consent: {row.marketing_consent ? "Yes" : "No"}</p>
+                  <p>Consent at registration (see profile for current permission): {row.marketing_consent ? "Yes" : "No"}</p>
                 </div>
 
                 <AdminCommunityRegistrationForm

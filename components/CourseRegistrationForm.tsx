@@ -1,4 +1,5 @@
 "use client";
+import { currentAttribution } from "@/lib/attribution";
 import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
@@ -23,6 +24,7 @@ export function CourseRegistrationForm({ courseSlug }: { courseSlug: string }) {
       stateRegion: String(form.get("stateRegion") || ""),
       business: String(form.get("business") || ""),
       marketingConsent: form.get("marketingConsent") === "on",
+      attribution: currentAttribution(),
     };
 
     const response = await formRequest("/api/course/register", {

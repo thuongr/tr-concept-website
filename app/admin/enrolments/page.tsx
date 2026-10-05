@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AdminEnrolmentForm } from "@/components/AdminEnrolmentForm";
 import { requireAdmin } from "@/lib/admin-auth";
 
@@ -7,7 +8,7 @@ export default async function AdminEnrolmentsPage() {
 
   const { data: enrolments } = await supabase
     .from("enrolments")
-    .select("id,status,payment_status,amount,created_at,contact_id,course_id,cohort_id")
+    .select("id,record_code,status,payment_status,amount,created_at,contact_id,course_id,cohort_id,source_community_registration_id")
     .order("created_at", { ascending: false })
     .limit(100);
 
@@ -16,7 +17,7 @@ export default async function AdminEnrolmentsPage() {
 
   const [{ data: contacts }, { data: courses }, { data: cohorts }] = await Promise.all([
     contactIds.length
-      ? supabase.from("contacts").select("id,name,email,phone,country,state_region").in("id", contactIds)
+      ? supabase.from("contacts").select("id,record_code,name,email,phone,country,state_region").in("id", contactIds)
       : Promise.resolve({ data: [] }),
     courseIds.length
       ? supabase.from("courses").select("id,offer_id").in("id", courseIds)
@@ -33,6 +34,10 @@ export default async function AdminEnrolmentsPage() {
   const offerIds = [...new Set((courses || []).map((row) => row.offer_id))];
   const { data: offers } = offerIds.length
     ? await supabase.from("offers").select("id,name").in("id", offerIds)
+    : { data: [] };
+
+  const { data: communitySources } = contactIds.length
+    ? await supabase.from("community_registrations").select("id,record_code,contact_id,status").in("contact_id",contactIds)
     : { data: [] };
 
   const contactMap = new Map((contacts || []).map((row) => [row.id, row]));
@@ -60,8 +65,11 @@ export default async function AdminEnrolmentsPage() {
             return (
               <article className="admin-enrolment-card" key={row.id}>
                 <div>
-                  <strong>{contact?.name || contact?.email || "Unknown contact"}</strong>
-                  <p>{contact?.email}</p>\n                  <p>{contact?.phone}</p>\n                  <p>{[contact?.state_region, contact?.country].filter(Boolean).join(" · ")}</p>
+                  <Link className="text-link" href={`/admin/contacts/${row.contact_id}`}><strong>{contact?.name || contact?.email || "Unknown contact"}</strong></Link>
+                  <p className="record-code">{contact?.record_code} · {row.record_code}</p>
+                  <p>{contact?.email}</p>
+                  <p>{contact?.phone}</p>
+                  <p>{[contact?.state_region, contact?.country].filter(Boolean).join(" · ")}</p>
                   <p>{offer?.name || "Course"}</p>
                 </div>
 
@@ -71,6 +79,8 @@ export default async function AdminEnrolmentsPage() {
                   paymentStatus={row.payment_status}
                   cohortId={row.cohort_id}
                   cohorts={cohortOptions}
+                  sourceRegistrationId={row.source_community_registration_id}
+                  communitySources={(communitySources || []).filter(r=>r.contact_id===row.contact_id).map(r=>({id:r.id,name:`${r.record_code} · ${r.status}`}))}
                 />
               </article>
             );

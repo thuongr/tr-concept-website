@@ -1,3 +1,4 @@
+import { findOrCreateContact } from "@/lib/contact-identity";
 import { isValidEmail, escapeHtml } from "@/lib/validation";
 import { NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -37,14 +38,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const { data: contact, error: contactError } = await supabase
-    .from("contacts")
-    .upsert(
-      { name, email, business_name: business || null },
-      { onConflict: "email" }
-    )
-    .select("id")
-    .single();
+  const { data: contact, error: contactError } = await findOrCreateContact(supabase, {
+    name, email, business_name: business || null,
+  });
 
   if (contactError || !contact) {
     return NextResponse.json({ error: "Could not save your details." }, { status: 500 });

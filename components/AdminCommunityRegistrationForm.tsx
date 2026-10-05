@@ -34,7 +34,7 @@ export function AdminCommunityRegistrationForm({
 
   return (
     <form className="inline-admin-form compact" onSubmit={submit}>
-      <select name="status" defaultValue={status}>
+      <select aria-label="Attendance status" name="status" defaultValue={status}>
         <option value="REGISTERED">Registered</option>
         <option value="ATTENDED">Attended</option>
         <option value="NO_SHOW">No show</option>

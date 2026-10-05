@@ -1,14 +1,12 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { requireAdminApi } from "@/lib/admin-api";
 
 const allowed = new Set(["REGISTERED", "ATTENDED", "NO_SHOW", "CANCELLED"]);
 
 export async function POST(request: Request) {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) return NextResponse.json({ error: "Supabase is not configured." }, { status: 503 });
-
-  const { data: auth } = await supabase.auth.getUser();
-  if (!auth.user) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+  const access = await requireAdminApi();
+  if (access.response) return access.response;
+  const { supabase } = access;
 
   const body = await request.json().catch(() => null);
   const registrationId =

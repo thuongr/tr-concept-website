@@ -3,9 +3,16 @@
 ## Purpose
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
+## People/community backend — 2026-10-05
+- New owner direction: no data/account/API migration from the old site; domain switch waits until completion.
+- See `docs/PEOPLE_AND_COMMUNITY_BACKEND.md` for the identity dictionary, independent state dimensions, source attribution, consent, activation steps and agent boundaries.
+- Migrations 005–006 add immutable display codes alongside UUIDs, owner membership/RLS, append-only activity, consent withdrawal, reporting views and atomic community/course registration.
+- Admin adds a person journey page, follow-up planning and explicit community → enrolment attribution. Payments remain manual; no Zoom or agent integration is active.
+- Run `npm run test:database` and `npm run test:admin`. Local tests are not production certification; Supabase provisioning is still pending.
+
 ## Production backend blocker — confirmed 2026-10-05
 - Vercel is missing the three Supabase environment variables required by the current code. `/admin` shows setup, admin APIs return 503, and Supabase form persistence is not operational.
-- Only Resend and legacy WEBSITE_API_URL environment entries exist. Identify the intended backend and configure/migrate it before considering admin ready. See `docs/ADMIN_AUDIT_2026-10-05.md`.
+- Only Resend and legacy WEBSITE_API_URL environment entries exist. The owner confirmed a completely independent new backend: no legacy migration. Provision a fresh project before considering admin ready. See `docs/ADMIN_AUDIT_2026-10-05.md`.
 
 ## Gold-wave and admin audit follow-up — 2026-10-05
 - Subpage terrain no longer clips at the hero boundary. A broad animated gold illumination mask lights mesh dots and multiple ridges, with reduced-motion support.

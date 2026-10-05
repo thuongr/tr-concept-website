@@ -1,3 +1,5 @@
+> Follow-up: the people/backend pass now implements owner membership/RLS, database capacity guards, atomic course/community registration, private Zoom column grants and consent withdrawal in migrations 005–006. See `PEOPLE_AND_COMMUNITY_BACKEND.md`. The findings below describe the earlier checkpoint; hosted verification is still pending. Enquiry/media-permission atomicity and real provider checks remain open.
+
 # Admin flow audit — 5 October 2026
 
 Scope: all admin route handlers, client forms, public registration/enquiry inputs that feed admin, source schema/RLS and published-content reads. No live customer records changed and no real emails sent. Payments remain manual.
