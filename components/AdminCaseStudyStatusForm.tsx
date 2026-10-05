@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -19,9 +20,10 @@ export function AdminCaseStudyStatusForm({
     setSaving(true);
     setMessage("");
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-    const response = await fetch("/api/admin/case-studies/update", {
+    const response = await formRequest("/api/admin/case-studies/update", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

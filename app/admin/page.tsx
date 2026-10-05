@@ -59,8 +59,10 @@ export default async function AdminPage() {
 
         <div className="admin-links">
           <Link href="/admin/content">Website content →</Link>
-          <Link href="/admin/community">Community sessions →</Link>\n          <Link href="/admin/community/registrations">Community registrations →</Link>
-          <Link href="/admin/enrolments">Enrolments →</Link>\n          <Link href="/admin/cohorts">Cohorts →</Link>
+          <Link href="/admin/community">Community sessions →</Link>
+          <Link href="/admin/community/registrations">Community registrations →</Link>
+          <Link href="/admin/enrolments">Enrolments →</Link>
+          <Link href="/admin/cohorts">Cohorts →</Link>
           <Link href="/admin/contacts">Contacts →</Link>
           <Link href="/admin/submissions">Form submissions →</Link>
           <Link href="/admin/email-logs">Email logs →</Link>

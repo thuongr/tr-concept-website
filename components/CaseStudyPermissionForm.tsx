@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -11,9 +12,10 @@ export function CaseStudyPermissionForm() {
     setState("sending");
     setMessage("");
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-    const response = await fetch("/api/case-study-permission", {
+    const response = await formRequest("/api/case-study-permission", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -46,7 +48,7 @@ export function CaseStudyPermissionForm() {
 
     setState("success");
     setMessage("Thank you — your permission choices have been recorded.");
-    event.currentTarget.reset();
+    formElement.reset();
   }
 
   return (

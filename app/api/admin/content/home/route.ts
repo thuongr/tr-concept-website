@@ -1,3 +1,5 @@
+import { isSafeInternalPath } from "@/lib/validation";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -25,11 +27,12 @@ export async function POST(request: Request) {
   const heroCtaLabel = clean(body?.heroCtaLabel, 120);
   const heroCtaUrl = clean(body?.heroCtaUrl, 500);
   const footerBrandLine = clean(body?.footerBrandLine, 300);
-  const heroImageUrl = clean(body?.heroImageUrl, 1500);
 
   if (!heroHeading || !heroBody || !heroCtaLabel || !heroCtaUrl || !footerBrandLine) {
     return NextResponse.json({ error: "Required content fields are missing." }, { status: 400 });
   }
+
+  if (!isSafeInternalPath(heroCtaUrl) || heroHeading.length > 120 || heroHeading.split("\n").length > 2) return NextResponse.json({error:"Use a short heading (up to two lines) and an internal CTA path."},{status:400});
 
   const { data: page } = await supabase
     .from("pages")
@@ -41,12 +44,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Home page record is missing." }, { status: 409 });
   }
 
+  const { data: settings } = await supabase
+    .from("business_settings")
+    .select("id")
+    .limit(1)
+    .maybeSingle();
+
+  if (!settings) {
+    return NextResponse.json({ error: "Business settings record is missing." }, { status: 409 });
+  }
+
   const { error: sectionError } = await supabase
     .from("page_sections")
     .upsert(
       {
         page_id: page.id,
-        section_key: "hero",
+        section_key: "hero_landscape",
         heading: heroHeading,
         body: heroBody,
         cta_label: heroCtaLabel,
@@ -62,21 +75,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: sectionError.message }, { status: 400 });
   }
 
-  const { data: settings } = await supabase
-    .from("business_settings")
-    .select("id")
-    .limit(1)
-    .maybeSingle();
-
-  if (!settings) {
-    return NextResponse.json({ error: "Business settings record is missing." }, { status: 409 });
-  }
-
   const { error: settingsError } = await supabase
     .from("business_settings")
     .update({
       footer_brand_line: footerBrandLine,
-      hero_image_url: heroImageUrl || null,
       updated_at: new Date().toISOString(),
     })
     .eq("id", settings.id);
@@ -85,5 +87,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: settingsError.message }, { status: 400 });
   }
 
+  revalidatePath("/", "layout");
   return NextResponse.json({ ok: true });
 }

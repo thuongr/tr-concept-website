@@ -14,3 +14,16 @@ export function escapeHtml(value: string) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+
+export function isHttpUrl(value: string) {
+  try { return ["http:", "https:"].includes(new URL(value).protocol); } catch { return false; }
+}
+
+export function brisbaneDateTime(value: string) {
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value)) return null;
+  const date = new Date(`${value}:00+10:00`);
+  if (!Number.isFinite(date.getTime())) return null;
+  // Reject normalized invalid dates such as February 31.
+  const roundTrip = new Date(date.getTime() + 10*60*60*1000).toISOString().slice(0,16);
+  return roundTrip === value ? date : null;
+}

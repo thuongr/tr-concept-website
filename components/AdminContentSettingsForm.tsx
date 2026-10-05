@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -8,14 +9,12 @@ export function AdminContentSettingsForm({
   heroCtaLabel,
   heroCtaUrl,
   footerBrandLine,
-  heroImageUrl,
 }: {
   heroHeading: string;
   heroBody: string;
   heroCtaLabel: string;
   heroCtaUrl: string;
   footerBrandLine: string;
-  heroImageUrl: string;
 }) {
   const [state, setState] = useState<"idle" | "saving" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -25,9 +24,10 @@ export function AdminContentSettingsForm({
     setState("saving");
     setMessage("");
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-    const response = await fetch("/api/admin/content/home", {
+    const response = await formRequest("/api/admin/content/home", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -36,7 +36,6 @@ export function AdminContentSettingsForm({
         heroCtaLabel: String(form.get("heroCtaLabel") || ""),
         heroCtaUrl: String(form.get("heroCtaUrl") || ""),
         footerBrandLine: String(form.get("footerBrandLine") || ""),
-        heroImageUrl: String(form.get("heroImageUrl") || ""),
       }),
     });
 
@@ -57,7 +56,8 @@ export function AdminContentSettingsForm({
       <div className="form-grid">
         <label className="form-full">
           Homepage hero heading
-          <input name="heroHeading" defaultValue={heroHeading} required />
+          <textarea name="heroHeading" defaultValue={heroHeading} maxLength={120} rows={2} required />
+          <small>Use a new line for the gold emphasis. Keep the heading concise.</small>
         </label>
 
         <label className="form-full">
@@ -75,15 +75,7 @@ export function AdminContentSettingsForm({
           <input name="heroCtaUrl" defaultValue={heroCtaUrl} required />
         </label>
 
-        <label className="form-full">
-          Founder hero image URL
-          <input
-            name="heroImageUrl"
-            type="url"
-            defaultValue={heroImageUrl}
-            placeholder="https://..."
-          />
-        </label>
+        <p className="form-full">The approved growth-tree artwork and its motion are managed in the design system.</p>
 
         <label className="form-full">
           Footer brand line

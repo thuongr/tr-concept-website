@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getFeaturedTestimonial } from "@/lib/site-content";
+import { getFeaturedTestimonial, getHomeHeroContent } from "@/lib/site-content";
 import { TreeMotion } from "@/components/TreeMotion";
 import { Landscape } from "@/components/Landscape";
 import styles from "./home.module.css";
@@ -11,15 +11,16 @@ function IdeaIcon({ kind }: { kind: "clarity" | "structure" | "growth" }) {
 }
 
 export default async function HomePage() {
-  const testimonial = await getFeaturedTestimonial();
+  const [testimonial, hero] = await Promise.all([getFeaturedTestimonial(), getHomeHeroContent()]);
+  const [firstLine, ...rest] = hero.heading.split("\n");
   return <div className={styles.world} data-home-landscape>
     <section className={styles.hero} aria-labelledby="home-title">
       <div className={styles.heroInner}>
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>From structure to growth</p>
-          <h1 id="home-title">Build the system.<br/><em>Then let it grow.</em></h1>
-          <p className={styles.lead}>Practical AI systems for real businesses.<br/>Less chaos. More clarity. Lasting growth.</p>
-          <Link className={styles.primary} href="/start-here">Start here <span aria-hidden="true">↗</span></Link>
+          <h1 id="home-title">{firstLine}{rest.length > 0 && <><br/><em>{rest.join(" ")}</em></>}</h1>
+          <p className={styles.lead}>{hero.body}</p>
+          <Link className={styles.primary} href={hero.ctaUrl}>{hero.ctaLabel} <span aria-hidden="true">↗</span></Link>
         </div>
         <figure className={styles.tree}>
           <img src="/trconcept-growth-tree.png" width="1536" height="1024" fetchPriority="high" alt="A luminous growth tree: Business at the roots, connected to Brain, Heart, Skills and Workflow."/>

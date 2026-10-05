@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -17,9 +18,10 @@ export function CommunityRegistrationForm({
     setState("sending");
     setMessage("");
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-    const response = await fetch("/api/community/register", {
+    const response = await formRequest("/api/community/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -40,8 +42,8 @@ export function CommunityRegistrationForm({
     }
 
     setState("success");
-    setMessage(`Seat reserved for “${sessionTitle}”. Check your email for confirmation.`);
-    event.currentTarget.reset();
+    setMessage(body.alreadyRegistered ? "We already have a registration record for this session. Contact hello@trconcept.co if you need to change or reactivate it." : `Seat reserved for “${sessionTitle}”.` + (body.emailSent ? " Check your email for confirmation." : " Confirmation email could not be sent. Please contact hello@trconcept.co for session details."));
+    formElement.reset();
   }
 
   return (

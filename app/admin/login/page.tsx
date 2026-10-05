@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -9,8 +10,9 @@ export default function AdminLoginPage() {
     event.preventDefault();
     setError("");
 
-    const form = new FormData(event.currentTarget);
-    const response = await fetch("/api/admin/login", {
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
+    const response = await formRequest("/api/admin/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

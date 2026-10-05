@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -14,9 +15,10 @@ export function AdminCommunityRegistrationForm({
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSaving(true);
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-    const response = await fetch("/api/admin/community/registrations/update", {
+    const response = await formRequest("/api/admin/community/registrations/update", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -24,7 +24,7 @@ export default async function AdminCommunityPage() {
               <div className="admin-row" key={session.id}>
                 <strong>{session.title}</strong>
                 <span>{session.status}</span>
-                <span>{new Date(session.starts_at).toLocaleString("en-AU")}</span>
+                <span>{new Date(session.starts_at).toLocaleString("en-AU", {timeZone:"Australia/Brisbane"})}</span>
                 <span>Cap {session.capacity || "—"}</span>
               </div>
             ))}

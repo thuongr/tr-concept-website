@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -11,9 +12,10 @@ export function AdminCreateSessionForm() {
     setState("sending");
     setMessage("");
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-    const response = await fetch("/api/admin/community/sessions", {
+    const response = await formRequest("/api/admin/community/sessions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -37,7 +39,7 @@ export function AdminCreateSessionForm() {
 
     setState("success");
     setMessage("Session created.");
-    event.currentTarget.reset();
+    formElement.reset();
     window.location.reload();
   }
 
@@ -58,7 +60,7 @@ export function AdminCreateSessionForm() {
           <textarea name="summary" rows={3} />
         </label>
         <label>
-          Date & time
+          Date & time (Brisbane, AEST)
           <input name="startsAt" type="datetime-local" required />
         </label>
         <label>

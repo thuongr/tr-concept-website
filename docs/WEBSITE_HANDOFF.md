@@ -3,6 +3,12 @@
 ## Purpose
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
+## Gold-wave and admin audit follow-up — 2026-10-05
+- Subpage terrain no longer clips at the hero boundary. A broad animated gold illumination mask lights mesh dots and multiple ridges, with reduced-motion support.
+- Homepage hero text now reads `hero_landscape` from CMS; current approved copy is the fallback. Legacy `hero` content is intentionally preserved separately. The approved tree remains fixed so traced animation stays aligned.
+- `docs/ADMIN_AUDIT_2026-10-05.md` records application fixes, regression coverage and unresolved database/account requirements. Do not claim full operational certification until authenticated/database checks are completed.
+- Run `npm run test:admin` for the mocked route regression suite. No online payments enabled.
+
 ## Terrain and motion update — 2026-10-05
 - `5b41ce793aeec20b009363c51a6ab8705473995e`: layered dotted mesh landscape, shared footer terrain, traced root/branch illumination and artwork-based flower blooms.
 - `components/TreeMotion.tsx` owns native-artwork coordinate paths. Keep the original artwork and reduced-motion fallback.

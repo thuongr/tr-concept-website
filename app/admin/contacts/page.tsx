@@ -21,7 +21,7 @@ export default async function AdminContactsPage() {
               <strong>{row.name}</strong>
               <span>{row.email}</span>
               <span>{row.business_name || "—"}</span>
-              <span>{new Date(row.created_at).toLocaleDateString("en-AU")}</span>
+              <span>{new Date(row.created_at).toLocaleDateString("en-AU", {timeZone:"Australia/Brisbane"})}</span>
             </div>
           ))}
         </div>

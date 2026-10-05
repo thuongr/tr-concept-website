@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -26,9 +27,10 @@ export function AdminEnrolmentForm({
     event.preventDefault();
     setSaving(true);
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-    const response = await fetch("/api/admin/enrolments/update", {
+    const response = await formRequest("/api/admin/enrolments/update", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -44,7 +46,8 @@ export function AdminEnrolmentForm({
     if (response.ok) {
       window.location.reload();
     } else {
-      alert("Could not update enrolment.");
+      const body = await response.json().catch(()=>({}));
+      alert(body.error || "Could not update enrolment.");
     }
   }
 

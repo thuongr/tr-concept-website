@@ -41,12 +41,14 @@ export async function POST(request: Request) {
   if (contactError || !contact) return NextResponse.json({ error: "Could not save your registration." }, { status: 500 });
 
   const enrolmentStatus = course.registration_status === "WAITLIST" ? "WAITLIST" : "NEW";
-  const { error: enrolmentError } = await supabase.from("enrolments").upsert({
+  const { data: createdEnrolment, error: enrolmentError } = await supabase.from("enrolments").upsert({
     contact_id: contact.id, course_id: course.id, status: enrolmentStatus,
     payment_status: "PENDING", amount: offer.price_amount,
-  }, { onConflict: "contact_id,course_id" });
+  }, { onConflict: "contact_id,course_id", ignoreDuplicates: true }).select("id").maybeSingle();
 
   if (enrolmentError) return NextResponse.json({ error: "Could not save your registration." }, { status: 500 });
+
+  if (!createdEnrolment) return NextResponse.json({ok:true,alreadyRegistered:true});
 
   const { data: submission } = await supabase.from("form_submissions").insert({
     contact_id: contact.id,

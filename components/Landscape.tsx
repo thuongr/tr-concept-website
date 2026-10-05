@@ -18,6 +18,8 @@ export function Landscape({ id, quiet = false, reverse = false }: { id: string; 
         <linearGradient id={`${id}-depth`} x1="0" y1="0" x2="0" y2="1"><stop stopColor="#49658a" stopOpacity=".14"/><stop offset="1" stopColor="#041225" stopOpacity="0"/></linearGradient>
         <linearGradient id={`${id}-fade`} x1="0" y1="0" x2="0" y2="1"><stop stopColor="white" stopOpacity="0"/><stop offset=".18" stopColor="white"/><stop offset=".7" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient>
         <mask id={`${id}-mask`}><rect width="1440" height="300" fill={`url(#${id}-fade)`}/></mask>
+        <linearGradient id={`${id}-energy`}><stop stopColor="white" stopOpacity="0"/><stop offset=".35" stopColor="white" stopOpacity=".6"/><stop offset=".55" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient>
+        <mask id={`${id}-energy-mask`} maskUnits="userSpaceOnUse" x="-80" y="0" width="1632" height="300"><rect className={styles.waveSweep} x="-600" width="600" height="300" fill={`url(#${id}-energy)`}/></mask>
         <filter id={`${id}-glow`}><feGaussianBlur stdDeviation="4"/></filter>
       </defs>
       <g mask={`url(#${id}-mask)`}>
@@ -27,6 +29,13 @@ export function Landscape({ id, quiet = false, reverse = false }: { id: string; 
           <path d={contour(layer,0)} fill="none" stroke={`url(#${id}-gold)`} strokeWidth={layer===2?1.2:.6}/>
         </g>)}
         <path d={contour(2,0)} fill="none" stroke="#dbb778" strokeWidth="7" opacity=".18" filter={`url(#${id}-glow)`}/>
+        <g mask={`url(#${id}-energy-mask)`}>
+          {[0,1,2].map(layer=><g key={layer}>
+            {Array.from({length:28},(_,row)=><path key={row} d={contour(layer,row)} fill="none" stroke="#ffd58d" strokeOpacity={.95-row*.016} strokeWidth="2.6" strokeDasharray=".1 7" strokeDashoffset={row*1.7} strokeLinecap="round"/>)}
+            <path d={contour(layer,0)} fill="none" stroke="#ffc46c" strokeWidth="20" opacity=".5" filter={`url(#${id}-glow)`}/>
+            <path d={contour(layer,0)} fill="none" stroke="#ffe3ad" strokeWidth="2.4" opacity=".9"/>
+          </g>)}
+        </g>
         <path className={styles.travellingLight} d={contour(2,0)} pathLength="100" fill="none" stroke="#ffe4b3" strokeWidth="2" strokeDasharray="2 98"/>
       </g>
     </svg>

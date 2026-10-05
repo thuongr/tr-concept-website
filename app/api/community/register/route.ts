@@ -38,20 +38,27 @@ export async function POST(request: Request) {
     .eq("id", sessionId)
     .single();
 
-  if (!session || session.status !== "OPEN") {
+  if (!session || session.status !== "OPEN" || new Date(session.starts_at).getTime() <= Date.now()) {
     return NextResponse.json(
       { error: "This session is not currently open for registration." },
       { status: 409 }
     );
   }
 
+  const { data: existingContact } = await supabase.from("contacts").select("id").eq("email", email).maybeSingle();
+  if (existingContact) {
+    const { data: existing } = await supabase.from("community_registrations").select("id").eq("community_session_id", sessionId).eq("contact_id", existingContact.id).maybeSingle();
+    if (existing) return NextResponse.json({ok:true,alreadyRegistered:true});
+  }
+
   if (session.capacity) {
-    const { count } = await supabase
+    const { count, error: countError } = await supabase
       .from("community_registrations")
       .select("*", { count: "exact", head: true })
       .eq("community_session_id", sessionId)
       .eq("status", "REGISTERED");
 
+    if (countError) return NextResponse.json({error:"Could not check availability. Please try again."},{status:503});
     if ((count || 0) >= session.capacity) {
       return NextResponse.json(
         { error: "This session is currently full." },
@@ -76,7 +83,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { error: registrationError } = await supabase
+  const { data: createdRegistration, error: registrationError } = await supabase
     .from("community_registrations")
     .upsert(
       {
@@ -85,8 +92,8 @@ export async function POST(request: Request) {
         status: "REGISTERED",
         marketing_consent: marketingConsent,
       },
-      { onConflict: "community_session_id,contact_id" }
-    );
+      { onConflict: "community_session_id,contact_id", ignoreDuplicates: true }
+    ).select("id").maybeSingle();
 
   if (registrationError) {
     return NextResponse.json(
@@ -94,6 +101,8 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+
+  if (!createdRegistration) return NextResponse.json({ok:true,alreadyRegistered:true});
 
   const { data: submission } = await supabase
     .from("form_submissions")

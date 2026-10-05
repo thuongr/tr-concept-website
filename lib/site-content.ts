@@ -1,3 +1,4 @@
+import { isSafeInternalPath } from "@/lib/validation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export type HomeHeroContent = {
@@ -12,12 +13,11 @@ export type BusinessSettings = {
   heroImageUrl: string | null;
 };
 
-const fallbackHero: HomeHeroContent = {
-  heading: "AI works better with structure.",
-  body:
-    "TRConcept helps business owners and professionals understand how to structure, design and apply AI in real work — so you can work smarter, build faster and focus on what matters.",
-  ctaLabel: "Explore courses",
-  ctaUrl: "/learn/level-1",
+export const fallbackHero: HomeHeroContent = {
+  heading: "Build the system.\nThen let it grow.",
+  body: "Practical AI systems for real businesses.\nLess chaos. More clarity. Lasting growth.",
+  ctaLabel: "Start here",
+  ctaUrl: "/start-here",
 };
 
 const fallbackSettings: BusinessSettings = {
@@ -42,7 +42,7 @@ export async function getHomeHeroContent(): Promise<HomeHeroContent> {
     .from("page_sections")
     .select("heading,body,cta_label,cta_url")
     .eq("page_id", page.id)
-    .eq("section_key", "hero")
+    .eq("section_key", "hero_landscape")
     .eq("is_visible", true)
     .maybeSingle();
 
@@ -52,7 +52,7 @@ export async function getHomeHeroContent(): Promise<HomeHeroContent> {
     heading: section.heading || fallbackHero.heading,
     body: section.body || fallbackHero.body,
     ctaLabel: section.cta_label || fallbackHero.ctaLabel,
-    ctaUrl: section.cta_url || fallbackHero.ctaUrl,
+    ctaUrl: section.cta_url && isSafeInternalPath(section.cta_url) ? section.cta_url : fallbackHero.ctaUrl,
   };
 }
 

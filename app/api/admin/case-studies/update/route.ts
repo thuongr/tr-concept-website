@@ -44,16 +44,17 @@ export async function POST(request: Request) {
 
   const nextStatus = permissionStatus === "WITHDRAWN" ? "ARCHIVED" : status;
 
-  const { error } = await supabase
+  const { data: updated, error } = await supabase
     .from("case_studies")
     .update({
       permission_status: permissionStatus,
       status: nextStatus,
       updated_at: new Date().toISOString(),
     })
-    .eq("id", id);
+    .eq("id", id).select("id").maybeSingle();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
 
+  if (!updated) return NextResponse.json({error:"Record not found."},{status:404});
   return NextResponse.json({ ok: true });
 }

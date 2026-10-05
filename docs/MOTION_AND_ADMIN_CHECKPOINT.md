@@ -1,5 +1,7 @@
 # Terrain, tree motion and admin checkpoint — 2026-10-05
 
+Historical checkpoint. The later `ADMIN_AUDIT_2026-10-05.md` supersedes the hero-editor limitation and records subsequent application fixes and remaining database risks.
+
 ## Visual system
 Implementation: `5b41ce793aeec20b009363c51a6ab8705473995e`.
 

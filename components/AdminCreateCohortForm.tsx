@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -16,9 +17,10 @@ export function AdminCreateCohortForm({ courses }: { courses: CourseOption[] }) 
     setState("saving");
     setMessage("");
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-    const response = await fetch("/api/admin/cohorts", {
+    const response = await formRequest("/api/admin/cohorts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -39,7 +41,7 @@ export function AdminCreateCohortForm({ courses }: { courses: CourseOption[] }) 
       return;
     }
 
-    event.currentTarget.reset();
+    formElement.reset();
     window.location.reload();
   }
 

@@ -1,3 +1,4 @@
+import { isValidEmail, escapeHtml } from "@/lib/validation";
 import { NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { sendTransactionalEmail } from "@/lib/email";
@@ -17,7 +18,7 @@ export async function POST(request: Request) {
     body?.permissions && typeof body.permissions === "object" ? body.permissions : {};
   const confirmation = body?.confirmation === true;
 
-  if (!name || !email.includes("@") || !confirmation) {
+  if (!name || !isValidEmail(email) || !confirmation) {
     return NextResponse.json(
       { error: "Name, email and confirmation are required." },
       { status: 400 }
@@ -71,10 +72,7 @@ export async function POST(request: Request) {
     ["VIDEO_AUDIO", scope.videoAudio],
   ] as const;
 
-  for (const [consentType, granted] of consentTypes) {
-    if (!granted) continue;
-
-    await supabase.from("consent_records").insert({
+  const records = consentTypes.filter(([,granted])=>granted).map(([consentType])=>({
       contact_id: contact.id,
       consent_type: consentType,
       status: "GRANTED",
@@ -84,10 +82,13 @@ export async function POST(request: Request) {
         "Participant selected specific case-study/media permissions and confirmed the choices were theirs.",
       source: "WEBSITE_CASE_STUDY_PERMISSION",
       granted_at: new Date().toISOString(),
-    });
+    }));
+  if (records.length) {
+    const {error} = await supabase.from("consent_records").insert(records);
+    if(error) return NextResponse.json({error:"Could not record permissions. Please try again."},{status:500});
   }
 
-  const { data: submission } = await supabase
+  const { data: submission, error: submissionError } = await supabase
     .from("form_submissions")
     .insert({
       contact_id: contact.id,
@@ -98,10 +99,12 @@ export async function POST(request: Request) {
     .select("id")
     .single();
 
+  if (submissionError || !submission) return NextResponse.json({error:"Could not save your choices. Please try again."},{status:500});
+
   const mail = await sendTransactionalEmail({
     to: email,
     subject: "TRConcept — permission choices recorded",
-    html: `<p>Hi ${name},</p><p>Your TRConcept case-study/media permission choices have been recorded.</p><p>If you want to ask about changing or withdrawing permission for future use, reply to this email or contact hello@trconcept.co.</p><p>Thương<br/>TRConcept</p>`,
+    html: `<p>Hi ${escapeHtml(name)},</p><p>Your TRConcept case-study/media permission choices have been recorded.</p><p>If you want to ask about changing or withdrawing permission for future use, reply to this email or contact hello@trconcept.co.</p><p>Thương<br/>TRConcept</p>`,
   });
 
   await supabase.from("email_logs").insert({

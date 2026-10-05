@@ -1,4 +1,5 @@
 "use client";
+import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
 
@@ -11,7 +12,8 @@ export function CourseRegistrationForm({ courseSlug }: { courseSlug: string }) {
     setState("sending");
     setMessage("");
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     const payload = {
       courseSlug,
       name: String(form.get("name") || ""),
@@ -23,7 +25,7 @@ export function CourseRegistrationForm({ courseSlug }: { courseSlug: string }) {
       marketingConsent: form.get("marketingConsent") === "on",
     };
 
-    const response = await fetch("/api/course/register", {
+    const response = await formRequest("/api/course/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -37,10 +39,10 @@ export function CourseRegistrationForm({ courseSlug }: { courseSlug: string }) {
     }
 
     setState("success");
-    setMessage(body.status === "WAITLIST"
-      ? "You’re on the waitlist. Check your email for confirmation."
-      : "Your registration has been received. Check your email for confirmation.");
-    event.currentTarget.reset();
+    setMessage(body.alreadyRegistered ? "We already have your registration. Contact hello@trconcept.co if you need to update it." :
+      (body.status === "WAITLIST" ? "You’re on the waitlist." : "Your registration has been received.") +
+      (body.emailSent ? " Check your email for confirmation." : " Confirmation email could not be sent. Please contact hello@trconcept.co if you need assistance."));
+    formElement.reset();
   }
 
   return (

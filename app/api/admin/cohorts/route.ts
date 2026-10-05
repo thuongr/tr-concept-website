@@ -1,3 +1,4 @@
+import { isHttpUrl } from "@/lib/validation";
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -19,11 +20,13 @@ export async function POST(request: Request) {
   const groupType = clean(body?.groupType, 30);
   const groupLink = clean(body?.groupLink, 1000);
   const notes = clean(body?.notes, 3000);
-  const capacity = Math.max(1, Number(body?.capacity) || 5);
+  const capacity = Number(body?.capacity ?? 5);
 
   if (!courseId || !name) {
     return NextResponse.json({ error: "Course and cohort name are required." }, { status: 400 });
   }
+
+  if (!Number.isInteger(capacity) || capacity < 1 || !["", "FACEBOOK", "ZALO", "OTHER"].includes(groupType) || (groupLink && !isHttpUrl(groupLink))) return NextResponse.json({error:"Invalid capacity, group type or group URL."},{status:400});
 
   const { data, error } = await supabase
     .from("cohorts")

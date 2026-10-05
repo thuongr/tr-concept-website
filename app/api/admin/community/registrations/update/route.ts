@@ -19,15 +19,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid update." }, { status: 400 });
   }
 
-  const { error } = await supabase
+  const { data: updated, error } = await supabase
     .from("community_registrations")
     .update({
       status,
       attended_at: status === "ATTENDED" ? new Date().toISOString() : null,
     })
-    .eq("id", registrationId);
+    .eq("id", registrationId).select("id").maybeSingle();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
 
+  if (!updated) return NextResponse.json({error:"Record not found."},{status:404});
   return NextResponse.json({ ok: true });
 }

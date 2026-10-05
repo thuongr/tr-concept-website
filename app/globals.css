@@ -372,15 +372,17 @@ em {
 .page-terrain {
   position:absolute;
   inset:0;
-  overflow:clip;
+  overflow:visible;
   z-index:-1;
   pointer-events:none
 }
 
 .page-terrain>div {
-  bottom:-55px;
-  height:205px;
-  opacity:.65
+  left:0;
+  width:100%;
+  bottom:-70px;
+  height:230px;
+  opacity:.9
 }
 
 .page-hero:has(.page-terrain) {
@@ -1224,9 +1226,9 @@ em {
     font-size:12px
   }
   .page-terrain>div {
-    height:130px;
-    bottom:-39px;
-    opacity:.65
+    height:180px;
+    bottom:-65px;
+    opacity:.9
   }
   .content-section {
     padding:43px 0

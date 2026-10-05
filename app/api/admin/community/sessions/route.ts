@@ -1,3 +1,4 @@
+import { brisbaneDateTime, isHttpUrl } from "@/lib/validation";
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -38,11 +39,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const parsedDate = new Date(startsAt);
+  const parsedDate = brisbaneDateTime(startsAt);
 
-  if (Number.isNaN(parsedDate.getTime())) {
+  if (!parsedDate) {
     return NextResponse.json({ error: "Invalid date/time." }, { status: 400 });
   }
+
+  if ((capacity !== null && (!Number.isInteger(capacity) || capacity < 1)) || (meetingUrl && !isHttpUrl(meetingUrl))) return NextResponse.json({error:"Enter a positive whole-number capacity and a valid meeting URL."},{status:400});
 
   const { data, error } = await supabase
     .from("community_sessions")

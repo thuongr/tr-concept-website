@@ -55,7 +55,7 @@ export async function POST(request: Request) {
   if (cohortId) {
     const { data: cohort } = await supabase
       .from("cohorts")
-      .select("course_id")
+      .select("course_id,status,capacity")
       .eq("id", cohortId)
       .single();
 
@@ -66,6 +66,15 @@ export async function POST(request: Request) {
       );
     }
   }
+
+  if (cohortId && !["CANCELLED", "WAITLIST"].includes(status)) {
+    const {data: target} = await supabase.from("cohorts").select("capacity,status").eq("id",cohortId).single();
+    if (!target || !["FORMING","ACTIVE"].includes(target.status)) return NextResponse.json({error:"This cohort is not accepting students."},{status:409});
+    const {count,error: countError} = await supabase.from("enrolments").select("id",{count:"exact",head:true}).eq("cohort_id",cohortId).neq("id",enrolmentId).not("status","in","(CANCELLED,WAITLIST)");
+    if(countError) return NextResponse.json({error:"Could not check cohort capacity."},{status:503});
+    if((count||0)>=target.capacity) return NextResponse.json({error:"This cohort is full."},{status:409});
+  }
+  if (status === "ASSIGNED" && !cohortId) return NextResponse.json({error:"Select a cohort for an assigned enrolment."},{status:400});
 
   const { error } = await supabase
     .from("enrolments")
