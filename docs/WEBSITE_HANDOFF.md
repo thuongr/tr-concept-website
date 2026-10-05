@@ -4,12 +4,21 @@
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
 ## Current checkpoint
-- Latest visual implementation: `6bd0a911f9a823d815df8ef2ea447b6c57695bc0` (2026-10-05 Brisbane).
+- Homepage visual implementation: `6bd0a911f9a823d815df8ef2ea447b6c57695bc0` (2026-10-05 Brisbane).
 - Production verified: https://tr-concept-website.vercel.app/
 - Final production screenshots inspected at 1440, 820 and 390 CSS pixels after two implementation/deployment passes.
 - See `docs/HOMEPAGE_VISUAL_QA.md` for changes, checks and remaining operational limitations.
 - Homepage styling now lives in `app/home.module.css`; reusable terrain is `components/Landscape.tsx`. Do not restore the deleted historical homepage overrides.
 - `trconcept.co` currently resolves to a Netlify 404; DNS/domain routing was not changed.
+
+### Public subpage system — 2026-10-05
+- Shared public layout implementation: `f92758b531cfc4e3f9e84c26655e29c65b4a2ca4`.
+- All public pages now share the homepage navy / cream / gold environment, serif–sans typography, header and footer.
+- `app/globals.css` owns shared tokens, chrome, subpage composition, diagrams, forms and responsive rules. Do not reintroduce homepage-only global chrome overrides.
+- `components/PageHero.tsx` uses the reusable landscape; `app/home.module.css` retains only homepage composition and terrain mechanics.
+- Learn is a sequential Level 1 → Level 2 pathway. Start Here uses open numbered route rows. Course and business diagrams become vertical paths on mobile.
+- `app/admin/admin.css` scopes the practical light administrative work surface. Do not let public editorial rules flatten admin tables or controls.
+- Business content, API handlers, Supabase/data model, email, registration and consent logic remain unchanged.
 
 ### Historical handoff baseline
 - Repository: `thuongr/tr-concept-website`
