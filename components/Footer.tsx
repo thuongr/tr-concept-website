@@ -16,9 +16,9 @@ export async function Footer() {
 
         <div className="footer-links">
           <Link href="/learn/level-1">Learn</Link>
-          <Link href="/community">Community</Link>
-          <Link href="/solve">Solve</Link>
           <Link href="/build">Build</Link>
+          <Link href="/solve">Solve</Link>
+          <Link href="/community">Community</Link>
           <Link href="/work">Work</Link>
           <Link href="/about">About</Link>
         </div>

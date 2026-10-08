@@ -307,3 +307,9 @@ Prioritise visual coherence and production quality over adding features. Keep th
 - With existing explicit owner approval, submitted one clearly labelled test enquiry to thuongrejeehan@gmail.com. API returned ok=true/emailSent=true; Supabase email log shows BREVO/SENT with provider message ID and no error. Previous 8 October attempt remains FAILED/HTTP401 for audit history.
 - This proves contact persistence and Brevo acceptance; inbox delivery and reply routing await owner confirmation. No other recipients contacted. Test enquiry records remain marked as tests; exclude them from future business reporting.
 - Next: confirm inbox/reply, then complete owner enquiry notifications and reliable queued email logs, followed by remaining registration/Admin and responsive visual checks. Do not claim complete launch readiness.
+
+
+### Owner confirmation and navigation — 9 October 2026
+- Owner confirmed the Brevo test reached Gmail Inbox (not Spam). Reply routing still untested.
+- Canonical business navigation is LEARN → BUILD → SOLVE. Updated desktop/mobile header and footer link order; existing URLs unchanged.
+- Website transactional signatures are currently literal HTML in lib/registration.ts and contact/case-study-permission API routes, not Gmail or Brevo templates. No Admin signature editor exists. Signature wording change awaits owner's desired text.
