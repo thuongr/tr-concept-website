@@ -299,3 +299,11 @@ Prioritise visual coherence and production quality over adding features. Keep th
 - Owner saved production BREVO_API_KEY (sensitive metadata verified; value not read). Configured EMAIL_PROVIDER=brevo and hello@trconcept.co sender/reply-to; requested production redeploy of 09a0ddf.
 - Real send/receipt/reply remains unverified. Do not describe deployment success as email delivery success. Resend retained only for manual rollback.
 - Next: owner-approved controlled email test to thuongrejeehan@gmail.com; examine business record/email log and confirm recipient inbox. Contact-owner notification and logging improvements, mobile QA remain open as previously recorded.
+
+
+### Controlled Brevo test — 9 October 2026, 08:44 Brisbane
+- Owner confirmed replacing the incorrectly supplied SMTP key with a Brevo API key. Sensitive production metadata showed the update; secret value was not read.
+- Redeployment dpl_3mPaXeUntRo798zQEHqCXDspTDLM (88032b) reached READY before testing.
+- With existing explicit owner approval, submitted one clearly labelled test enquiry to thuongrejeehan@gmail.com. API returned ok=true/emailSent=true; Supabase email log shows BREVO/SENT with provider message ID and no error. Previous 8 October attempt remains FAILED/HTTP401 for audit history.
+- This proves contact persistence and Brevo acceptance; inbox delivery and reply routing await owner confirmation. No other recipients contacted. Test enquiry records remain marked as tests; exclude them from future business reporting.
+- Next: confirm inbox/reply, then complete owner enquiry notifications and reliable queued email logs, followed by remaining registration/Admin and responsive visual checks. Do not claim complete launch readiness.
