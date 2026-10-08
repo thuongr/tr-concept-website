@@ -14,29 +14,29 @@ export function Landscape({ id, quiet = false, reverse = false }: { id: string; 
   return <div className={`${styles.terrain} ${quiet ? styles.quiet : ""} ${reverse ? styles.reverse : ""}`} aria-hidden="true">
     <svg viewBox="0 0 1440 300" preserveAspectRatio="none">
       <defs>
-        <linearGradient id={`${id}-gold`}><stop stopColor="#a7793e" stopOpacity=".1"/><stop offset=".3" stopColor="#ebc98f" stopOpacity=".75"/><stop offset=".65" stopColor="#9faec4" stopOpacity=".25"/><stop offset="1" stopColor="#e3ba78" stopOpacity=".65"/></linearGradient>
+        <linearGradient id={`${id}-gold`}><stop stopColor="#694016" stopOpacity=".3"/><stop offset=".19" stopColor="#bb761f"/><stop offset=".29" stopColor="#fff3c5"/><stop offset=".36" stopColor="#e8ac43"/><stop offset=".53" stopColor="#735021" stopOpacity=".45"/><stop offset=".72" stopColor="#d99528"/><stop offset=".83" stopColor="#fff0b5"/><stop offset="1" stopColor="#9c5f16" stopOpacity=".4"/></linearGradient>
         <linearGradient id={`${id}-depth`} x1="0" y1="0" x2="0" y2="1"><stop stopColor="#49658a" stopOpacity=".14"/><stop offset="1" stopColor="#041225" stopOpacity="0"/></linearGradient>
         <linearGradient id={`${id}-fade`} x1="0" y1="0" x2="0" y2="1"><stop stopColor="white" stopOpacity="0"/><stop offset=".18" stopColor="white"/><stop offset=".7" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient>
         <mask id={`${id}-mask`}><rect width="1440" height="300" fill={`url(#${id}-fade)`}/></mask>
         <linearGradient id={`${id}-energy`}><stop stopColor="white" stopOpacity="0"/><stop offset=".35" stopColor="white" stopOpacity=".6"/><stop offset=".55" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient>
-        <mask id={`${id}-energy-mask`} maskUnits="userSpaceOnUse" x="-80" y="0" width="1632" height="300"><rect className={styles.waveSweep} x="-600" width="600" height="300" fill={`url(#${id}-energy)`}/></mask>
+        <mask id={`${id}-energy-mask`} maskUnits="userSpaceOnUse" x="-80" y="0" width="1632" height="300"><rect className={styles.waveSweep} x="-600" width="280" height="300" fill={`url(#${id}-energy)`}/></mask>
         <filter id={`${id}-glow`}><feGaussianBlur stdDeviation="4"/></filter>
       </defs>
       <g mask={`url(#${id}-mask)`}>
         {[0,1,2].map(layer=><g key={layer} opacity={[.45,.7,1][layer]}>
           <path d={`${contour(layer,0)} L1552 310 H-80Z`} fill={`url(#${id}-depth)`}/>
-          {Array.from({length:28},(_,row)=><path key={row} d={contour(layer,row)} fill="none" stroke={layer===2&&row%5===0?'#dbbc86':'#91abc9'} strokeOpacity={.46-row*.008} strokeWidth={layer===2?1.9:1.5} strokeDasharray={`.1 ${layer===2?7:9}`} strokeDashoffset={row*1.7} strokeLinecap="round"/>)}
-          <path d={contour(layer,0)} fill="none" stroke={`url(#${id}-gold)`} strokeWidth={layer===2?1.2:.6}/>
+          {Array.from({length:28},(_,row)=><path key={row} d={contour(layer,row)} fill="none" stroke={layer===2&&row%4===0?'#d69a36':'#607b9c'} strokeOpacity={.32-row*.007} strokeWidth={layer===2?1.35:1} strokeDasharray={`.1 ${layer===2?7:9}`} strokeDashoffset={row*1.7} strokeLinecap="round"/>)}
+          <path d={contour(layer,0)} fill="none" stroke={`url(#${id}-gold)`} strokeWidth={layer===2?1.7:.5}/>
         </g>)}
-        <path d={contour(2,0)} fill="none" stroke="#dbb778" strokeWidth="7" opacity=".18" filter={`url(#${id}-glow)`}/>
+        <path d={contour(2,0)} fill="none" stroke="#c47b18" strokeWidth="8" opacity=".28" filter={`url(#${id}-glow)`}/>
         <g mask={`url(#${id}-energy-mask)`}>
-          {[0,1,2].map(layer=><g key={layer}>
-            {Array.from({length:28},(_,row)=><path key={row} d={contour(layer,row)} fill="none" stroke="#ffd58d" strokeOpacity={.95-row*.016} strokeWidth="2.6" strokeDasharray=".1 7" strokeDashoffset={row*1.7} strokeLinecap="round"/>)}
-            <path d={contour(layer,0)} fill="none" stroke="#ffc46c" strokeWidth="20" opacity=".5" filter={`url(#${id}-glow)`}/>
-            <path d={contour(layer,0)} fill="none" stroke="#ffe3ad" strokeWidth="2.4" opacity=".9"/>
+          {[2].map(layer=><g key={layer}>
+            {Array.from({length:18},(_,row)=><path key={row} d={contour(layer,row)} fill="none" stroke="#e8a638" strokeOpacity={.66-row*.03} strokeWidth="1.7" strokeDasharray=".1 7" strokeDashoffset={row*1.7} strokeLinecap="round"/>)}
+            <path d={contour(layer,0)} fill="none" stroke="#d78a17" strokeWidth="11" opacity=".65" filter={`url(#${id}-glow)`}/>
+            <path d={contour(layer,0)} fill="none" stroke="#ffd366" strokeWidth="3" opacity=".95"/>
+          <path d={contour(layer,0)} fill="none" stroke="#fff6d8" strokeWidth=".85"/>
           </g>)}
         </g>
-        <path className={styles.travellingLight} d={contour(2,0)} pathLength="100" fill="none" stroke="#ffe4b3" strokeWidth="2" strokeDasharray="2 98"/>
       </g>
     </svg>
   </div>;

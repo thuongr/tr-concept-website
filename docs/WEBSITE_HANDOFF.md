@@ -288,3 +288,8 @@ Prioritise visual coherence and production quality over adding features. Keep th
 - Vercel metadata confirms BREVO_API_KEY is missing. Owner must enter it directly in Vercel; no secret values were read. Incoming hello@trconcept.co forwarding is owner-reported, not proof of outbound website delivery.
 - Added tests/email-regressions.cjs (fake transport, no real email). Call sites record actual transport on send completion. See EMAIL_FLOW_AUDIT.md for cutover steps and remaining logging limitations.
 - Exact next task: fix queued email logging and add owner notification for website enquiries, then complete Brevo controlled delivery testing once credentials are configured. Finish pending mobile visual/registration/Admin walkthrough before declaring public enrolment launch ready. CRM is not a launch blocker.
+
+
+### Metallic terrain refinement — 8 October 2026
+- Owner reiterated the North Star: metallic gold highlights, not an evenly cream-coloured moving mesh. Shared Landscape now uses bronze/gold/sharp highlight stops, darker/finer background particles, and a narrower light sweep on the foreground ridge only. Sweep is slower (19s); removed redundant travelling dash. Reduced-motion fallback retains static terrain.
+- Applies to homepage and existing shared subpage/footer terrain; no artwork, routes or business logic changed. Typecheck/build pass. Live desktop/mobile inspection of this revision remains required; do not mark overall visual work complete.
