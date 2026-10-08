@@ -26,3 +26,7 @@ Required cutover steps:
 Transport fake-based regression tests cover API payload, absent key, provider rejection, ambiguous timeout, malformed success response, invalid provider and Resend compatibility without sending mail. No CRM contacts, lists or campaigns are created.
 
 Launch gates still open: mobile visual QA; real course/community/Admin operational walkthrough; owner enquiry notification (current contact route acknowledges the visitor but does not notify the owner); queued/checkable enquiry/permission email logging; real sender/delivery/reply verification. CRM, online payment, Zoom sync and agents are not launch requirements.
+
+
+## Production configuration update — 8 October 2026, evening Brisbane
+Owner saved BREVO_API_KEY; metadata verified sensitive/production without reading its value. EMAIL_PROVIDER=brevo, EMAIL_FROM=TRConcept <hello@trconcept.co>, EMAIL_REPLY_TO=hello@trconcept.co configured. Redeploy requested from 09a0ddf. Earlier missing-key / active-Resend notes are historical. Brevo sender authorization, API validity and real delivery still unverified; no email sent. Retain Resend for manual rollback until delivery verified. Controlled test proposed to owner inbox thuongrejeehan@gmail.com via contact form with clearly marked synthetic enquiry; awaiting explicit send approval.
