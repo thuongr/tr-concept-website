@@ -54,7 +54,6 @@ export default async function HomePage() {
             <p className={styles.flow}>Task <span>→</span> Context <span>→</span> Skill Set <span>→</span> AI Assistant</p>
             <Link className={styles.textLink} href="/learn/level-1">Explore Level 1 <span>↗</span></Link>
           </div>
-          <div className={styles.progression} aria-hidden="true"><span>Build on your foundation</span><svg viewBox="0 0 180 90" fill="none"><path d="M0 70C55 70 65 20 170 20m-10-7 10 7-10 7"/></svg></div>
           <div className={styles.architecture}>
             <span className={styles.step}>02 <small>THE BUSINESS ARCHITECTURE</small></span>
             <p className={styles.courseLabel}>Level 2 · AI for Business Builder</p>
