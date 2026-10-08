@@ -281,3 +281,10 @@ Prioritise visual coherence and production quality over adding features. Keep th
 - Live desktop browser inspection confirmed the open, aligned Level 1/Level 2 layout and removal of the isolated curved progression arrow. The approved tree, terrain and public routes remain.
 - Responsive QA is NOT complete for this checkpoint: local Chromium exited with SIGSEGV before rendering; fallback cloud browser exposes no viewport resize control. Do not claim 390px/820px visual verification from source inspection.
 - Exact next task: finish production Learn visual QA at 390px, 820px and 1440px, fix any spacing/overflow issues, then address the email-log error handling documented in `docs/EMAIL_FLOW_AUDIT.md`. Real email delivery remains unverified; no test email was sent in this pass.
+
+
+### Email transport preparation — 8 October 2026
+- Owner approved moving toward Brevo email first and a minimal CRM connection later. lib/email.ts now selects server-side transport using EMAIL_PROVIDER; default remains resend until verified cutover. BREVO_API_KEY is required for brevo. No CRM integration implemented.
+- Vercel metadata confirms BREVO_API_KEY is missing. Owner must enter it directly in Vercel; no secret values were read. Incoming hello@trconcept.co forwarding is owner-reported, not proof of outbound website delivery.
+- Added tests/email-regressions.cjs (fake transport, no real email). Call sites record actual transport on send completion. See EMAIL_FLOW_AUDIT.md for cutover steps and remaining logging limitations.
+- Exact next task: fix queued email logging and add owner notification for website enquiries, then complete Brevo controlled delivery testing once credentials are configured. Finish pending mobile visual/registration/Admin walkthrough before declaring public enrolment launch ready. CRM is not a launch blocker.

@@ -108,7 +108,7 @@ export async function POST(request: Request) {
     submission_id: submission?.id || null,
     email_type: "CASE_STUDY_PERMISSION_CONFIRMATION",
     recipient_email: email,
-    provider: "RESEND",
+    provider: mail.provider,
     provider_message_id: mail.ok ? mail.id : null,
     status: mail.ok ? "SENT" : "FAILED",
     error_message: mail.ok ? null : mail.error,

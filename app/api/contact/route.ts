@@ -16,6 +16,6 @@ export async function POST(request: Request) {
   const {data:submission,error:submissionError}=await supabase.from("form_submissions").insert({contact_id:contact.id,form_type:type.toUpperCase(),source_page:"/contact",payload_json:{name,message,business}}).select("id").single();
   if(submissionError||!submission) return NextResponse.json({error:"Could not save your message. Please try again."},{status:500});
   const mail=await sendTransactionalEmail({to:email,subject:"We received your TRConcept enquiry",html:`<p>Hi ${escapeHtml(name)},</p><p>Thanks for getting in touch. Your message has been received.</p><p>Thương<br/>TRConcept</p>`});
-  await supabase.from("email_logs").insert({contact_id:contact.id,submission_id:submission.id,email_type:"ENQUIRY_ACKNOWLEDGEMENT",recipient_email:email,provider:"RESEND",provider_message_id:mail.ok?mail.id:null,status:mail.ok?"SENT":"FAILED",error_message:mail.ok?null:mail.error,sent_at:mail.ok?new Date().toISOString():null});
+  await supabase.from("email_logs").insert({contact_id:contact.id,submission_id:submission.id,email_type:"ENQUIRY_ACKNOWLEDGEMENT",recipient_email:email,provider:mail.provider,provider_message_id:mail.ok?mail.id:null,status:mail.ok?"SENT":"FAILED",error_message:mail.ok?null:mail.error,sent_at:mail.ok?new Date().toISOString():null});
   return NextResponse.json({ok:true,emailSent:mail.ok});
 }

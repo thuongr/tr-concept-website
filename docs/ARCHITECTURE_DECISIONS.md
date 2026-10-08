@@ -32,3 +32,12 @@
 **Why:** Preserve authorization, auditability and human approval for consequential actions.  
 **Consequences:** No unrestricted database/service key access for agents. Later use least privilege, validated commands, idempotency and actor tracking; preserve human approval. No agent orchestration in the website MVP.  
 **Status:** Accepted direction; implementation deferred.
+
+
+## ADR-004 — Consolidate transactional email toward Brevo
+- Date: 2026-10-08
+- Decision: Prepare Brevo as website transactional email transport, separate from CRM integration. Retain active Resend configuration until sender and delivery verification pass.
+- Context: Owner has configured hello@trconcept.co inbound forwarding and prefers fewer providers; website currently sends using Resend.
+- Why: Minimum sufficient infrastructure without coupling business registration to CRM or disrupting current email transport.
+- Consequences: Server-only EMAIL_PROVIDER switch, BREVO_API_KEY, sender/reply-to configuration, actual provider in email logs; no automatic fallback after ambiguous failures. Cutover requires credentials and controlled delivery verification. No contacts/campaign sync included.
+- Status: Accepted; transport code prepared, production Brevo activation pending.

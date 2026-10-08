@@ -49,7 +49,7 @@ export async function registerParticipation(request: Request, kind: "COURSE" | "
       + `<p>Thương<br/>TRConcept</p>`,
   });
   const { error: logError } = await supabase.from("email_logs").update({
-    provider_message_id: mail.ok ? mail.id : null, status: mail.ok ? "SENT" : "FAILED",
+    provider: mail.provider, provider_message_id: mail.ok ? mail.id : null, status: mail.ok ? "SENT" : "FAILED",
     error_message: mail.ok ? null : mail.error, sent_at: mail.ok ? new Date().toISOString() : null,
   }).eq("id", data.email_log_id);
   if (logError) console.error("Registration email log update failed", { code: logError.code });
