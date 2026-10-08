@@ -3,17 +3,31 @@
 ## Purpose
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
+
+## Current engineering checkpoint — 2026-10-08
+- Architecture authority: `docs/ARCHITECTURE_DECISIONS.md`. Admin is a lightweight business control layer, not a generic CRM. Approved North Star is unchanged.
+- Current main: `f983e0c`; production redeployment `dpl_3ef5TxcaQceSApDse97QjWi1sdDM` reached READY on 2026-10-06 with the server secret. Production API invalid-session test reached database validation (409), with zero test contacts/email logs. This proves connectivity, not successful registration/email delivery.
+- Owner login is confirmed by the owner's 2026-10-06 dashboard screenshot. Database checks confirmed owner access true and outsider access false.
+- Keep courses/cohorts/enrolments, community/attendance, consent, publishing permissions, CMS, operational IDs and audit history. UUIDs remain canonical; PER/CRS/COH/ENR/COM/REG/SUB/CNS/EML are display codes.
+- Existing relationship status, next action and follow-up UI are transitional overlap with a CRM. Preserve them and their data; do not expand them. Future migration needs explicit field ownership and conflict rules.
+- Runtime path: public forms → server route → Supabase business transaction → email attempt. Admin operates directly through authenticated server routes/RLS. No CRM adapter, synchronization or agent orchestration exists.
+- Email implementation is currently **Resend**, `lib/email.ts`, despite the owner's existing business use of Brevo. Do not claim Brevo is integrated or silently migrate delivery. Sender/reply-to defaults are hello@trconcept.co; inbox/domain verification and delivery remain unverified. Owner login Gmail is not automatically a sending identity.
+- Required runtime configuration: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, SUPABASE_SECRET_KEY; RESEND_API_KEY for current email transport. EMAIL_FROM, EMAIL_REPLY_TO, NEXT_PUBLIC_SITE_URL should be explicitly reviewed. SUPABASE_SERVICE_ROLE_KEY is legacy fallback; WEBSITE_API_URL is unused legacy configuration. Never record values/secrets here. No CRM environment variables required yet.
+- Important code: `lib/registration.ts` and migration 006 implement atomic course/community registration and queued email; `lib/email.ts` sends after commit. `app/api/contact` and `app/api/case-study-permission` still have multi-write flows. `app/admin/contacts`, `components/AdminContactForm.tsx` and `app/api/admin/contacts/update` contain transitional follow-up capability.
+- Open debt/blockers: no email delivery certification, no email retry worker, no full authenticated mutation/browser journey certification; generic follow-up ownership needs future review. No online payments, Zoom sync, CRM sync, agent API, or legacy migration.
+- Exact next task: repair homepage Learn composition in `app/page.tsx` + `app/home.module.css`: group intro copy under the heading, remove isolated curved arrow, communicate sequential foundation → business architecture. Preserve copy/routes/tree/terrain. Deploy and visually inspect 1440/820/390. Then finish email audit; obtain explicit test-send authorization to a controlled inbox before sending real mail.
+
 ## People/community backend — 2026-10-05
 - New owner direction: no data/account/API migration from the old site; domain switch waits until completion.
 - See `docs/PEOPLE_AND_COMMUNITY_BACKEND.md` for the identity dictionary, independent state dimensions, source attribution, consent, activation steps and agent boundaries.
 - Migrations 005–006 add immutable display codes alongside UUIDs, owner membership/RLS, append-only activity, consent withdrawal, reporting views and atomic community/course registration.
 - Admin adds a person journey page, follow-up planning and explicit community → enrolment attribution. Payments remain manual; no Zoom or agent integration is active.
-- Run `npm run test:database` and `npm run test:admin`. Local tests are not production certification; Supabase provisioning is still pending.
+- Run `npm run test:database` and `npm run test:admin`. Local tests are not production certification; Supabase provisioning and owner login are complete; full operational/email verification remains pending.
 
 ## Supabase activation checkpoint — 2026-10-05
 - New independent project created: `auxqtrwkqywpkvgqyqqt`, `trconcept-website`, Sydney, `thuongr’s team`, free plan. **Do not create another project.**
 - All migrations applied, broad historical authenticated policy removed, internal definer functions moved to private schema. Hosted rollback-only registration/RLS checks passed; no participant data remains.
-- Vercel production URL/publishable key configured. Server secret and verified owner Auth user/membership still pending; backend is not fully operational yet.
+- Vercel production URL, publishable key and sensitive SUPABASE_SECRET_KEY configured. Owner Auth account and active OWNER membership provisioned on 2026-10-06; owner supplied a screenshot of successful /admin login. Full operational/email verification remains pending.
 - Use `SUPABASE_SECRET_KEY` for the new server credential; legacy env name remains only as fallback. Never print or commit either secret.
 - Dashboard authentication is needed for operations the plugin does not expose. See `docs/PEOPLE_AND_COMMUNITY_BACKEND.md` for current status and tested limits.
 
@@ -34,7 +48,7 @@ This file is the continuity checkpoint for any ChatGPT Work session, coding agen
 - Final production screenshots inspected at 1440, 820 and 390 CSS pixels after two implementation/deployment passes.
 - See `docs/HOMEPAGE_VISUAL_QA.md` for changes, checks and remaining operational limitations.
 - Homepage styling now lives in `app/home.module.css`; reusable terrain is `components/Landscape.tsx`. Do not restore the deleted historical homepage overrides.
-- `trconcept.co` currently resolves to a Netlify 404; DNS/domain routing was not changed.
+- Historical 2026-10-05 observation: `trconcept.co` resolved to a Netlify 404. Current DNS has not been reverified; do not change domain routing as part of this work.
 
 ### Public subpage system — 2026-10-05
 - See `docs/SUBPAGE_VISUAL_QA.md` for production desktop/mobile/tablet checks and scope limitations.

@@ -2,11 +2,15 @@
 
 Updated 2026-10-05. This is the new `thuongr/tr-concept-website` backend only. No records, accounts, database connections or legacy API integrations are imported from the old site. Domain routing is unchanged. Existing public content and routes remain intact.
 
+## Architecture boundary (2026-10-08)
+
+See `ARCHITECTURE_DECISIONS.md`: this Admin owns TRConcept operations, not generic CRM. Existing relationship/follow-up fields remain transitional and must not be expanded into sales pipelines or campaigns. Future CRM sync is server-side, provider-neutral and follows the committed business record; no integration is implemented.
+
 ## Deployment status
 
 Fresh project `trconcept-website` (`auxqtrwkqywpkvgqyqqt`) now exists in `thuongr’s team`, Sydney (`ap-southeast-2`), on the confirmed free plan. All repository migrations, including internal-function hardening, are applied. PostgreSQL is 17.11. The website's URL and publishable key are configured for Vercel production only.
 
-Activation is still incomplete: the server-only secret key and verified owner Auth account/membership are pending. The connected plugin supports SQL and public keys but not secret-key retrieval or Auth account management; dashboard sign-in is needed for those steps. Do not create another project or import legacy data. No real participant registrations or emails were used in tests.
+Server secret was configured and redeployed on 2026-10-06; owner Auth membership and owner login were verified. End-to-end registration/email delivery certification remains incomplete. The connected plugin supports SQL and public keys but not secret-key retrieval or Auth account management; dashboard sign-in is needed for those steps. Do not create another project or import legacy data. No real participant registrations or emails were used in tests.
 
 ## Identity and relationships
 
