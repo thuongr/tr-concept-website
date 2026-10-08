@@ -274,3 +274,10 @@ Operate as a long-running implementation loop:
 **repo → inspect → code → commit → deploy → inspect desktop/mobile → fix → repeat**
 
 Prioritise visual coherence and production quality over adding features. Keep the approved TRConcept business architecture and content principles intact. Do not ask the owner to approve every small adjustment; make a coherent pass, verify it, then report meaningful milestones.
+
+### Production verification — 8 October 2026
+- Architecture checkpoint `e3cd471` and Learn/email-audit checkpoint `795bd14` are committed on main. Vercel reports the latter READY in production (`dpl_4guf5K6Uaheqgk22kN7VwBk4B3aW`).
+- TypeScript and production build passed after replacing a corrupt local Turbopack cache; no application fix was needed for the cache failure.
+- Live desktop browser inspection confirmed the open, aligned Level 1/Level 2 layout and removal of the isolated curved progression arrow. The approved tree, terrain and public routes remain.
+- Responsive QA is NOT complete for this checkpoint: local Chromium exited with SIGSEGV before rendering; fallback cloud browser exposes no viewport resize control. Do not claim 390px/820px visual verification from source inspection.
+- Exact next task: finish production Learn visual QA at 390px, 820px and 1440px, fix any spacing/overflow issues, then address the email-log error handling documented in `docs/EMAIL_FLOW_AUDIT.md`. Real email delivery remains unverified; no test email was sent in this pass.
