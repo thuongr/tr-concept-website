@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-type EmailInput = { to: string; subject: string; html: string };
+type EmailInput = { to: string; subject: string; html: string; replyTo?: string };
 export function emailProvider() {
   return (process.env.EMAIL_PROVIDER || "resend").trim().toUpperCase();
 }
@@ -15,7 +15,7 @@ function mailbox(value: string) {
 export async function sendTransactionalEmail(input: EmailInput) {
   const provider = emailProvider();
   const from = process.env.EMAIL_FROM || "TRConcept <hello@trconcept.co>";
-  const replyTo = process.env.EMAIL_REPLY_TO || "hello@trconcept.co";
+  const replyTo = input.replyTo || process.env.EMAIL_REPLY_TO || "hello@trconcept.co";
   try {
     if (provider === "BREVO") {
       const key = process.env.BREVO_API_KEY;

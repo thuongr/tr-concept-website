@@ -2,7 +2,7 @@ import { findOrCreateContact } from "@/lib/contact-identity";
 import { isValidEmail, escapeHtml } from "@/lib/validation";
 import { NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
-import { sendTransactionalEmail } from "@/lib/email";
+import { sendLoggedEmail } from "@/lib/logged-email";
 
 function clean(value: unknown, max = 1000) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
@@ -97,22 +97,11 @@ export async function POST(request: Request) {
 
   if (submissionError || !submission) return NextResponse.json({error:"Could not save your choices. Please try again."},{status:500});
 
-  const mail = await sendTransactionalEmail({
+  const mail = await sendLoggedEmail(supabase, {
+    contactId: contact.id, submissionId: submission.id, emailType: "CASE_STUDY_PERMISSION_CONFIRMATION",
     to: email,
     subject: "TRConcept — permission choices recorded",
     html: `<p>Hi ${escapeHtml(name)},</p><p>Your TRConcept case-study/media permission choices have been recorded.</p><p>If you want to ask about changing or withdrawing permission for future use, reply to this email or contact hello@trconcept.co.</p><p>Thương<br/>TRConcept</p>`,
-  });
-
-  await supabase.from("email_logs").insert({
-    contact_id: contact.id,
-    submission_id: submission?.id || null,
-    email_type: "CASE_STUDY_PERMISSION_CONFIRMATION",
-    recipient_email: email,
-    provider: mail.provider,
-    provider_message_id: mail.ok ? mail.id : null,
-    status: mail.ok ? "SENT" : "FAILED",
-    error_message: mail.ok ? null : mail.error,
-    sent_at: mail.ok ? new Date().toISOString() : null,
   });
 
   return NextResponse.json({ ok: true, emailSent: mail.ok });
