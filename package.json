@@ -9,7 +9,9 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run build",
     "test:admin": "node tests/admin-regressions.cjs",
-    "test:database": "node tests/database-regressions.cjs"
+    "test:database": "node tests/database-regressions.cjs",
+    "prebuild": "node scripts/generate-terrain.mjs",
+    "predev": "node scripts/generate-terrain.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",

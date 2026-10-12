@@ -4,6 +4,14 @@
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
 
+## Terrain correction — 12 October 2026, afternoon
+- Owner explicitly rejected the four ribbon-like waves despite earlier responsive checks. The visual authority is the raised dotted landscape in the original tree artwork, not the added foreground ribbons. Earlier statements of visual verification do not mean owner acceptance of that design.
+- Replaced parallel contour/ridge SVG with a projected height field: overlapping hills, back-to-front occlusion, slope-based surface shading and fine surface points. No continuous gold outline. Sparse gold points illuminate slowly; SVG includes prefers-reduced-motion handling.
+- Removed the extra hero terrain overlay so it cannot obscure the approved tree roots/artwork. Shared transitions and footer use the new surface.
+- Source: scripts/generate-terrain.mjs; npm prebuild/predev generates public/terrain-surface.svg. Generated asset is ignored in Git, cached as one shared image, and carries no customer data. Landscape remains a decorative server component; dense geometry is outside the HTML/React tree. Do not run next build directly without generating the asset first; use npm run build.
+- Local build and Home/Learn screenshot checks at 1440/820/390 passed with no overflow. Production visual verification follows deployment. All business content, forms, Admin, Supabase and email logic unchanged.
+- Next: inspect the deployed terrain at desktop/mobile and record results, then continue the owner password recovery / authenticated Admin checks already documented.
+
 ## Frontend correction checkpoint — 2026-10-12
 - Owner screenshots exposed a separate `/learn` issue: prior fixes covered homepage only. Removed the subpage curved arrow, 100px desktop offset and mobile indentation; stage actions align with flex layout. Hero headings balance lines, Learn/Build use intentional desktop phrase breaks.
 - About hero now links to its own approach section; business pillars read Learn → Build → Solve.

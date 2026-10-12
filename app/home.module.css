@@ -29,11 +29,10 @@
 @keyframes branch-rise{0%,16%{opacity:0;stroke-dashoffset:100}20%{opacity:1}43%{opacity:1;stroke-dashoffset:0}48%,100%{opacity:0;stroke-dashoffset:0}}
 @keyframes petal-bloom{0%,39%{opacity:0;transform:scale(.72)}48%{opacity:.95;transform:scale(1.09)}57%{opacity:.65;transform:scale(1)}69%,100%{opacity:0;transform:scale(1)}}
 .terrain{position:absolute;left:-3%;width:106%;height:285px;bottom:-113px;pointer-events:none;z-index:1;opacity:1}
-.terrain svg{width:100%;height:100%;overflow:visible}
-.hero>.terrain{height:265px;bottom:-73px;z-index:2}
+.terrain img{display:block;width:100%;height:100%;object-fit:fill;object-position:center}
+
 .quiet{opacity:.7}.reverse{transform:scaleX(-1)}
-.waveSweep{animation:wave-energy 19s ease-in-out infinite}
-@keyframes wave-energy{0%{transform:translateX(0)}75%,100%{transform:translateX(2200px)}}
+
 .travellingLight{opacity:0;animation:landscape-light 18s linear infinite}
 @keyframes landscape-light{0%,65%{opacity:0;stroke-dashoffset:100}70%{opacity:.7}93%{opacity:.5}100%{opacity:0;stroke-dashoffset:0}}
 .approach{position:relative;padding:44px 0 114px}
@@ -73,14 +72,14 @@
 @media(min-width:1600px){.heroInner{min-height:660px}.tree{width:1000px;margin-left:-150px}.heroCopy{padding-top:130px}}
 @media(max-width:1100px) and (min-width:701px){.shell,.heroInner{width:calc(100% - 64px)}.heroCopy{padding-top:90px}.heroCopy h1{font-size:43px}.tree{width:750px;margin-left:-130px;margin-top:40px}.heroInner{min-height:565px}.hero{min-height:565px}.world .lead{max-width:31ch;font-size:14px}.approachGrid{gap:40px;grid-template-columns:1fr 1.3fr}.pillars{gap:20px}.learningJourney{gap:40px}.learningJourney h3{font-size:29px}.world .flow{white-space:normal}.communityGrid{gap:55px}.conversation li{font-size:22px;gap:14px}.services{gap:70px}}
 @media(min-width:701px) and (max-width:1000px){
- .heroInner{display:flex;flex-direction:column;min-height:0}.hero{min-height:0}.heroCopy{padding-top:45px;z-index:3}.heroCopy h1{font-size:48px}.world .lead{max-width:none;font-size:15px}.tree{width:min(780px,110%);margin:-110px -55px 0 auto;align-self:flex-end}.heroCopy{padding-bottom:85px}.hero>.terrain{bottom:-60px}.approach{padding-top:65px}
+ .heroInner{display:flex;flex-direction:column;min-height:0}.hero{min-height:0}.heroCopy{padding-top:45px;z-index:3}.heroCopy h1{font-size:48px}.world .lead{max-width:none;font-size:15px}.tree{width:min(780px,110%);margin:-110px -55px 0 auto;align-self:flex-end}.heroCopy{padding-bottom:85px}.approach{padding-top:65px}
 }
 @media(max-width:700px){
  .shell,.heroInner{width:calc(100% - 44px)}
  .world{font-size:15px}.world h2{font-size:33px;line-height:1.12;margin-bottom:18px}.world .eyebrow{font-size:9px;letter-spacing:.18em;margin-bottom:17px}
  .hero{min-height:0}.heroInner{display:flex;flex-direction:column;min-height:0}.heroCopy{padding-top:38px;width:100%}.heroCopy h1{font-size:clamp(32px,9.4vw,48px);line-height:1.1;margin-bottom:19px;white-space:normal}.world .lead{font-size:13px;line-height:1.7;margin-bottom:20px}.primary{padding:10px 16px;font-size:12px;gap:23px}
  .tree{width:calc(100vw + 36px);max-width:none;align-self:center;margin:12px 0 0;aspect-ratio:3/2;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(0deg,transparent,#000 12%,#000 95%,transparent)}
- .hero>.terrain{height:150px;bottom:-51px}.terrain{height:170px;bottom:-73px;left:-20%;width:140%}
+ .terrain{height:170px;bottom:-73px;left:-20%;width:140%}
  .approach{padding:48px 0 55px}.approachGrid{grid-template-columns:1fr;gap:30px}.approachGrid>div>p:not(.eyebrow){font-size:13px;max-width:39ch}.textLink{font-size:12px;gap:23px}
  .pillars{grid-template-columns:1fr;gap:24px;padding:0 0 0 17px}.pillars article{display:grid;grid-template-columns:37px 1fr;column-gap:17px;align-items:start}.pillars svg{grid-row:span 2;width:33px;height:33px;margin:0}.pillars h3{font-size:16px;margin-bottom:4px}.pillars p{font-size:13px;max-width:28ch}.pillars article:nth-child(2){margin-left:22px}.pillars article:nth-child(3){margin-left:44px}
  .learn{padding:63px 0 45px}.sectionHead{display:block}.sectionHead>p{font-size:13px;max-width:37ch;margin-bottom:0}.learningJourney{display:block;padding:32px 0 0}.step{font-size:27px}.step small{font-size:8px}.learningJourney h3{font-size:29px}.world .courseLabel{font-size:10px;margin:19px 0 12px}.world .flow{font-size:10px;white-space:normal;line-height:1.9}.flow span{margin:0 3px}.foundation{padding-right:17px}.architecture{padding:25px 0 0;margin-top:32px}.architecture>p:not(.courseLabel){font-size:13px;min-height:0}.world .principle{font-size:17px;margin:35px 0 0}
@@ -98,5 +97,3 @@
  
 }
 @media(prefers-reduced-motion:reduce){.rootEnergy,.branchEnergy,.branchHalo,.flowerBloom,.travellingLight{animation:none;opacity:0}.primary{transition:none}.primary:hover{transform:none}}
-
-@media(prefers-reduced-motion:reduce){.waveSweep{animation:none;opacity:0}}

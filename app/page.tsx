@@ -28,7 +28,7 @@ export default async function HomePage() {
           <figcaption className={styles.srOnly}>Structure becomes capability. Capability creates outcomes and growth.</figcaption>
         </figure>
       </div>
-      <Landscape id="hero-terrain"/>
+
     </section>
 
     <section className={styles.approach} aria-labelledby="approach-title">
