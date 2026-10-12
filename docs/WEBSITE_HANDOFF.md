@@ -340,3 +340,9 @@ Prioritise visual coherence and production quality over adding features. Keep th
 - No horizontal overflow; Learn stages align on desktop/tablet and use equal mobile indentation; curved arrow absent. About CTA targets #approach and Build CTA preserves /contact?type=build. Footer overflow is visible and its obsolete border is removed.
 - Mobile menu opened successfully and lists Learn → Build → Solve → Community → Work → About. Reduced-motion emulation showed no running animations. Nine public routes were also captured at all three sizes in the preceding production pass.
 - This verifies this frontend correction milestone, not every backend operation or inbox delivery. Follow CUSTOMER_ADMIN_JOURNEYS.md for remaining manual operations and limits. Next task: implement and verify owner password recovery, then authenticated Admin class/community walkthrough; preserve brand assets until the owner supplies replacements.
+
+### Raised-terrain deployment verification — 12 October 2026
+- Commit 3018b8c reached READY: dpl_E1Qfos4ZZsCb3LgVYZdSZHD8TTqW. Production Home and Learn screenshots inspected at 1440/820/390; no horizontal overflow. Original tree roots are unobscured; shared terrain uses shaded overlapping hill surfaces, without continuous gold outlines.
+- Production generated SVG loads correctly. Its 90 row-light animations are present; reduced-motion media switches all to animation-name:none (zero remaining animations). Gold accents are sparse surface glints, not full-width travelling strokes.
+- The shared SVG is about 456 KB gzip / 1.79 MB raw and reused across transitions; a later performance pass may simplify surface geometry if needed. No client rendering dependency was added.
+- Owner acceptance of visual likeness remains separate from responsive/technical verification. Preserve the explicit reference distinction: raised terrain above, rejected ribbon waves below.
