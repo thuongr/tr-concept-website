@@ -326,3 +326,9 @@ Prioritise visual coherence and production quality over adding features. Keep th
 - Frontend commit `9eefbe2` reached READY (`dpl_Dmo1ACknMf976M7CBU2AsozKVWW5`). Live desktop inspection confirms new Build service content and aligned Learn stages with no curved arrow.
 - A second pass found the shared footer still clipped its terrain vertically and drew an unrelated horizontal border. Removed both; terrain width is constrained without clipping its upper edge. Homepage secondary services now follow Build → Solve as well.
 - Local 1440/820/390 checks cover these refinements; final production verification follows this commit. Operational limits in CUSTOMER_ADMIN_JOURNEYS.md remain unchanged.
+
+### Final production visual verification — 12 October 2026
+- `26ca056` is READY in production (`dpl_EmUxoPbzi97WpuJMMDjj33f3vJVD`). After the footer correction, Home, About, Learn and Build were rendered and screenshots inspected at 1440, 820 and 390 CSS pixels on the production alias.
+- No horizontal overflow; Learn stages align on desktop/tablet and use equal mobile indentation; curved arrow absent. About CTA targets #approach and Build CTA preserves /contact?type=build. Footer overflow is visible and its obsolete border is removed.
+- Mobile menu opened successfully and lists Learn → Build → Solve → Community → Work → About. Reduced-motion emulation showed no running animations. Nine public routes were also captured at all three sizes in the preceding production pass.
+- This verifies this frontend correction milestone, not every backend operation or inbox delivery. Follow CUSTOMER_ADMIN_JOURNEYS.md for remaining manual operations and limits. Next task: implement and verify owner password recovery, then authenticated Admin class/community walkthrough; preserve brand assets until the owner supplies replacements.
