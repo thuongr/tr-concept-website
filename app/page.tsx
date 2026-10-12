@@ -79,8 +79,8 @@ export default async function HomePage() {
       <div className={styles.shell}>
         <p className={styles.eyebrow}>More ways to work together</p><h2 id="paths-title">Need a clearer next move?</h2>
         <div className={styles.services}>
-          <article><span className={styles.courseLabel}>SOLVE / 1:1</span><h3>Untangle the<br/>business problem.</h3><p>Business problem first. AI second.</p><Link className={styles.textLink} href="/solve">Explore consulting <span>↗</span></Link></article>
           <article><span className={styles.courseLabel}>BUILD / BUSINESS WEBSITES</span><h3>Turn clarity into<br/>a focused website.</h3><p>A clear customer journey, with practical management tools where your business needs them.</p><Link className={styles.textLink} href="/build">Explore Build <span>↗</span></Link></article>
+          <article><span className={styles.courseLabel}>SOLVE / 1:1</span><h3>Untangle the<br/>business problem.</h3><p>Business problem first. AI second.</p><Link className={styles.textLink} href="/solve">Explore consulting <span>↗</span></Link></article>
         </div>
       </div>
     </section>

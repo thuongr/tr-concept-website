@@ -321,3 +321,8 @@ Prioritise visual coherence and production quality over adding features. Keep th
 - Owner confirmed the Brevo test reached Gmail Inbox (not Spam). Reply routing still untested.
 - Canonical business navigation is LEARN → BUILD → SOLVE. Updated desktop/mobile header and footer link order; existing URLs unchanged.
 - Website transactional signatures are currently literal HTML in lib/registration.ts and contact/case-study-permission API routes, not Gmail or Brevo templates. No Admin signature editor exists. Signature wording change awaits owner's desired text.
+
+### Production follow-up — 12 October 2026
+- Frontend commit `9eefbe2` reached READY (`dpl_Dmo1ACknMf976M7CBU2AsozKVWW5`). Live desktop inspection confirms new Build service content and aligned Learn stages with no curved arrow.
+- A second pass found the shared footer still clipped its terrain vertically and drew an unrelated horizontal border. Removed both; terrain width is constrained without clipping its upper edge. Homepage secondary services now follow Build → Solve as well.
+- Local 1440/820/390 checks cover these refinements; final production verification follows this commit. Operational limits in CUSTOMER_ADMIN_JOURNEYS.md remain unchanged.
