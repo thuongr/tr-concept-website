@@ -350,7 +350,8 @@ em {
 }
 
 .page-hero h1 {
-  max-width:19ch;
+  max-width:22ch;
+  text-wrap:balance;
   margin:0 0 27px
 }
 
@@ -380,8 +381,8 @@ em {
 .page-terrain>div {
   left:0;
   width:100%;
-  bottom:-70px;
-  height:230px;
+  bottom:-105px;
+  height:270px;
   opacity:.9
 }
 
@@ -599,13 +600,12 @@ em {
 
 .learn-stage {
   position:relative;
+  display:flex;
+  flex-direction:column;
   padding-top:20px;
   border-top:1px solid #c5984f77
 }
 
-.learn-stage:last-child {
-  margin-top:100px
-}
 
 .learn-stage .stage-number {
   font:38px var(--serif);
@@ -632,28 +632,13 @@ em {
   display:flex;
   gap:25px;
   align-items:center;
-  margin-top:30px
+  margin-top:auto;
+  padding-top:30px
 }
 
 .learn-stage footer strong {
   font:24px var(--serif);
   color:var(--cream)
-}
-
-.learn-connection {
-  position:absolute;
-  left:43%;
-  top:65px;
-  width:10%;
-  height:100px;
-  color:#b58d50
-}
-
-.learn-connection svg {
-  width:100%;
-  height:100%;
-  stroke:currentColor;
-  fill:none
 }
 
 .learn-footnote-simple {
@@ -1301,9 +1286,6 @@ em {
     grid-template-columns:1fr;
     gap:70px
   }
-  .learn-stage:last-child {
-    margin:0 0 0 28px
-  }
   .learn-stage h2 {
     font-size:36px
   }
@@ -1320,14 +1302,6 @@ em {
   }
   .learn-stage footer strong {
     font-size:22px
-  }
-  .learn-connection {
-    left:2px;
-    top:290px;
-    width:35px;
-    height:115px;
-    transform:rotate(75deg);
-    opacity:.65
   }
   .learn-footnote-simple {
     font-size:14px;
@@ -1571,3 +1545,12 @@ em {
 
 .footer-terrain { position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.4; }
 .footer-terrain>div { top:-65px; bottom:auto; height:190px; }
+
+/* Editorial headings keep short final lines together at every public breakpoint. */
+.content-section h2 { text-wrap:balance; }
+@media(max-width:700px) { .desktop-break { display:none; } }
+
+.build-process { padding-top:110px; }
+.build-process>div:first-child { top:-80px; bottom:auto; left:0; width:100%; }
+.build-process>.shell { position:relative; z-index:2; }
+@media(max-width:700px) { .build-process { padding-top:75px; } }

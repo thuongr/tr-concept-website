@@ -4,6 +4,16 @@
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
 
+## Frontend correction checkpoint — 2026-10-12
+- Owner screenshots exposed a separate `/learn` issue: prior fixes covered homepage only. Removed the subpage curved arrow, 100px desktop offset and mobile indentation; stage actions align with flex layout. Hero headings balance lines, Learn/Build use intentional desktop phrase breaks.
+- About hero now links to its own approach section; business pillars read Learn → Build → Solve.
+- Build explicitly offers website design/development, with a private management area, forms, registrations and selected integrations scoped per business. Updated metadata, homepage teaser and Start Here wording. No backend feature or CRM is implied to be standard in every project.
+- Shared Landscape rebuilt as four overlapping dotted dune surfaces with bronze/gold specular ridges and restrained moving illumination. Existing tree artwork/motion preserved. Fixed Build terrain horizontal overflow found during visual QA. No section clipping added.
+- Relevant files: components/PageHero.tsx, components/Landscape.tsx, app/globals.css, app/home.module.css, app/about/page.tsx, app/learn/page.tsx, app/build/page.tsx.
+- Typecheck/build pass. Actual local browser screenshots at 1440/820/390 cover Home, About, Learn, Build, Level 1, Level 2, Solve, Community and Start Here; no horizontal overflow after fix. React review: no new client state, dependencies or data fetching; SVG decorative/aria-hidden, motion respects reduced-motion.
+- Production verification pending this commit. Exact next task: verify deployed routes at all three widths, links, reduced motion and visible terrain continuity; record results. Then resolve owner password recovery and complete the authenticated operational walkthrough. CRM and online payments remain out of scope.
+- Customer/owner operational flows and manual steps: docs/CUSTOMER_ADMIN_JOURNEYS.md. Existing backend/email checkpoint below still applies.
+
 ## Current engineering checkpoint — 2026-10-09
 - Architecture: Admin owns TRConcept operations; no CRM synchronization or agent orchestration. See ARCHITECTURE_DECISIONS.md. No old-site migration or online payment.
 - Public navigation: LEARN → BUILD → SOLVE. Approved North Star unchanged; latest mobile/terrain visual QA is still open. Owner is revising brand identity: retain existing signature/logo until supplied.
