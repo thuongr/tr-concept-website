@@ -4,6 +4,13 @@
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
 
+## Flowing-wave correction — 12 October 2026, 15:16 Brisbane
+- Owner rejected the projected hills as ghost-like dark lumps. This supersedes the raised-terrain interpretation below. Reference is horizontally flowing folds beneath the original tree, with visible metallic light travelling along folds.
+- Generator now creates three shallow overlapping wave sheets, fine surface points, low-contrast static ridges and travelling bronze/gold reflections with a narrow bright core and soft halo. No isolated Gaussian hills. Original hero artwork remains unchanged.
+- Shared external SVG remains generated at prebuild/predev (about 525 KB raw, down from 1.79 MB). No new dependency or business/backend change.
+- Typecheck/build passed. Local Home/Learn checked at 1440/820/390 without horizontal overflow. Two mobile motion frames inspected at 3s and 6.5s show reflection movement; reduced-motion produces zero animations.
+- Production verification follows deployment. Visual owner acceptance remains open; do not equate QA/build success with likeness approval.
+
 ## Terrain correction — 12 October 2026, afternoon
 - Owner explicitly rejected the four ribbon-like waves despite earlier responsive checks. The visual authority is the raised dotted landscape in the original tree artwork, not the added foreground ribbons. Earlier statements of visual verification do not mean owner acceptance of that design.
 - Replaced parallel contour/ridge SVG with a projected height field: overlapping hills, back-to-front occlusion, slope-based surface shading and fine surface points. No continuous gold outline. Sparse gold points illuminate slowly; SVG includes prefers-reduced-motion handling.
