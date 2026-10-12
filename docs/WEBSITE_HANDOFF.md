@@ -9,7 +9,7 @@ This file is the continuity checkpoint for any ChatGPT Work session, coding agen
 - Generator now creates three shallow overlapping wave sheets, fine surface points, low-contrast static ridges and travelling bronze/gold reflections with a narrow bright core and soft halo. No isolated Gaussian hills. Original hero artwork remains unchanged.
 - Shared external SVG remains generated at prebuild/predev (about 525 KB raw, down from 1.79 MB). No new dependency or business/backend change.
 - Typecheck/build passed. Local Home/Learn checked at 1440/820/390 without horizontal overflow. Two mobile motion frames inspected at 3s and 6.5s show reflection movement; reduced-motion produces zero animations.
-- Production verification follows deployment. Visual owner acceptance remains open; do not equate QA/build success with likeness approval.
+- Production commit 61ff5ad reached READY (dpl_Gk7y3nHA8U3Qqnza92R5JEzYS2ah). Home/Learn production screenshots inspected at 1440/820/390; no horizontal overflow. Visual owner acceptance remains open; do not equate QA/build success with likeness approval.
 
 ## Terrain correction — 12 October 2026, afternoon
 - Owner explicitly rejected the four ribbon-like waves despite earlier responsive checks. The visual authority is the raised dotted landscape in the original tree artwork, not the added foreground ribbons. Earlier statements of visual verification do not mean owner acceptance of that design.
