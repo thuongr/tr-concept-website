@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { formRequest } from "@/lib/form-request";
 
 import { FormEvent, useState } from "react";
@@ -49,6 +50,8 @@ export default function AdminLoginPage() {
           <button className="button button-dark" type="submit">
             Sign in →
           </button>
+
+          <Link className="text-link" href="/admin/forgot-password">Forgot password?</Link>
 
           {error && <p className="form-message error">{error}</p>}
         </form>

@@ -4,6 +4,16 @@
 This file is the continuity checkpoint for any ChatGPT Work session, coding agent, or future developer continuing the TRConcept website. Do not restart the visual direction from scratch. Inspect the live implementation and continue from the current `main` branch.
 
 
+## Password recovery checkpoint — 2026-10-15
+- Added login → `/admin/forgot-password` → Supabase Auth email → `/auth/recovery` (PKCE code exchange) → `/admin/reset-password` → sign in again.
+- API routes: `/api/admin/forgot-password`, `/api/admin/reset-password`; shared form `components/AdminRecoveryForm.tsx`; canonical origin `lib/recovery.ts`. Password 12–128 characters, confirmation required. Reset requires a verified user and active `is_admin()` membership. Valid signed-in admins may also change their own password here.
+- Callback rejects missing/expired/used codes, missing browser verifier and inactive Admin access. No arbitrary redirect accepted. Request responses do not reveal whether an email account exists. Supabase rate limits apply. Password update requests require the configured application origin; global sign-out revokes refresh sessions after success (already issued access tokens expire normally).
+- `NEXT_PUBLIC_SITE_URL` is optional and currently absent in Vercel; fallback is `https://tr-concept-website.vercel.app`. Before domain cutover set the canonical URL, update Auth redirect allowlist and retest cookies/recovery. Start recovery and open the newest link in the same browser/device.
+- Supabase Auth email is separate from website Brevo API email. Dashboard URL Configuration must allow `https://tr-concept-website.vercel.app/auth/recovery`. Auth email template must retain the provider confirmation URL. Verify Auth SMTP/sender separately; do not assume `BREVO_API_KEY` configures SMTP. Never paste credentials or reset links into chats/docs.
+- Tests: TypeScript, production build, 30 existing Admin regressions and focused mocked recovery regression checks passed. No real password was changed. Dashboard config inspection currently blocked by Supabase sign-in in this browser; redirect/SMTP and owner email receipt remain unverified.
+- Exact next task: verify deployed recovery UI at desktop/mobile; owner verifies Auth redirect/SMTP, requests a reset in her browser, opens email and sets her own password. Then authenticated Cohorts → Enrolments → Community → Registrations walkthrough with explicit test fixtures. Do not mark email/reset/Admin walkthrough complete until observed.
+- North Star visual acceptance remains open. No CRM integration, payment, data migration or schema change in this milestone.
+
 ## Flowing-wave correction — 12 October 2026, 15:16 Brisbane
 - Owner rejected the projected hills as ghost-like dark lumps. This supersedes the raised-terrain interpretation below. Reference is horizontally flowing folds beneath the original tree, with visible metallic light travelling along folds.
 - Generator now creates three shallow overlapping wave sheets, fine surface points, low-contrast static ridges and travelling bronze/gold reflections with a narrow bright core and soft halo. No isolated Gaussian hills. Original hero artwork remains unchanged.

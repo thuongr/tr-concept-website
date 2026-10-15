@@ -40,4 +40,13 @@
 - Context: Owner has configured hello@trconcept.co inbound forwarding and prefers fewer providers; website currently sends using Resend.
 - Why: Minimum sufficient infrastructure without coupling business registration to CRM or disrupting current email transport.
 - Consequences: Server-only EMAIL_PROVIDER switch, BREVO_API_KEY, sender/reply-to configuration, actual provider in email logs; no automatic fallback after ambiguous failures. Cutover requires credentials and controlled delivery verification. No contacts/campaign sync included.
-- Status: Accepted; transport code prepared, production Brevo activation pending.
+- Status: Active in production; owner confirmed Inbox delivery on 2026-10-09. Auth recovery email remains a separate configuration.
+
+
+## ADR-005 — Admin recovery uses Supabase Auth
+- Date: 2026-10-15
+- Decision: Delegate password recovery and password storage to Supabase Auth; implement a small server-side PKCE callback and active Admin authorization check.
+- Context: Owner cannot sign in after forgetting the password. Website registration emails already use Brevo API, which does not configure Supabase Auth email delivery.
+- Why: Avoid a second password/token database and preserve existing Auth/RLS ownership.
+- Consequences: Supabase redirect allowlist and Auth SMTP/template must be verified separately. Recovery links require the same browser/device. User chooses her password privately. No CRM or new business tables. Refresh sessions are revoked after a successful password update; access JWTs expire normally.
+- Status: Implemented; production email and owner completion pending verification.
